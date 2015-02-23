@@ -211,6 +211,33 @@ public class RTCommand extends CommandBase
 				RandomThings.instance.spectreHandler.sendOperator(player, args[1]);
 			}
 		}
+		else if (subCommand.equals("sendtospectre"))
+		{
+			invalidArguments = new ChatComponentText("/rt sendtospectre <username>");
+			if (args.length < 2)
+			{
+				throw new WrongUsageException(invalidArguments.getFormattedText());
+			}
+			
+			if (commandUser instanceof EntityPlayer)
+			{
+				invalidArguments = new ChatComponentText("Must be operator to use /rt sendtospectre <username>");
+				if (!MinecraftServer.getServer().getConfigurationManager().func_152596_g(((EntityPlayer)commandUser).getGameProfile()))
+				{
+					throw new WrongUsageException(invalidArguments.getFormattedText());
+				}
+			}
+			
+			String target = args[1];
+			EntityPlayerMP targetPlayer = getPlayer(commandUser, target);
+
+			if (targetPlayer == null) 
+			{
+				throw new PlayerNotFoundException();
+			}
+
+			RandomThings.instance.spectreHandler.teleportPlayerToSpectreWorld(targetPlayer);
+		}
 		else if (subCommand.equals("analyze"))
 		{
 			if (commandUser instanceof EntityPlayer)
@@ -253,9 +280,13 @@ public class RTCommand extends CommandBase
 	{
 		if (stringList.length == 1)
 		{
-			return getListOfStringsMatchingLastWord(stringList, "notify", "moon", "setItemColor", "spectre", "setBiomeCapsule", "spectre", "analyze", "bloodmoon");
+			return getListOfStringsMatchingLastWord(stringList, "notify", "moon", "setItemColor", "spectre", "sendtospectre", "setBiomeCapsule", "spectre", "analyze", "bloodmoon");
 		}
 		else if (stringList[0].equals("notify") && stringList.length == 2)
+		{
+			return getListOfStringsMatchingLastWord(stringList, getListOfPlayerUsernames());
+		}
+		else if (stringList[0].equals("sendtospectre") && stringList.length == 2)
 		{
 			return getListOfStringsMatchingLastWord(stringList, getListOfPlayerUsernames());
 		}
