@@ -1,13 +1,13 @@
 [
 {
-  "modid": "RandomThings",
-  "name": "Random Things",
+  "modid": "${modId}",
+  "name": "${modName}",
   "description": "Random Things packed into one Mod.",
-  "version": "${version}",
-  "mcversion": "${mcversion}",
+  "version": "${modVersion}",
+  "mcversion": "${minecraftVersion}",
   "url": "http://minecraft.curseforge.com/mc-mods/59816-random-things",
   "updateUrl": "",
-  "authorList": ["Lumien"],
+  "authorList": ["Lumien", "SirFell"],
   "credits": "Lumien (Mod);Drakeflame13 (Soul Texture)",
   "logoFile": "logo.png",
   "screenshots": [],
