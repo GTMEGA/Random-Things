@@ -1,0 +1,7 @@
+// Add your dependencies here
+
+dependencies {
+	compile "li.cil.oc:OpenComputers:MC1.7.10-1.4.+:api"
+    compile("com.github.GTNewHorizons:NotEnoughItems:master-SNAPSHOT:dev")
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+}

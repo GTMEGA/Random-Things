@@ -53,7 +53,7 @@ import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.Mod.EventHandler;
 
-@Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = Reference.MOD_VERSION, guiFactory = "lumien.randomthings.Client.Config.RandomThingsGuiFactory")
+@Mod(modid = Tags.MODID, version = Tags.VERSION, name = Tags.MODNAME, acceptedMinecraftVersions = "[1.7.10]", guiFactory = "lumien.randomthings.Client.Config.RandomThingsGuiFactory")
 public class RandomThings
 {
 	@Instance(Reference.MOD_ID)
