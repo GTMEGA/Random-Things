@@ -53,7 +53,7 @@ import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.Mod.EventHandler;
 
-@Mod(modid = Tags.MODID, version = Tags.VERSION, name = Tags.MODNAME, acceptedMinecraftVersions = "[1.7.10]", guiFactory = "lumien.randomthings.Client.Config.RandomThingsGuiFactory")
+@Mod(modid = Reference.MOD_ID, version = Reference.MOD_VERSION, name = Reference.MOD_NAME, acceptedMinecraftVersions = "[1.7.10]", guiFactory = "lumien.randomthings.Client.Config.RandomThingsGuiFactory")
 public class RandomThings
 {
 	@Instance(Reference.MOD_ID)
@@ -105,10 +105,6 @@ public class RandomThings
 			BackgroundHandler.setRandomBackground();
 			soundRecorderHandler = new SoundRecorderHandler();
 		}
-
-		// Version Checker
-		String VERSION_CHECKER_MODID = "VersionChecker";
-		FMLInterModComms.sendRuntimeMessage(Reference.MOD_ID, VERSION_CHECKER_MODID, "addVersionCheck", "https://raw.github.com/lumien231/Random-Things/master/version.json");
 	}
 
 	@EventHandler
