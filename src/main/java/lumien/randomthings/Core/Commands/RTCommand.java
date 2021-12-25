@@ -8,8 +8,9 @@ import com.google.common.base.Preconditions;
 import cpw.mods.fml.common.registry.GameData;
 import cpw.mods.fml.common.registry.GameRegistry;
 
+import lumien.randomthings.Handler.RTMoonHandler.Bluemoon.ServerBluemoonHandler;
 import lumien.randomthings.RandomThings;
-import lumien.randomthings.Handler.Bloodmoon.ServerBloodmoonHandler;
+import lumien.randomthings.Handler.RTMoonHandler.Bloodmoon.ServerBloodmoonHandler;
 import lumien.randomthings.Items.ItemBiomeCapsule;
 import lumien.randomthings.Network.PacketHandler;
 import lumien.randomthings.Network.Messages.MessageNotification;
@@ -70,7 +71,7 @@ public class RTCommand extends CommandBase
 	@Override
 	public void processCommand(ICommandSender commandUser, String[] args)
 	{
-		ChatComponentText invalidArguments = new ChatComponentText("/rt <notify|moon|setItemColor|setBiomeCapsule|analyze|bloodmoon>");
+		ChatComponentText invalidArguments = new ChatComponentText("/rt <notify|moon|setItemColor|setBiomeCapsule|analyze|bloodmoon|bluemoon>");
 		invalidArguments.getChatStyle().setColor(EnumChatFormatting.RED);
 		if (args.length == 0)
 		{
@@ -267,6 +268,11 @@ public class RTCommand extends CommandBase
 			ServerBloodmoonHandler.INSTANCE.force();
 			commandUser.addChatMessage(new ChatComponentTranslation("text.bloodmoon.command", new Object[0]));
 		}
+		else if (subCommand.equals("bluemoon"))
+		{
+			ServerBluemoonHandler.INSTANCE.force();
+			commandUser.addChatMessage(new ChatComponentTranslation("text.bluemoon.command", new Object[0]));
+		}
 	}
 
 	@Override
@@ -280,7 +286,7 @@ public class RTCommand extends CommandBase
 	{
 		if (stringList.length == 1)
 		{
-			return getListOfStringsMatchingLastWord(stringList, "notify", "moon", "setItemColor", "spectre", "sendtospectre", "setBiomeCapsule", "spectre", "analyze", "bloodmoon");
+			return getListOfStringsMatchingLastWord(stringList, "notify", "moon", "setItemColor", "spectre", "sendtospectre", "setBiomeCapsule", "spectre", "analyze", "bloodmoon", "bluemoon");
 		}
 		else if (stringList[0].equals("notify") && stringList.length == 2)
 		{

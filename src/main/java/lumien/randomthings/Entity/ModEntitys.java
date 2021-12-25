@@ -14,6 +14,7 @@ public class ModEntitys
 		EntityRegistry.registerModEntity(EntitySpirit.class, "spirit", 3, RandomThings.instance, 80, 1, true);
 		EntityRegistry.registerModEntity(EntityReviveCircle.class, "reviveCircle", 4, RandomThings.instance, 80, 1, true);
 		EntityRegistry.registerModEntity(EntityBloodmoonCircle.class, "bloodmoonCircle", 5, RandomThings.instance, 80, 1, true);
+		EntityRegistry.registerModEntity(EntityBlueWolf.class, "blueWolf", 6, RandomThings.instance, 80, 1, true);
 		
 		if (Loader.isModLoaded("MineFactoryReloaded"))
 		{
@@ -21,6 +22,7 @@ public class ModEntitys
 			MFRRegistry.registerSafariNetBlacklist(EntitySoul.class);
 			MFRRegistry.registerSafariNetBlacklist(EntityReviveCircle.class);
 			MFRRegistry.registerSafariNetBlacklist(EntityHealingOrb.class);
+			MFRRegistry.registerSafariNetBlacklist(EntityBlueWolf.class);
 		}
 	}
 }

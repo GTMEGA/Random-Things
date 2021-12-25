@@ -3,6 +3,7 @@ package lumien.randomthings.Transformer;
 import lumien.randomthings.Configuration.ConfigBlocks;
 import lumien.randomthings.Configuration.VanillaChanges;
 
+import lumien.randomthings.RandomThings;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -17,7 +18,6 @@ import org.objectweb.asm.tree.InsnNode;
 import org.objectweb.asm.tree.JumpInsnNode;
 import org.objectweb.asm.tree.LabelNode;
 import org.objectweb.asm.tree.LdcInsnNode;
-import org.objectweb.asm.tree.LocalVariableNode;
 import org.objectweb.asm.tree.MethodInsnNode;
 import org.objectweb.asm.tree.MethodNode;
 import org.objectweb.asm.tree.VarInsnNode;
@@ -67,12 +67,11 @@ public class RTClassTransformer implements IClassTransformer
 
 		coreLogger.log(Level.INFO, "Found Render Global Class: " + classNode.name);
 
-		String renderSkyName = MCPNames.method("func_72714_a");
 		MethodNode renderSky = null;
 
 		for (MethodNode mn : classNode.methods)
 		{
-			if (mn.name.equals(renderSkyName))
+			if (mn.name.equals(MCPNames.method(RandomThings.returnValidMethod("func_72714_a", "renderSky"))))
 			{
 				renderSky = mn;
 				break;
@@ -87,18 +86,25 @@ public class RTClassTransformer implements IClassTransformer
 				if (ain instanceof FieldInsnNode)
 				{
 					FieldInsnNode fin = (FieldInsnNode) ain;
-					if (fin.name.equals(MCPNames.field("field_110927_h")))
+					if (fin.name.equals(MCPNames.field(RandomThings.returnValidMethod("field_110927_h", "locationMoonPhasesPng"))))
 					{
-						renderSky.instructions.insert(renderSky.instructions.get(i + 1), new MethodInsnNode(INVOKESTATIC, "lumien/randomthings/Handler/Bloodmoon/ClientBloodmoonHandler", "moonColorHook", "()V", false));
+						renderSky.instructions.insert(renderSky.instructions.get(i + 1), new MethodInsnNode(INVOKESTATIC, "lumien/randomthings/Handler/RTMoonHandler/Bloodmoon/ClientBloodmoonHandler", "moonColorHook", "()V", false));
+						i++;
+
+						renderSky.instructions.insert(renderSky.instructions.get(i + 1), new MethodInsnNode(INVOKESTATIC, "lumien/randomthings/Handler/RTMoonHandler/Bluemoon/ClientBluemoonHandler", "moonColorHook", "()V", false));
 						i++;
 					}
 				}
 				else if (ain instanceof MethodInsnNode)
 				{
 					MethodInsnNode min = (MethodInsnNode) ain;
-					if (min.name.equals(MCPNames.method("func_72833_a")))
+					if (min.name.equals(MCPNames.method(RandomThings.returnValidMethod("func_72833_a","getSkyColor"))))
 					{
-						renderSky.instructions.insert(min, new MethodInsnNode(INVOKESTATIC, "lumien/randomthings/Handler/Bloodmoon/ClientBloodmoonHandler", "skyColorHook", "(Lnet/minecraft/util/Vec3;)V", false));
+						renderSky.instructions.insert(min, new MethodInsnNode(INVOKESTATIC, "lumien/randomthings/Handler/RTMoonHandler/Bloodmoon/ClientBloodmoonHandler", "skyColorHook", "(Lnet/minecraft/util/Vec3;)V", false));
+						renderSky.instructions.insert(min, new InsnNode(DUP));
+						i += 2;
+
+						renderSky.instructions.insert(min, new MethodInsnNode(INVOKESTATIC, "lumien/randomthings/Handler/RTMoonHandler/Bluemoon/ClientBluemoonHandler", "skyColorHook", "(Lnet/minecraft/util/Vec3;)V", false));
 						renderSky.instructions.insert(min, new InsnNode(DUP));
 						i += 2;
 					}
@@ -120,12 +126,11 @@ public class RTClassTransformer implements IClassTransformer
 
 		coreLogger.log(Level.INFO, "Found Item Class: " + classNode.name);
 
-		String getColorFromItemStackName = MCPNames.method("func_82790_a");
 		MethodNode getColorFromItemStack = null;
 
 		for (MethodNode mn : classNode.methods)
 		{
-			if (mn.name.equals(getColorFromItemStackName))
+			if (mn.name.equals(MCPNames.method(RandomThings.returnValidMethod("func_82790_a","getColorFromItemStack"))))
 			{
 				getColorFromItemStack = mn;
 			}
@@ -164,7 +169,6 @@ public class RTClassTransformer implements IClassTransformer
 		coreLogger.log(Level.INFO, "Found World Class: " + classNode.name);
 
 		String sunBrightnessName = "getSunBrightnessBody";
-		String indirectlyPoweredName = MCPNames.method("func_72864_z");
 
 		int removeIndex = 0;
 
@@ -177,7 +181,7 @@ public class RTClassTransformer implements IClassTransformer
 			{
 				getSunBrightness = mn;
 			}
-			else if (mn.name.equals(indirectlyPoweredName))
+			else if (mn.name.equals(MCPNames.method(RandomThings.returnValidMethod("func_72864_z","isBlockIndirectlyGettingPowered"))))
 			{
 				isBlockIndirectlyGettingPowered = mn;
 			}
@@ -238,7 +242,6 @@ public class RTClassTransformer implements IClassTransformer
 		classReader.accept(classNode, 0);
 		coreLogger.log(Level.INFO, "Found EntityRenderer Class: " + classNode.name);
 
-		String methodName = MCPNames.method("func_78472_g");
 
 		int removeIndex = 0;
 
@@ -246,7 +249,7 @@ public class RTClassTransformer implements IClassTransformer
 
 		for (MethodNode mn : classNode.methods)
 		{
-			if (mn.name.equals(methodName))
+			if (mn.name.equals(MCPNames.method(RandomThings.returnValidMethod("func_78472_g","updateLightmap"))))
 			{
 				updateLightmap = mn;
 			}
@@ -313,7 +316,7 @@ public class RTClassTransformer implements IClassTransformer
 		ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_MAXS | ClassWriter.COMPUTE_FRAMES);
 		classNode.accept(writer);
 
-		String methodName = MCPNames.method("func_149695_a");
+		String methodName = MCPNames.method(RandomThings.returnValidMethod("func_149695_a", "onNeighborBlockChange"));
 		String worldClass = "net/minecraft/world/World";
 		String leaveClass = "net/minecraft/block/BlockLeavesBase";
 		String blockClass = "net/minecraft/block/Block";

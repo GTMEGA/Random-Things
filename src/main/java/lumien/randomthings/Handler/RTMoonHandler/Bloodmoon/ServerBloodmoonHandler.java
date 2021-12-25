@@ -1,8 +1,9 @@
-package lumien.randomthings.Handler.Bloodmoon;
+package lumien.randomthings.Handler.RTMoonHandler.Bloodmoon;
 
 import java.util.List;
 
 import lumien.randomthings.Configuration.Settings;
+import lumien.randomthings.Library.RTMobSpawner;
 import lumien.randomthings.Network.PacketHandler;
 import lumien.randomthings.Network.Messages.MessageBloodmoon;
 import net.minecraft.entity.player.EntityPlayer;
@@ -19,7 +20,7 @@ public class ServerBloodmoonHandler extends WorldSavedData
 {
 	public static ServerBloodmoonHandler INSTANCE;
 
-	private BloodmoonSpawner bloodMoonSpawner;
+	private RTMobSpawner bloodMoonSpawner;
 
 	boolean bloodMoon;
 	boolean forceBloodMoon;
@@ -27,7 +28,7 @@ public class ServerBloodmoonHandler extends WorldSavedData
 	public ServerBloodmoonHandler()
 	{
 		super("Bloodmoon");
-		bloodMoonSpawner = new BloodmoonSpawner();
+		bloodMoonSpawner = new RTMobSpawner();
 		bloodMoon = false;
 		forceBloodMoon = false;
 	}
@@ -35,7 +36,7 @@ public class ServerBloodmoonHandler extends WorldSavedData
 	public ServerBloodmoonHandler(String name)
 	{
 		super("Bloodmoon");
-		bloodMoonSpawner = new BloodmoonSpawner();
+		bloodMoonSpawner = new RTMobSpawner();
 		bloodMoon = false;
 		forceBloodMoon = false;
 	}
@@ -59,7 +60,7 @@ public class ServerBloodmoonHandler extends WorldSavedData
 				{
 					for (int i = 0; i < Settings.BLOODMOON_SPAWNSPEED; i++)
 					{
-						bloodMoonSpawner.findChunksForSpawning((WorldServer) world, true, false, world.getTotalWorldTime() % 20 == 0);
+						bloodMoonSpawner.findChunksForRandomSpawning((WorldServer) world, true, false, world.getTotalWorldTime() % 20 == 0, Settings.BLOODMOON_SPAWNLIMIT_MULTIPLIER, Settings.BLOODMOON_SPAWNRANGE, Settings.BLOODMOON_VANISH, "bloodmoonSpawned");
 					}
 				}
 
@@ -72,7 +73,7 @@ public class ServerBloodmoonHandler extends WorldSavedData
 			{
 				if (time == 12000)
 				{
-					if (forceBloodMoon || Math.random() < Settings.BLOODMOON_CHANCE)
+					if (forceBloodMoon || Math.random() < Settings.BLOODMOON_CHANCE && world.getCurrentMoonPhaseFactor() > 0.9f)
 					{
 						forceBloodMoon = false;
 						setBloodmoon(true);

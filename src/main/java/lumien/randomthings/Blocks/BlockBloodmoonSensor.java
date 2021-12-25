@@ -2,9 +2,8 @@ package lumien.randomthings.Blocks;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import lumien.randomthings.RandomThings;
-import lumien.randomthings.Handler.Bloodmoon.ServerBloodmoonHandler;
+import lumien.randomthings.Handler.RTMoonHandler.Bloodmoon.ServerBloodmoonHandler;
 import net.minecraft.block.BlockDaylightDetector;
-import net.minecraft.block.material.Material;
 import net.minecraft.world.World;
 
 public class BlockBloodmoonSensor extends BlockDaylightDetector

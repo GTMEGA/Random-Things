@@ -10,6 +10,8 @@ import static org.lwjgl.opengl.GL11.glEnable;
 
 import java.lang.reflect.Field;
 
+import lumien.randomthings.Handler.RTMoonHandler.Bluemoon.ClientBluemoonHandler;
+import lumien.randomthings.Handler.RTMoonHandler.Bluemoon.ServerBluemoonHandler;
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.Blocks.ModBlocks;
 import lumien.randomthings.Client.RenderUtils;
@@ -20,8 +22,8 @@ import lumien.randomthings.Configuration.VanillaChanges;
 import lumien.randomthings.Entity.EntityHealingOrb;
 import lumien.randomthings.Entity.EntitySoul;
 import lumien.randomthings.Entity.EntitySpirit;
-import lumien.randomthings.Handler.Bloodmoon.ClientBloodmoonHandler;
-import lumien.randomthings.Handler.Bloodmoon.ServerBloodmoonHandler;
+import lumien.randomthings.Handler.RTMoonHandler.Bloodmoon.ClientBloodmoonHandler;
+import lumien.randomthings.Handler.RTMoonHandler.Bloodmoon.ServerBloodmoonHandler;
 import lumien.randomthings.Handler.Spectre.SpectreHandler;
 import lumien.randomthings.Items.ItemBloodstone;
 import lumien.randomthings.Items.ItemCreativeSword;
@@ -40,8 +42,10 @@ import net.minecraft.client.settings.GameSettings;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.IMob;
+import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayer.EnumStatus;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -56,6 +60,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.ChatStyle;
 import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.world.World;
 import net.minecraft.world.WorldProvider;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.client.event.EntityViewRenderEvent.FogColors;
@@ -73,8 +78,6 @@ import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.entity.player.PlayerDropsEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent.BreakSpeed;
-import net.minecraftforge.event.entity.player.PlayerEvent.HarvestCheck;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.entity.player.PlayerSleepInBedEvent;
 import net.minecraftforge.event.entity.player.UseHoeEvent;
 import net.minecraftforge.event.world.BlockEvent.BreakEvent;
@@ -101,7 +104,7 @@ public class RTEventHandler
 	{
 		try
 		{
-			experienceValue = EntityLiving.class.getDeclaredField(MCPNames.field("field_70728_aV"));
+			experienceValue = EntityLiving.class.getDeclaredField(MCPNames.field(RandomThings.returnValidMethod("field_70728_aV","experienceValue")));
 			experienceValue.setAccessible(true);
 		}
 		catch (Exception e)
@@ -166,16 +169,24 @@ public class RTEventHandler
 	}
 
 	@SubscribeEvent
-	public void livingUpdate(LivingUpdateEvent event)
-	{
-		if (Settings.BLOODMOON_VANISH && !event.entityLiving.worldObj.isRemote)
-		{
-			if (event.entityLiving.dimension == 0)
-			{
-				if (event.entityLiving.getEntityData().getBoolean("bloodmoonSpawned") && !ServerBloodmoonHandler.INSTANCE.isBloodmoonActive() && Math.random() <= 0.2f)
-				{
-					event.entityLiving.setDead();
+	public void livingUpdate(LivingUpdateEvent event) {
+		if (!event.entityLiving.worldObj.isRemote && event.entityLiving.dimension == 0) {
+			EntityLivingBase eventEntity = event.entityLiving;
+			
+			if (Settings.BLOODMOON_VANISH && eventEntity.getEntityData().getBoolean("bloodmoonSpawned") && !ServerBloodmoonHandler.INSTANCE.isBloodmoonActive() && Math.random() <= 0.2f) {
+				eventEntity.setDead();
+			}
+			if (Settings.BLUEMOON_VANISH && eventEntity.getEntityData().getBoolean("bluemoonSpawned") && !ServerBluemoonHandler.INSTANCE.isBluemoonActive() && Math.random() <= 0.01f) {
+				if (Math.random() > 0.9f) {
+					World world = eventEntity.worldObj;
+					if(world.countEntities(EnumCreatureType.creature, true) <= EnumCreatureType.creature.getMaxNumberOfCreature()) {
+						EntityLiving newDoggo = new EntityWolf(world);
+
+						newDoggo.setLocationAndAngles(eventEntity.posX, eventEntity.posY, eventEntity.posZ, eventEntity.rotationYaw, eventEntity.rotationPitch);
+						eventEntity.worldObj.spawnEntityInWorld(newDoggo);
+					}
 				}
+				eventEntity.setDead();
 			}
 		}
 	}
@@ -185,10 +196,26 @@ public class RTEventHandler
 	{
 		if (Settings.BLOODMOON_NOSLEEP)
 		{
-			if (RandomThings.proxy.isBloodmoon())
+			if (RandomThings.proxy.isBloodmoon() && !RandomThings.proxy.isBluemoon())
 			{
 				event.result = EnumStatus.OTHER_PROBLEM;
-				event.entityPlayer.addChatMessage(new ChatComponentTranslation("text.bloodmoon.nosleep").setChatStyle(new ChatStyle().setColor(EnumChatFormatting.RED)));
+				event.entityPlayer.addChatMessage(new ChatComponentTranslation("text.rtmoon.nosleep").setChatStyle(new ChatStyle().setColor(EnumChatFormatting.RED)));
+			}
+		}
+		if (Settings.BLUEMOON_NOSLEEP)
+		{
+			if (RandomThings.proxy.isBluemoon() && !RandomThings.proxy.isBloodmoon())
+			{
+				event.result = EnumStatus.OTHER_PROBLEM;
+				event.entityPlayer.addChatMessage(new ChatComponentTranslation("text.rtmoon.nosleep").setChatStyle(new ChatStyle().setColor(EnumChatFormatting.BLUE)));
+			}
+		}
+		if (Settings.BLOODMOON_NOSLEEP && Settings.BLUEMOON_NOSLEEP)
+		{
+			if (RandomThings.proxy.isBluemoon() && RandomThings.proxy.isBloodmoon())
+			{
+				event.result = EnumStatus.OTHER_PROBLEM;
+				event.entityPlayer.addChatMessage(new ChatComponentTranslation("text.rtmoon.nosleep").setChatStyle(new ChatStyle().setColor(EnumChatFormatting.DARK_GRAY)));
 			}
 		}
 	}
@@ -197,7 +224,7 @@ public class RTEventHandler
 	@SideOnly(Side.CLIENT)
 	public void fogColor(FogColors event)
 	{
-		if (Settings.BLOODMOON_VISUAL_BLACKFOG && ClientBloodmoonHandler.INSTANCE.isBloodmoonActive())
+		if (Settings.BLOODMOON_VISUAL_BLACKFOG && ClientBloodmoonHandler.INSTANCE.isBloodmoonActive() || Settings.BLUEMOON_VISUAL_BLACKFOG && ClientBluemoonHandler.INSTANCE.isBluemoonActive())
 		{
 			event.red = Math.max(event.red - ClientBloodmoonHandler.INSTANCE.fogRemove, 0);
 			event.green = Math.max(event.green - ClientBloodmoonHandler.INSTANCE.fogRemove, 0);
@@ -344,6 +371,7 @@ public class RTEventHandler
 		if (!event.world.isRemote && event.world.provider.dimensionId == 0)
 		{
 			ServerBloodmoonHandler.INSTANCE = (ServerBloodmoonHandler) event.world.mapStorage.loadData(ServerBloodmoonHandler.class, "Bloodmoon");
+			ServerBluemoonHandler.INSTANCE = (ServerBluemoonHandler) event.world.mapStorage.loadData(ServerBluemoonHandler.class, "Bluemoon");
 
 			if (ServerBloodmoonHandler.INSTANCE == null)
 			{
@@ -351,7 +379,14 @@ public class RTEventHandler
 				ServerBloodmoonHandler.INSTANCE.markDirty();
 			}
 
+			if (ServerBluemoonHandler.INSTANCE == null)
+			{
+				ServerBluemoonHandler.INSTANCE = new ServerBluemoonHandler();
+				ServerBluemoonHandler.INSTANCE.markDirty();
+			}
+
 			event.world.mapStorage.setData("Bloodmoon", ServerBloodmoonHandler.INSTANCE);
+			event.world.mapStorage.setData("Bluemoon", ServerBluemoonHandler.INSTANCE);
 		}
 	}
 
@@ -421,6 +456,7 @@ public class RTEventHandler
 		if (event.entity == Minecraft.getMinecraft().thePlayer)
 		{
 			ClientBloodmoonHandler.INSTANCE.setBloodmoon(false);
+			ClientBluemoonHandler.INSTANCE.setBluemoon(false);
 		}
 	}
 
@@ -430,6 +466,7 @@ public class RTEventHandler
 		if (!event.world.isRemote && event.entity instanceof EntityPlayer && event.world.provider.dimensionId == 0)
 		{
 			ServerBloodmoonHandler.INSTANCE.playerJoinedWorld((EntityPlayer) event.entity);
+			ServerBluemoonHandler.INSTANCE.playerJoinedWorld((EntityPlayer) event.entity);
 		}
 
 		if (VanillaChanges.THROWABLES_MOTION)

@@ -91,6 +91,7 @@ imbue.spectre=Spectre Imbue
 
 entity.spirit.name=Spirit
 entity.bloodmoonCircle.name=Bloodmoon Circle
+entity.randomthings.blueWolf.name=Blue Wolf
 
 text.miscellaneous.press=Press %s for more information
 text.miscellaneous.shift=shift
@@ -168,6 +169,10 @@ text.enderLetter.sender=Sender: %s
 text.enderLetter.invalidreceiver=You have specified an invalid receiver
 text.enderLetter.empty=You can't send an empty letter
 
-text.bloodmoon.command=There will be a Bloodmoon next night
+text.bloodmoon.command=There will be a Blood Moon next night
 text.bloodmoon.notify=The Blood Moon is rising...
-text.bloodmoon.nosleep=You don't feel tired right now
+
+text.bluemoon.command=There will be a Blue Moon next night
+text.bluemoon.notify=The Blue Moon is rising...
+
+text.rtmoon.nosleep=You don't feel tired right now

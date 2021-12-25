@@ -2,6 +2,7 @@ package lumien.randomthings.Potions;
 
 import java.awt.Color;
 
+import lumien.randomthings.RandomThings;
 import org.lwjgl.opengl.GL11;
 
 import lumien.randomthings.Client.RenderUtils;
@@ -33,7 +34,7 @@ public class PotionImbue extends Potion
 	public int getLiquidColor()
 	{
 		StackTraceElement[] stackTraceElements = Thread.currentThread().getStackTrace();
-		if (stackTraceElements.length > 3 && stackTraceElements[3].getMethodName().equals(MCPNames.method("func_70679_bo")))
+		if (stackTraceElements.length > 3 && stackTraceElements[3].getMethodName().equals(MCPNames.method(RandomThings.returnValidMethod("func_70679_bo","updatePotionEffects"))))
 		{
 			return 0;
 		}

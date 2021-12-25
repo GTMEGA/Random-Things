@@ -5,6 +5,9 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
+import lumien.randomthings.Client.Model.ModelBlueWolf;
+import lumien.randomthings.Client.Renderer.*;
+import lumien.randomthings.Entity.*;
 import org.apache.logging.log4j.Level;
 
 import cpw.mods.fml.client.registry.ClientRegistry;
@@ -25,21 +28,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.client.MinecraftForgeClient;
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.Client.ClientTickHandler;
-import lumien.randomthings.Client.Renderer.RenderBloodmoonCircle;
-import lumien.randomthings.Client.Renderer.RenderHealingOrb;
-import lumien.randomthings.Client.Renderer.RenderItemCollector;
-import lumien.randomthings.Client.Renderer.RenderRTItem;
-import lumien.randomthings.Client.Renderer.RenderReviveCircle;
-import lumien.randomthings.Client.Renderer.RenderSoul;
-import lumien.randomthings.Client.Renderer.RenderSpirit;
-import lumien.randomthings.Client.Renderer.RenderWirelessLever;
 import lumien.randomthings.Configuration.VanillaChanges;
-import lumien.randomthings.Entity.EntityBloodmoonCircle;
-import lumien.randomthings.Entity.EntityHealingOrb;
-import lumien.randomthings.Entity.EntityReviveCircle;
-import lumien.randomthings.Entity.EntitySoul;
-import lumien.randomthings.Entity.EntitySpirit;
-import lumien.randomthings.Handler.Bloodmoon.ClientBloodmoonHandler;
+import lumien.randomthings.Handler.RTMoonHandler.Bloodmoon.ClientBloodmoonHandler;
 import lumien.randomthings.Items.ItemGinto;
 import lumien.randomthings.Items.ModItems;
 import lumien.randomthings.Library.OverrideUtils;
@@ -105,6 +95,7 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerEntityRenderingHandler(EntitySoul.class, new RenderSoul());
 		RenderingRegistry.registerEntityRenderingHandler(EntityReviveCircle.class, new RenderReviveCircle());
 		RenderingRegistry.registerEntityRenderingHandler(EntityBloodmoonCircle.class, new RenderBloodmoonCircle());
+		RenderingRegistry.registerEntityRenderingHandler(EntityBlueWolf.class, new RenderBlueWolf(new ModelBlueWolf(), new ModelBlueWolf(), 0.7F));
 		
 		RenderingRegistry.registerBlockHandler(new RenderWirelessLever());
 
@@ -151,7 +142,7 @@ public class ClientProxy extends CommonProxy
 	{
 		if (VanillaChanges.LOCKED_GAMMA)
 		{
-			GameSettings.Options[] videoOptions = ReflectionHelper.getPrivateValue(GuiVideoSettings.class, null, MCPNames.field("field_146502_i"));
+			GameSettings.Options[] videoOptions = ReflectionHelper.getPrivateValue(GuiVideoSettings.class, null, MCPNames.field(RandomThings.returnValidMethod("field_146502_i", "videoOptions")));
 			ArrayList<GameSettings.Options> options = new ArrayList<GameSettings.Options>(Arrays.asList(videoOptions));
 
 			Iterator<GameSettings.Options> iterator = options.iterator();
@@ -167,7 +158,7 @@ public class ClientProxy extends CommonProxy
 			RandomThings.instance.logger.log(Level.INFO, "Removing Gamma from settings... (GammaLock is on)");
 			try
 			{
-				OverrideUtils.setFinalStatic(GuiVideoSettings.class.getDeclaredField(MCPNames.field("field_146502_i")), options.toArray(videoOptions));
+				OverrideUtils.setFinalStatic(GuiVideoSettings.class.getDeclaredField(MCPNames.field(RandomThings.returnValidMethod("field_146502_i", "videoOptions"))), options.toArray(videoOptions));
 			}
 			catch (NoSuchFieldException e)
 			{

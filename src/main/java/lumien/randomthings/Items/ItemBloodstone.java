@@ -4,7 +4,7 @@ import java.util.List;
 
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.Entity.EntityBloodmoonCircle;
-import lumien.randomthings.Handler.Bloodmoon.ServerBloodmoonHandler;
+import lumien.randomthings.Handler.RTMoonHandler.Bloodmoon.ServerBloodmoonHandler;
 import lumien.randomthings.Library.BlockPattern;
 
 import cpw.mods.fml.relauncher.Side;

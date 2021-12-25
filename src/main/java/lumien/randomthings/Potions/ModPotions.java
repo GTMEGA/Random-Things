@@ -86,7 +86,7 @@ public class ModPotions
 	{
 		try
 		{
-			OverrideUtils.setFinalStatic(Potion.class.getDeclaredField(MCPNames.field("field_76425_a")), Arrays.copyOf(Potion.potionTypes, newSize));
+			OverrideUtils.setFinalStatic(Potion.class.getDeclaredField(MCPNames.field(RandomThings.returnValidMethod("field_76425_a","potionTypes"))), Arrays.copyOf(Potion.potionTypes, newSize));
 		}
 		catch (Exception e)
 		{

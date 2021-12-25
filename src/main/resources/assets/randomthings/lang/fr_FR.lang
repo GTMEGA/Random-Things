@@ -170,4 +170,4 @@ text.enderLetter.empty=Vous ne pouvez pas envoyer un lettre vide
 
 text.bloodmoon.command=Il va y avoir une lune de sang la nuit prochaine
 text.bloodmoon.notify=La lune de sang s'éléve...
-text.bloodmoon.nosleep=Vous n'avez pas l'air si fatigué maintenant
+text.rtmoon.nosleep=Vous n'avez pas l'air si fatigué maintenant

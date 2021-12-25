@@ -4,7 +4,7 @@ import io.netty.buffer.ByteBuf;
 import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
 
 import lumien.randomthings.RandomThings;
-import lumien.randomthings.Handler.Bloodmoon.ServerBloodmoonHandler;
+import lumien.randomthings.Handler.RTMoonHandler.Bloodmoon.ServerBloodmoonHandler;
 import lumien.randomthings.Items.ItemBloodstone;
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;

@@ -1,42 +1,42 @@
 package lumien.randomthings.Network.Messages;
 
-import io.netty.buffer.ByteBuf;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import lumien.randomthings.Handler.RTMoonHandler.Bloodmoon.ClientBloodmoonHandler;
+import io.netty.buffer.ByteBuf;
+import lumien.randomthings.Handler.RTMoonHandler.Bluemoon.ClientBluemoonHandler;
 import lumien.randomthings.Network.IRTMessage;
 
-public class MessageBloodmoon implements IRTMessage
+public class MessageBluemoon implements IRTMessage
 {
-	boolean bloodMoon;
+	boolean blueMoon;
 
-	public MessageBloodmoon()
+	public MessageBluemoon()
 	{
 
 	}
 
-	public MessageBloodmoon(boolean bloodMoon)
+	public MessageBluemoon(boolean blueMoon)
 	{
-		this.bloodMoon = bloodMoon;
+		this.blueMoon = blueMoon;
 	}
 
 	@Override
 	public void fromBytes(ByteBuf buf)
 	{
-		this.bloodMoon = buf.readBoolean();
+		this.blueMoon = buf.readBoolean();
 	}
 
 	@Override
 	public void toBytes(ByteBuf buf)
 	{
-		buf.writeBoolean(bloodMoon);
+		buf.writeBoolean(blueMoon);
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void onMessage(MessageContext context)
 	{
-		ClientBloodmoonHandler.INSTANCE.setBloodmoon(this.bloodMoon);
+		ClientBluemoonHandler.INSTANCE.setBluemoon(this.blueMoon);
 	}
 }

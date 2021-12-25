@@ -2,6 +2,8 @@ package lumien.randomthings;
 
 import java.io.File;
 import java.io.IOException;
+
+import net.minecraft.launchwrapper.Launch;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.Logger;
 
@@ -198,6 +200,14 @@ public class RandomThings
 				}
 			}
 		}
+	}
+
+	public static boolean isDevEnvironment() {
+		return (boolean) Launch.blackboard.get("fml.deobfuscatedEnvironment");
+	}
+
+	public static String returnValidMethod(String notDevEnv, String devEnv){
+		return isDevEnvironment() ? devEnv : notDevEnv;
 	}
 
 	private void initializeModNBT()

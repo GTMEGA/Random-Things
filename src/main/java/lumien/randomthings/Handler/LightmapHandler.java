@@ -2,7 +2,8 @@ package lumien.randomthings.Handler;
 
 import lumien.randomthings.Configuration.Settings;
 import lumien.randomthings.Configuration.VanillaChanges;
-import lumien.randomthings.Handler.Bloodmoon.ClientBloodmoonHandler;
+import lumien.randomthings.Handler.RTMoonHandler.Bloodmoon.ClientBloodmoonHandler;
+import lumien.randomthings.Handler.RTMoonHandler.Bluemoon.ClientBluemoonHandler;
 
 public class LightmapHandler
 {
@@ -10,9 +11,24 @@ public class LightmapHandler
 
 	public static int manipulateRed(int originalValue)
 	{
-		if (VanillaChanges.HARDCORE_DARKNESS)
+		if (ClientBluemoonHandler.INSTANCE.isBluemoonActive() || VanillaChanges.HARDCORE_DARKNESS)
 		{
-			return Math.max(originalValue - 14, 0);
+			if (VanillaChanges.HARDCORE_DARKNESS)
+			{
+				originalValue -= 14;
+			}
+
+			if (Settings.BLUEMOON_VISUAL_BLUELIGHT && ClientBluemoonHandler.INSTANCE.isBluemoonActive() && !ClientBloodmoonHandler.INSTANCE.isBloodmoonActive())
+			{
+				originalValue -= ClientBluemoonHandler.INSTANCE.lightSub*1.9f;
+			}
+
+			if (Settings.BLOODMOON_VISUAL_REDLIGHT && Settings.BLUEMOON_VISUAL_BLUELIGHT && ClientBluemoonHandler.INSTANCE.isBluemoonActive() && ClientBloodmoonHandler.INSTANCE.isBloodmoonActive())
+			{
+				originalValue -= ClientBluemoonHandler.INSTANCE.lightSub*1.5f;
+			}
+
+			return Math.max(originalValue, 0);
 		}
 		else
 		{
@@ -22,16 +38,26 @@ public class LightmapHandler
 
 	public static int manipulateGreen(int originalValue)
 	{
-		if (ClientBloodmoonHandler.INSTANCE.isBloodmoonActive() || VanillaChanges.HARDCORE_DARKNESS)
+		if (ClientBloodmoonHandler.INSTANCE.isBloodmoonActive() || ClientBluemoonHandler.INSTANCE.isBluemoonActive() || VanillaChanges.HARDCORE_DARKNESS)
 		{
 			if (VanillaChanges.HARDCORE_DARKNESS)
 			{
 				originalValue -= 14;
 			}
 
-			if (Settings.BLOODMOON_VISUAL_REDLIGHT && ClientBloodmoonHandler.INSTANCE.isBloodmoonActive())
+			if (Settings.BLOODMOON_VISUAL_REDLIGHT && ClientBloodmoonHandler.INSTANCE.isBloodmoonActive() && !ClientBluemoonHandler.INSTANCE.isBluemoonActive())
 			{
 				originalValue -= ClientBloodmoonHandler.INSTANCE.lightSub;
+			}
+
+			if (Settings.BLUEMOON_VISUAL_BLUELIGHT && ClientBluemoonHandler.INSTANCE.isBluemoonActive() && !ClientBloodmoonHandler.INSTANCE.isBloodmoonActive())
+			{
+				originalValue -= ClientBluemoonHandler.INSTANCE.lightSub*1.5f;
+			}
+
+			if (Settings.BLOODMOON_VISUAL_REDLIGHT && Settings.BLUEMOON_VISUAL_BLUELIGHT && ClientBluemoonHandler.INSTANCE.isBluemoonActive() && ClientBloodmoonHandler.INSTANCE.isBloodmoonActive())
+			{
+				originalValue -= ClientBluemoonHandler.INSTANCE.lightSub*1.9f;
 			}
 
 			return Math.max(originalValue, 0);
@@ -51,9 +77,14 @@ public class LightmapHandler
 				originalValue -= 14;
 			}
 
-			if (Settings.BLOODMOON_VISUAL_REDLIGHT && ClientBloodmoonHandler.INSTANCE.isBloodmoonActive())
+			if (Settings.BLOODMOON_VISUAL_REDLIGHT && ClientBloodmoonHandler.INSTANCE.isBloodmoonActive() && !ClientBluemoonHandler.INSTANCE.isBluemoonActive())
 			{
 				originalValue -= ClientBloodmoonHandler.INSTANCE.lightSub*1.9f;
+			}
+
+			if (Settings.BLOODMOON_VISUAL_REDLIGHT && Settings.BLUEMOON_VISUAL_BLUELIGHT && ClientBluemoonHandler.INSTANCE.isBluemoonActive() && ClientBloodmoonHandler.INSTANCE.isBloodmoonActive())
+			{
+				originalValue -= ClientBluemoonHandler.INSTANCE.lightSub*1.5f;
 			}
 
 			return Math.max(originalValue, 0);
