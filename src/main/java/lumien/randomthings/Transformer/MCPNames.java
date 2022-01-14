@@ -12,6 +12,7 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 import com.google.common.io.Files;
 import com.google.common.io.LineProcessor;
+import net.minecraft.launchwrapper.Launch;
 
 public class MCPNames
 {
@@ -37,7 +38,7 @@ public class MCPNames
 
 	public static boolean mcp()
 	{
-		return RTLoadingPlugin.IN_MCP;
+		return (boolean) Launch.blackboard.get("fml.deobfuscatedEnvironment");
 	}
 
 	public static String field(String srgName)
