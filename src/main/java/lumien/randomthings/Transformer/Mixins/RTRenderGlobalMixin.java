@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class RTRenderGlobalMixin {
     @Redirect(method = "renderSky",
             at = @At(value = "INVOKE",
-                    target = "Lnet/minecraft/client/multiplayer/WorldClient;getSkyColor(Lnet/minecraft/entity/Entity;F)Lnet/minecraft/util/Vec3;"),
+                     target = "Lnet/minecraft/client/multiplayer/WorldClient;getSkyColor(Lnet/minecraft/entity/Entity;F)Lnet/minecraft/util/Vec3;"),
             require = 1)
     private Vec3 rtSkyColorHook(WorldClient theWorld, Entity renderViewEntity, float v) {
         Vec3 vec3 = theWorld.getSkyColor(renderViewEntity, v);
@@ -25,7 +25,9 @@ public class RTRenderGlobalMixin {
 
     @Inject(method="renderSky",
             at = @At(value = "INVOKE",
-                    target = "Lnet/minecraft/client/renderer/texture/TextureManager;bindTexture(Lnet/minecraft/util/ResourceLocation;)V", ordinal = 2, shift = At.Shift.AFTER),
+                     target = "Lnet/minecraft/client/renderer/texture/TextureManager;bindTexture(Lnet/minecraft/util/ResourceLocation;)V",
+                     ordinal = 2,
+                     shift = At.Shift.AFTER),
             require = 1)
     private void rtMoonColorHook(float tessellator, CallbackInfo ci){
         ClientBloodmoonHandler.moonColorHook();

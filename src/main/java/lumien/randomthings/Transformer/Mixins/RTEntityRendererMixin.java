@@ -10,30 +10,31 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 @Mixin(EntityRenderer.class)
 public class RTEntityRendererMixin {
         @ModifyVariable(method = "updateLightmap",
-                at = @At(value = "STORE"),
-                ordinal = 1
-        )
+                        at = @At(value = "STORE"),
+                        ordinal = 1,
+                        require = 1)
         private int rtManipulateRed(int val) {
                 return LightmapHandler.manipulateRed(val);
         }
         @ModifyVariable(method = "updateLightmap",
-                at = @At(value = "STORE"),
-                ordinal = 2
-        )
+                        at = @At(value = "STORE"),
+                        ordinal = 2,
+                        require = 1)
         private int rtManipulateGreen(int val) {
                 return LightmapHandler.manipulateGreen(val);
         }
         @ModifyVariable(method = "updateLightmap",
-                at = @At(value = "STORE"),
-                ordinal = 3
-        )
+                        at = @At(value = "STORE"),
+                        ordinal = 3,
+                        require = 1)
         private int rtManipulateBlue(int val) {
                 return LightmapHandler.manipulateBlue(val);
         }
 
         @ModifyVariable(method = "updateLightmap",
-                at = @At(value = "STORE"),
-                ordinal = 1)
+                        at = @At(value = "STORE"),
+                        ordinal = 1,
+                        require = 1)
         private float rtHardcoreDarkness(float value) {
                 if (VanillaChanges.HARDCORE_DARKNESS) {
                         return (value - 0.05F) / 0.95F;
