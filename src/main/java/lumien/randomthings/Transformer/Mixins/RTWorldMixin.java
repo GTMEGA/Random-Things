@@ -6,6 +6,7 @@ import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(World.class)
@@ -22,15 +23,14 @@ public class RTWorldMixin {
         }
     }
 
-    @Inject(method = "getSunBrightnessBody(F)F",
-            at = @At("TAIL"),
-            cancellable = true,
-            remap = false,
-            require = 1)
-    private void rtHardcoreDarkness(float var, CallbackInfoReturnable<Float> cir) {
-        if (VanillaChanges.HARDCORE_DARKNESS) {
-            cir.setReturnValue((var - 0.2f) / 0.8f);
-            cir.cancel();
-        }
+    @ModifyVariable(method = "getSunBrightnessBody",
+                    at = @At(value = "STORE",
+                             ordinal = 5),
+                    remap = false,
+                    ordinal = 2,
+                    require = 1)
+    //f2 = (float)((double)f2 * (1.0D - (double)(this.getWeightedThunderStrength(p_72971_1_) * 5.0F) / 16.0D)); <-modifies this line, right before the return statement
+    private float rtHardcoreDarkness(float f2) {
+        return VanillaChanges.HARDCORE_DARKNESS ? ((f2 - 0.2F) / 0.8F) : f2;
     }
 }
