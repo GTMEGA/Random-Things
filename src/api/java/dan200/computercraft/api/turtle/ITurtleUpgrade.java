@@ -88,7 +88,6 @@ public interface ITurtleUpgrade
 	public IIcon getIcon( ITurtleAccess turtle, TurtleSide side );
 
     /**
-     * TODO: Document me
      */
     public void update( ITurtleAccess turtle, TurtleSide side );
 }
