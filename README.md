@@ -1,6 +1,17 @@
 # Random-Things [![](https://jitpack.io/v/GTMEGA/Random-Things.svg)](https://jitpack.io/#GTMEGA/Random-Things) [![](https://github.com/GTMEGA/Random-Things/actions/workflows/gradle.yml/badge.svg)](https://github.com/GTMEGA/Random-Things/actions/workflows/gradle.yml)
 #### GTMEGA's Random-Things fork.
 
+This branch holds sources of 2.4.0+ versions of the mod, mainly targeted to be used within GT:MEGA modpack.
+
+Feature comparison across branches:
+
+| Feature | 2.4.0+ | 2.3.0 | 2.2.4-mixin |
+|--|--|--|--|
+| Mixinification | ✔️ | ✔️ | ✔️ |
+| Optimization | ✔️ | ✔️ |  |
+| Extra Features | ✔️ |  |  |
+
+
 ------
 ### License
 

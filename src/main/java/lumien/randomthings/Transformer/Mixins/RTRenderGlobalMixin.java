@@ -1,6 +1,7 @@
 package lumien.randomthings.Transformer.Mixins;
 
-import lumien.randomthings.Handler.Bloodmoon.ClientBloodmoonHandler;
+import lumien.randomthings.Handler.RTMoonHandler.Bloodmoon.ClientBloodmoonHandler;
+import lumien.randomthings.Handler.RTMoonHandler.Bluemoon.ClientBluemoonHandler;
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.client.renderer.RenderGlobal;
 import net.minecraft.entity.Entity;
@@ -20,6 +21,7 @@ public class RTRenderGlobalMixin {
     private Vec3 rtSkyColorHook(WorldClient theWorld, Entity renderViewEntity, float v) {
         Vec3 vec3 = theWorld.getSkyColor(renderViewEntity, v);
         ClientBloodmoonHandler.skyColorHook(vec3);
+        ClientBluemoonHandler.skyColorHook(vec3);
         return vec3;
     }
 
@@ -29,6 +31,7 @@ public class RTRenderGlobalMixin {
             require = 1)
     private void rtMoonColorHook(float tessellator, CallbackInfo ci){
         ClientBloodmoonHandler.moonColorHook();
+        ClientBluemoonHandler.moonColorHook();
     }
 }
 
