@@ -2,6 +2,7 @@
 #### GTMEGA's Random-Things fork.
 
 This branch holds sources of 2.3.+ versions of the mod, versions that contain both mixinification, optimizations but not RT:MEGA features
+
 Feature comparison across branches:
 
 | Feature | master | compat |
