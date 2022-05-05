@@ -2,6 +2,8 @@
 
 dependencies {
 	compile "li.cil.oc:OpenComputers:MC1.7.10-1.4.+:api"
-    compile("com.github.GTNewHorizons:NotEnoughItems:master-SNAPSHOT:dev")
+    compile 'codechicken:codechickenlib-mc1.7.10:1.1.4+:dev'
+    compile 'codechicken:codechickencore-mc1.7.10:1.0.9+:dev'
+    compile 'codechicken:notenoughitems-mc1.7.10:2.1.5+:dev'
     compile fileTree(dir: 'libs', include: ['*.jar'])
 }

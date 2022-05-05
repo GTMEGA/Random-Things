@@ -2,6 +2,8 @@ package lumien.randomthings.Transformer;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.NoSuchElementException;
@@ -23,12 +25,10 @@ public class MCPNames
 	{
 		if (mcp())
 		{
-			String mappingDir;
+			Path mappingDir = Paths.get(System.getProperty("user.home"), ".gradle", "caches", "minecraft", "net", "minecraftforge", "forge", "1.7.10-10.13.4.1614-1.7.10", "unpacked", "conf");
 
-			mappingDir = "./../mcp/";
-
-			fields = readMappings(new File(mappingDir + "fields.csv"));
-			methods = readMappings(new File(mappingDir + "methods.csv"));
+			fields = readMappings(mappingDir.resolve("fields.csv").toFile());
+			methods = readMappings(mappingDir.resolve("methods.csv").toFile());
 		}
 		else
 		{

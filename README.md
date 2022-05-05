@@ -1,6 +1,16 @@
 # Random-Things [![](https://jitpack.io/v/GTMEGA/Random-Things.svg)](https://jitpack.io/#GTMEGA/Random-Things) [![](https://github.com/GTMEGA/Random-Things/actions/workflows/gradle.yml/badge.svg)](https://github.com/GTMEGA/Random-Things/actions/workflows/gradle.yml)
-#### GTMEGA's port of official 1.7.10 Random-Things to SpongeMixins.
-*Please note that this repository is unlikely to get anymore updates as it was done purely to let people use lumiens great work in a scenario where there is a conflict of ASM transformers.* 
+#### GTMEGA's Random-Things fork.
+
+This branch holds sources of 2.3.+ versions of the mod, versions that contain both mixinification, optimizations but not RT:MEGA features
+Feature comparison across branches:
+
+| Feature | master | compat |
+|--|--|--|
+| Mixinification | ✔️ | ✔️ |
+| Optimization | ✔️ | ✔️ |
+| Extra Features | ✔️ | ❌ |
+
+
 
 ------
 ### License

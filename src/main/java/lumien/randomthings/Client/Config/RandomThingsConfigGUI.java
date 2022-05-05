@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import lumien.randomthings.Configuration.RTConfiguration;
+import lumien.randomthings.Library.Reference;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraftforge.common.config.ConfigElement;
 import cpw.mods.fml.client.config.GuiConfig;
@@ -14,7 +15,7 @@ public class RandomThingsConfigGUI extends GuiConfig
 {
 	public RandomThingsConfigGUI(GuiScreen parent)
 	{
-		super(parent, getConfigElements(), "RandomThings", false, false, GuiConfig.getAbridgedConfigPath(RTConfiguration.config.toString()));
+		super(parent, getConfigElements(), Reference.MOD_ID, false, false, GuiConfig.getAbridgedConfigPath(RTConfiguration.config.toString()));
 	}
 
 	private static List<IConfigElement> getConfigElements()
