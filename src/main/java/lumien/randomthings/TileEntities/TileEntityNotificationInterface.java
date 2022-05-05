@@ -177,7 +177,6 @@ public class TileEntityNotificationInterface extends TileEntity implements IPeri
 	@Optional.Method(modid = "ComputerCraft")
 	public void attach(IComputerAccess computer)
 	{
-		// TODO Auto-generated method stub
 
 	}
 
@@ -185,7 +184,6 @@ public class TileEntityNotificationInterface extends TileEntity implements IPeri
 	@Optional.Method(modid = "ComputerCraft")
 	public void detach(IComputerAccess computer)
 	{
-		// TODO Auto-generated method stub
 
 	}
 
@@ -193,7 +191,6 @@ public class TileEntityNotificationInterface extends TileEntity implements IPeri
 	@Optional.Method(modid = "ComputerCraft")
 	public boolean equals(IPeripheral other)
 	{
-		// TODO Auto-generated method stub
 		return false;
 	}
 

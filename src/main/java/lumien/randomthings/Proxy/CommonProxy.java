@@ -67,7 +67,6 @@ public class CommonProxy
 
 	public void postInit()
 	{
-		// TODO Auto-generated method stub
 
 	}
 }
