@@ -41,7 +41,7 @@ public class ItemIngredient extends ItemBase
 		ingredients.add(new Ingredient("playerCore", "playerCore", 64));
 		ingredients.add(new Ingredient("obsidianStick", "obsidianStick", 64));
 		ingredients.add(new Ingredient("enderFragment", "enderFragment", 16));
-		ingredients.add(new Ingredient("ectoplasm", "ectoplasm", 64));
+		ingredients.add(new Ingredient("ectoplasm", "_ectoplasm", 64));
 		ingredients.add(new Ingredient("spectreIron", "spectreIron", 64));
 		ingredients.add(new Ingredient("transformationCore", "transformationCore", 1));
 		ingredients.add(new Ingredient("enderDiamond", "enderDiamond", 64));
