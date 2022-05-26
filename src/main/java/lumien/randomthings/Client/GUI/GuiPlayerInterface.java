@@ -30,15 +30,6 @@ public class GuiPlayerInterface extends GuiContainer
 	public void initGui()
 	{
 		super.initGui();
-
-		int x = (width - xSize) / 2;
-		int y = (height - ySize) / 2;
-	}
-
-	@Override
-	public void onGuiClosed()
-	{
-		super.onGuiClosed();
 	}
 
 	@Override
@@ -64,11 +55,5 @@ public class GuiPlayerInterface extends GuiContainer
 		fontRendererObj.drawString(I18n.format("tile.playerinterface.name", new Object[0]), 8, 6, 4210752);
 		String connectedTo = "Connected to " + (!te.getPlayerName().equals("") ? te.getPlayerName() : "nobody");
 		fontRendererObj.drawString(connectedTo, (xSize / 2 - fontRendererObj.getStringWidth(connectedTo) / 2), (ySize / 2 - fontRendererObj.FONT_HEIGHT / 2), 4210752);
-	}
-
-	@Override
-	public void updateScreen()
-	{
-		super.updateScreen();
 	}
 }

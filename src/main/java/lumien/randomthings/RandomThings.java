@@ -58,7 +58,7 @@ public class RandomThings
 	@Instance(Reference.MOD_ID)
 	public static RandomThings instance;
 
-	public static final String AUTHOR_USERNAME = "XxsumsumxX";
+	public static final String AUTHOR_USERNAME = "Developer";
 
 	@SidedProxy(clientSide = "lumien.randomthings.Proxy.ClientProxy", serverSide = "lumien.randomthings.Proxy.CommonProxy")
 	public static CommonProxy proxy;

@@ -29,7 +29,7 @@ public class ItemFilter extends ItemBase implements IItemWithProperties
 {
 	public enum FilterType
 	{
-		BLOCK, ITEM, ENTITY, POSITION;
+		BLOCK, ITEM, ENTITY, POSITION
 	}
 
 	public static ItemStack standardItemFilter;

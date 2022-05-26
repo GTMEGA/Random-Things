@@ -16,7 +16,6 @@ import net.minecraft.util.Facing;
 
 public class TileEntityItemCollector extends TileEntity
 {
-	private final int range = 2;
 
 	private int tickRate = 20;
 	private int tickCounter = 0;
@@ -45,6 +44,7 @@ public class TileEntityItemCollector extends TileEntity
 					TileEntity te = worldObj.getTileEntity(targetX, targetY, targetZ);
 					if (te != null && (te instanceof IInventory || te instanceof ISidedInventory))
 					{
+						int range = 2;
 						AxisAlignedBB bounding = AxisAlignedBB.getBoundingBox(xCoord - range, yCoord - range, zCoord - range, xCoord + range + 1, yCoord + range + 1, zCoord + range + 1);
 
 						List<EntityItem> items = worldObj.getEntitiesWithinAABB(EntityItem.class, bounding);

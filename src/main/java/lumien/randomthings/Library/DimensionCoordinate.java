@@ -1,5 +1,7 @@
 package lumien.randomthings.Library;
 
+import java.util.Objects;
+
 public class DimensionCoordinate
 {
 	/** the dimension */
@@ -29,9 +31,8 @@ public class DimensionCoordinate
 	}
 
 	@Override
-	public int hashCode()
-	{
-		return dimension + this.posX << 8 + this.posZ << 16 + this.posY << 32;
+	public int hashCode() {
+		return Objects.hash(dimension, posX, posY, posZ);
 	}
 
 	@Override

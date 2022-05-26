@@ -85,11 +85,6 @@ public class RenderUtils
 	public static Color getAverageIconColor(IIcon icon)
 	{
 		TextureAtlasSprite sprite = (TextureAtlasSprite) icon;
-		int x = sprite.getOriginX();
-		int y = sprite.getOriginY();
-
-		int width = sprite.getIconWidth();
-		int height = sprite.getIconHeight();
 
 		int textureMapID = Minecraft.getMinecraft().getTextureMapBlocks().getGlTextureId();
 		GL11.glBindTexture(GL_TEXTURE_2D, textureMapID);
@@ -100,8 +95,6 @@ public class RenderUtils
 		IntBuffer ib = BufferUtils.createIntBuffer(textureWidth * textureHeight * 4);
 		GL11.glGetTexImage(GL_TEXTURE_2D, 0, GL11.GL_RGBA, GL11.GL_UNSIGNED_INT, ib);
 		GL11.glBindTexture(GL_TEXTURE_2D, 0);
-
-		int startPos = y * width + x;
 		ib.rewind();
 		for (int i = 0; i < ib.capacity(); i++)
 		{

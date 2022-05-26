@@ -226,7 +226,7 @@ public class BloodmoonSpawner
 	}
 
 	/**
-	 * Returns whether or not the specified creature type can spawn at the
+	 * Returns whether the specified creature type can spawn at the
 	 * specified location.
 	 */
 	public static boolean canCreatureTypeSpawnAtLocation(EnumCreatureType p_77190_0_, World p_77190_1_, int p_77190_2_, int p_77190_3_, int p_77190_4_)

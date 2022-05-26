@@ -118,7 +118,7 @@ public class InventoryDropFilter extends InventoryBasic
 			NBTTagCompound slotEntry = itemList.getCompoundTagAt(i);
 			int j = slotEntry.getByte("Slot") & 0xff;
 
-			if (j >= 0 && j < getSizeInventory())
+			if (j < getSizeInventory())
 			{
 				setInventorySlotContents(j, ItemStack.loadItemStackFromNBT(slotEntry));
 			}

@@ -83,7 +83,7 @@ public class RenderItemCollector extends TileEntitySpecialRenderer
 		GL11.glPopMatrix();
 	}
 
-	// Set the lighting stuff, so it changes it's brightness properly.
+	// Set the lighting stuff, so it changes its brightness properly.
 	private void adjustLightFixture(World world, int i, int j, int k, Block block)
 	{
 		Tessellator tess = Tessellator.instance;

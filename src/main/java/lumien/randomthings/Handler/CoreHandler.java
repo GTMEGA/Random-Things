@@ -43,7 +43,6 @@ public class CoreHandler
 	{
 		if (is.stackTagCompound != null)
 		{
-			long time = System.currentTimeMillis();
 			if (is.stackTagCompound.hasKey("customRTColor"))
 			{
 				return is.stackTagCompound.getInteger("customRTColor");

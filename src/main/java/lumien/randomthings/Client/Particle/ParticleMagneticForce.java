@@ -26,8 +26,6 @@ public class ParticleMagneticForce extends EntityFX
 
 		this.followPlayer = followPlayer;
 
-		float f = this.rand.nextFloat() * 0.6F + 0.4F;
-
 		this.particleRed = 1;
 		this.particleGreen = 1;
 		this.particleBlue = 0;

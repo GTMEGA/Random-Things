@@ -20,8 +20,6 @@ public class GuiItemCollector extends GuiContainer
 	GuiButton minusY, plusY;
 	GuiButton minusZ, plusZ;
 
-	GuiButton filter;
-
 	public GuiItemCollector(InventoryPlayer inventoryPlayer, TileEntityAdvancedItemCollector te)
 	{
 		super(new ContainerItemCollector(inventoryPlayer, te));
@@ -140,12 +138,6 @@ public class GuiItemCollector extends GuiContainer
 		fontRendererObj.drawString(radiusZ, xSize / 2 - fontRendererObj.getStringWidth(radiusZ) / 2, 75, 4210752);
 
 		fontRendererObj.drawString("Filter: ", 48, 103, 0x000000);
-	}
-
-	@Override
-	public void updateScreen()
-	{
-		super.updateScreen();
 	}
 
 }

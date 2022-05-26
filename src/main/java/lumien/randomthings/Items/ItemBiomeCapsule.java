@@ -163,7 +163,6 @@ public class ItemBiomeCapsule extends ItemBase
 				if (charges < 256 && entityItem.worldObj.getTotalWorldTime() % Settings.BIOME_CHARGE_TIME == 0)
 				{
 					int itemPosX = (int) Math.floor(entityItem.posX);
-					int itemPosY = (int) Math.floor(entityItem.posY);
 					int itemPosZ = (int) Math.floor(entityItem.posZ);
 
 					int foundBiomeID = entityItem.worldObj.getBiomeGenForCoords(itemPosX, itemPosZ).biomeID;

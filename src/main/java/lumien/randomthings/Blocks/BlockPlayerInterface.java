@@ -16,10 +16,6 @@ import net.minecraft.world.World;
 
 public class BlockPlayerInterface extends BlockContainerBase
 {
-	IIcon texture_bottom;
-	IIcon texture_top;
-	IIcon texture_side;
-
 	IIcon[] icons;
 
 	protected BlockPlayerInterface()

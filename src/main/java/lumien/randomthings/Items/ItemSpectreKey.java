@@ -96,8 +96,8 @@ public class ItemSpectreKey extends ItemBase
 	}
 
 	/**
-	 * returns the action that specifies what animation to play when the items
-	 * is being used
+	 * Returns the action that specifies what animation to play when the items
+	 * are being used
 	 */
 	@Override
 	public EnumAction getItemUseAction(ItemStack par1ItemStack)

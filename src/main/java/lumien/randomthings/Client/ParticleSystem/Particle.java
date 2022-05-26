@@ -9,7 +9,6 @@ public class Particle
 	Vector3f gravity;
 
 	int energy;
-	private boolean isDead;
 
 	public Particle()
 	{
