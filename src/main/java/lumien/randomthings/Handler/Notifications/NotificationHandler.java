@@ -22,7 +22,7 @@ public class NotificationHandler
 	int tickRate;
 	int displayCounter;
 
-	final float teiler = 28F / 20F;
+	static final float factor = 1.4F;
 
 	Gui guiInstance = new Gui();
 	Minecraft mc = Minecraft.getMinecraft();
@@ -51,16 +51,15 @@ public class NotificationHandler
 		if (currentNotification != null)
 		{
 			ScaledResolution scaledresolution = new ScaledResolution(mc, mc.displayWidth, mc.displayHeight);
-			int i = scaledresolution.getScaleFactor();
 
 			if (displayCounter < 20)
 			{
-				drawY = (int) (teiler * (displayCounter + partialTickTime - 20F));
+				drawY = (int) (factor * (displayCounter + partialTickTime - 20F));
 			}
 			else if (displayCounter > currentNotification.duration + 20)
 			{
 				float dif = currentNotification.duration + 40 - displayCounter - partialTickTime;
-				drawY = (int) (0f - (teiler * (20f - dif)));
+				drawY = (int) (0f - (factor * (20f - dif)));
 			}
 			else
 			{

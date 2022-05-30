@@ -12,7 +12,6 @@ import net.minecraft.item.ItemStack;
 public class ContainerItemFilter extends Container
 {
 	IInventory filterInventory;
-	ItemStack filter;
 
 	public ContainerItemFilter(ItemStack filter, IInventory playerInventory, IInventory filterInventory)
 	{

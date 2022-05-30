@@ -1,7 +1,7 @@
 package lumien.randomthings.Client.GUI;
 
 import lumien.randomthings.Client.GUI.Elements.Buttons.GuiButtonBooleanProperty;
-import lumien.randomthings.Client.GUI.Elements.Buttons.GuiButtonListtype;
+import lumien.randomthings.Client.GUI.Elements.Buttons.GuiButtonListType;
 import lumien.randomthings.Container.ContainerItemFilter;
 import lumien.randomthings.Items.ModItems;
 import lumien.randomthings.Library.ClientUtil;
@@ -26,7 +26,7 @@ public class GuiItemFilter extends GuiContainer
 
 	GuiButtonBooleanProperty oreDictButton;
 	GuiButtonBooleanProperty metadataButton;
-	GuiButtonListtype listTypeButton;
+	GuiButtonListType listTypeButton;
 
 	public GuiItemFilter(ItemStack filter, EntityPlayer player, IInventory inventoryPlayer, IInventory inventoryFilter)
 	{
@@ -52,7 +52,7 @@ public class GuiItemFilter extends GuiContainer
 		oreDictButton.setValue(itemFilter.stackTagCompound.getBoolean("oreDict"));
 		this.buttonList.add(oreDictButton);
 
-		listTypeButton = new GuiButtonListtype(this, 1, guiLeft + 173, guiTop + 4 + 22, itemFilter.stackTagCompound.getInteger("listType"));
+		listTypeButton = new GuiButtonListType(this, 1, guiLeft + 173, guiTop + 4 + 22, itemFilter.stackTagCompound.getInteger("listType"));
 		this.buttonList.add(listTypeButton);
 	}
 

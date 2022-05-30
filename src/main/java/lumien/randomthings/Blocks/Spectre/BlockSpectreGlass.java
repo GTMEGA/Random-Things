@@ -63,16 +63,11 @@ public class BlockSpectreGlass extends BlockBase
 	public boolean shouldSideBeRendered(IBlockAccess ba, int x, int y, int z, int side)
 	{
 		Block block = ba.getBlock(x, y, z);
-		ForgeDirection fd = ForgeDirection.VALID_DIRECTIONS[side];
 
 		if (block == this)
 		{
 			return false;
 		}
-		else if (ba.isAirBlock(x, y, z) || !block.isOpaqueCube())
-		{
-			return true;
-		}
-		return false;
+		else return ba.isAirBlock(x, y, z) || !block.isOpaqueCube();
 	}
 }

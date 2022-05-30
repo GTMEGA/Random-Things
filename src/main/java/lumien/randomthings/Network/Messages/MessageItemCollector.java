@@ -67,7 +67,6 @@ public class MessageItemCollector implements IRTMessage
 	@Override
 	public void onMessage(MessageContext ctx)
 	{
-		int dimensionID = ctx.getServerHandler().playerEntity.dimension;
 		World worldObj = ctx.getServerHandler().playerEntity.worldObj;
 
 		if (worldObj.getBlock(posX, posY, posZ) == ModBlocks.advancedItemCollector)

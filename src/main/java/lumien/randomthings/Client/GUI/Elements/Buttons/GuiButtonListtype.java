@@ -15,13 +15,13 @@ import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
 
-public class GuiButtonListtype extends GuiButton
+public class GuiButtonListType extends GuiButton
 {
 	ResourceLocation listTypeTextures = new ResourceLocation("randomthings:textures/gui/buttonListType.png");
 	int listType;
 	GuiContainer gc;
 
-	public GuiButtonListtype(GuiContainer gc, int id, int posX, int posY, int type)
+	public GuiButtonListType(GuiContainer gc, int id, int posX, int posY, int type)
 	{
 		super(id, posX, posY, "");
 

@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.nio.FloatBuffer;
+import java.nio.charset.StandardCharsets;
 import javax.vecmath.Vector3f;
 import lumien.randomthings.RandomThings;
 
@@ -36,12 +37,12 @@ public class ParticleSystem
 	public ParticleSystem(Vector3f emissionPoint, int maxParticles, int generationSpeed)
 	{
 		particles = new Particle[maxParticles];
-		this.maxParticles = maxParticles = 1;
+		this.maxParticles = 1;
 		this.generationSpeed = generationSpeed;
 		this.emissionPoint = emissionPoint;
 		this.lastUsedPosition = 0;
 		initiateParticles();
-		inititateShaders();
+		initiateShaders();
 
 		vertexBufferID = glGenBuffers();
 	}
@@ -54,10 +55,11 @@ public class ParticleSystem
 		}
 	}
 
-	private void inititateShaders()
+	private void initiateShaders()
 	{
 		try
 		{
+			//TODO test this stuff and rewrite it to use ResourceLocation instead of hard reference
 			vertexShaderID = createShader("D:/development/vertex.shader", GL_VERTEX_SHADER);
 			fragmentShaderID = createShader("D:/development/fragment.shader", GL_FRAGMENT_SHADER);
 		}
@@ -65,7 +67,7 @@ public class ParticleSystem
 		{
 			e.printStackTrace();
 			RandomThings.instance.logger.log(Level.WARN, "Couldn't initialize Shaders");
-		}
+	}
 
 		programID = glCreateProgram();
 		glAttachShader(programID, vertexShaderID);
@@ -218,7 +220,7 @@ public class ParticleSystem
 		BufferedReader reader;
 		try
 		{
-			reader = new BufferedReader(new InputStreamReader(in, "UTF-8"));
+			reader = new BufferedReader(new InputStreamReader(in, StandardCharsets.UTF_8));
 
 			Exception innerExc = null;
 

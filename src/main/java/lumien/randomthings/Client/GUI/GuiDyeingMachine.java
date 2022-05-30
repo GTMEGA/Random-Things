@@ -61,8 +61,6 @@ public class GuiDyeingMachine extends GuiContainer
 		{
 			ItemStack dye = inventorySlots.getSlot(1).getStack();
 
-			int[] oreDictIds = OreDictionary.getOreIDs(dye);
-
 			int checkDye = Colors.getDyeColor(dye);
 
 			if (checkDye != 0)

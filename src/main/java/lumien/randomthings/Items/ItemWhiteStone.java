@@ -87,8 +87,6 @@ public class ItemWhiteStone extends ItemBase
 		int time = (int) (worldObj.getWorldTime() % 24000);
 		if (stack.getItemDamage() == 0 && !worldObj.isRemote && (entity instanceof EntityPlayer) && worldObj.getCurrentMoonPhaseFactor() == 1F && time >= 18000 && time <= 22000 && worldObj.canBlockSeeTheSky((int) Math.floor(entity.posX), (int) Math.floor(entity.posY), (int) Math.floor(entity.posZ)))
 		{
-			EntityPlayer player = (EntityPlayer) entity;
-
 			if (stack.stackTagCompound == null)
 			{
 				stack.stackTagCompound = new NBTTagCompound();

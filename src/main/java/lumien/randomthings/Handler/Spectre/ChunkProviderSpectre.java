@@ -29,8 +29,8 @@ public class ChunkProviderSpectre implements IChunkProvider
 	}
 
 	/**
-	 * Will return back a chunk, if it doesn't exist and its not a MP client it
-	 * will generates all the blocks for the specified chunk from the map seed
+	 * Will return a chunk, if it doesn't exist and it's not an MP client it
+	 * will generate all the blocks for the specified chunk from the map seed
 	 * and chunk seed
 	 */
 	@Override
@@ -52,7 +52,7 @@ public class ChunkProviderSpectre implements IChunkProvider
 	}
 
 	/**
-	 * Populates chunk with ores etc etc
+	 * Populates chunk with ores etc. etc.
 	 */
 	@Override
 	public void populate(IChunkProvider par1IChunkProvider, int par2, int par3)

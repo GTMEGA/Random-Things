@@ -13,7 +13,6 @@ import net.minecraft.util.ResourceLocation;
 
 public class BackgroundHandler
 {
-	static Field f;
 	static String[] validBlocks = new String[] { "netherrack", "wool_colored", "stonebrick", "stonebrick_mossy", "sponge", "stone", "red_sand", "sand", "bedrock", "brick", "clay", "cobblestone", "cobblestone_mossy", "dirt", "end_stone", "glowstone", "gravel", "hardened_clay", "hay_block_top", "ice", "log", "melon_side", "mycelium_top", "nether_brick", "portal" };
 
 	static Random rng = new Random();

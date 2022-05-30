@@ -66,10 +66,10 @@ public class RTConfiguration
 		imbueDuration = config.get("Settings", "ImbueDuration", 20 * 60 * 5, "The duration of imbues (in ticks)");
 		biomeChargeTime = config.get("Settings", "BiomeChargeTime", 20, "The amount of ticks the biome capsule needs to collect 1 charge");
 		decaySpeed = config.get("Settings", "LeaveDecaySpeed", 7, "The amount of ticks every leave needs to decay (Lower is faster)");
-		decayFuzz = config.get("Settings", "LeaveDecayFuzz", 5, "A random number from 0-thisconfigoption will be added to the decay speed for every Leave. Setting this to 0 will decay leaves rather linear while higher numbers will let the whole thing look more natural");
-		bloodMoon_spawnSpeed = config.get("Settings", "BloodMoonSpawnSpeed", 3, "How much faster enemys spawn on a bloodmoon (0=Vanilla)");
-		bloodMoon_spawnLimitMult = config.get("Settings", "BloodMoonSpawnLimitMult", 3, "With which number should the default entity limit be multiplicated on a blood moon");
-		bloodMoon_spawnRange = config.get("Settings", "BloodMoonSpawnRange", 3, "How close can enemys spawn next to the player on a bloodmoon in blocks? (Vanilla=24)");
+		decayFuzz = config.get("Settings", "LeaveDecayFuzz", 5, "A random number from 0 to (this config value) will be added to the decay speed for every leaf block. Setting this to 0 will decay leaves rather linear while higher numbers will let the whole thing look more natural");
+		bloodMoon_spawnSpeed = config.get("Settings", "BloodMoonSpawnSpeed", 3, "How much faster enemies spawn on a bloodmoon (0=Vanilla)");
+		bloodMoon_spawnLimitMult = config.get("Settings", "BloodMoonSpawnLimitMult", 3, "With which number should the default entity limit be multiplied on a blood moon");
+		bloodMoon_spawnRange = config.get("Settings", "BloodMoonSpawnRange", 3, "How close can enemies spawn next to the player on a bloodmoon in blocks? (Vanilla=24)");
 		bloodMoon_chance = config.get("Settings", "BloodMoonChance", 0.05, "The chance of a bloodmoon happening (0=Never;1=Every night;0.05=5% of all nights)");
 		bloodMoon_noSleep = config.get("Settings", "BloodMoonNoSleep", true, "Whether players are NOT allowed to sleep during a bloodmoon");
 		bloodMoon_vanish = config.get("Settings", "BloodmoonVanish", false, "Should monsters spawned by a bloodmoon vanish at dawn?");
@@ -173,7 +173,7 @@ public class RTConfiguration
 		Settings.BLOODMOON_VISUAL_BLACKFOG = bloodMoon_visual_blackFog.getBoolean();
 		Settings.BLOODMOON_VISUAL_REDSKY = bloodMoon_visual_redSky.getBoolean();
 
-		MagneticForceHandler.TELEPORT_LENGTH = RTConfiguration.config.get("Settings", "MagneticForceTeleportLength", 200, "In ticks (20=1 Second)").getInt();
+		MagneticForceHandler.TELEPORT_LENGTH = RTConfiguration.config.get("Settings", "MagneticForceTeleportLength", 200, "How long does it take to get teleported in ticks (20=1 Second)").getInt();
 
 		if (RTConfiguration.config.hasChanged())
 			RTConfiguration.config.save();

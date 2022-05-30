@@ -363,7 +363,7 @@ public class RTMobSpawner
 	}
 
 	/**
-	 * Returns whether or not the specified creature type can spawn at the
+	 * Returns whether the specified creature type can spawn at the
 	 * specified location.
 	 */
 	public static boolean canCreatureTypeSpawnAtLocation(EnumCreatureType creatureType, World world, int x, int y, int z)

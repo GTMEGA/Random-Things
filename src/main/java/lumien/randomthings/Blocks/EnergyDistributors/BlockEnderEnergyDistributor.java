@@ -78,7 +78,6 @@ public class BlockEnderEnergyDistributor extends BlockContainerBase
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(IBlockAccess ba, int posX, int posY, int posZ, int side)
 	{
-		TileEntityEnderEnergyDistributor te = (TileEntityEnderEnergyDistributor) ba.getTileEntity(posX, posY, posZ);
 		if (side == 1)
 		{
 			return top;

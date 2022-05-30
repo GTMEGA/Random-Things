@@ -30,7 +30,6 @@ public class RenderRTItem implements IItemRenderer
 	public void renderItem(ItemRenderType type, ItemStack item, Object... data)
 	{
 		RenderItem ri = new RenderItem();
-		RenderBlocks rb = (RenderBlocks) data[0];
 		ri.renderItemIntoGUI(Minecraft.getMinecraft().fontRenderer, Minecraft.getMinecraft().getTextureManager(), item, 0, 0,true);
 		if (((ItemBase) item.getItem()).showDamage(item))
 		{

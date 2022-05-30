@@ -64,11 +64,17 @@ public class InventoryUtils
 		if ((is1 == null && is2 != null) || (is1 != null && is2 == null))
 		{
 			return false;
+		} else if (is1 != null & is2 != null)
+		{
+			is1 = is1.copy();
+			is2 = is2.copy();
+			is1.stackSize = 1;
+			is2.stackSize = 1;
+
+			return ItemStack.areItemStacksEqual(is1, is2);
+		} else
+		{
+			return true;
 		}
-		is1 = is1.copy();
-		is2 = is2.copy();
-		is1.stackSize = 1;
-		is2.stackSize = 1;
-		return ItemStack.areItemStacksEqual(is1, is2);
 	}
 }
