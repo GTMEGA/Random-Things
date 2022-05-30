@@ -201,14 +201,6 @@ public class RandomThings
 		}
 	}
 
-	public static boolean isDevEnvironment() {
-		return (boolean) Launch.blackboard.get("fml.deobfuscatedEnvironment");
-	}
-
-	public static String returnValidMethod(String notDevEnv, String devEnv){
-		return isDevEnvironment() ? devEnv : notDevEnv;
-	}
-
 	private void initializeModNBT()
 	{
 		nbtFile = new File(DimensionManager.getCurrentSaveRootDirectory(), "RandomThings.dat");

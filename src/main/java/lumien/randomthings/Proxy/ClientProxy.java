@@ -142,7 +142,7 @@ public class ClientProxy extends CommonProxy
 	{
 		if (VanillaChanges.LOCKED_GAMMA)
 		{
-			GameSettings.Options[] videoOptions = ReflectionHelper.getPrivateValue(GuiVideoSettings.class, null, MCPNames.field(RandomThings.returnValidMethod("field_146502_i", "videoOptions")));
+			GameSettings.Options[] videoOptions = ReflectionHelper.getPrivateValue(GuiVideoSettings.class, null, MCPNames.field("field_146502_i"));
 			ArrayList<GameSettings.Options> options = new ArrayList<GameSettings.Options>(Arrays.asList(videoOptions));
 
 			Iterator<GameSettings.Options> iterator = options.iterator();
@@ -158,7 +158,7 @@ public class ClientProxy extends CommonProxy
 			RandomThings.instance.logger.log(Level.INFO, "Removing Gamma from settings... (GammaLock is on)");
 			try
 			{
-				OverrideUtils.setFinalStatic(GuiVideoSettings.class.getDeclaredField(MCPNames.field(RandomThings.returnValidMethod("field_146502_i", "videoOptions"))), options.toArray(videoOptions));
+				OverrideUtils.setFinalStatic(GuiVideoSettings.class.getDeclaredField(MCPNames.field("field_146502_i")), options.toArray(videoOptions));
 			}
 			catch (NoSuchFieldException e)
 			{

@@ -1,6 +1,5 @@
 package lumien.randomthings.Container.Slots;
 
-import lumien.randomthings.RandomThings;
 import lumien.randomthings.Transformer.MCPNames;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -34,7 +33,7 @@ public class SlotDyeable extends Slot
 		}
 		try
 		{
-			item.getClass().getDeclaredMethod(MCPNames.method(RandomThings.returnValidMethod("func_82790_a","getColorFromItemStack")), ItemStack.class, int.class);
+			item.getClass().getDeclaredMethod(MCPNames.method("func_82790_a"), ItemStack.class, int.class);
 			return false;
 		}
 		catch (NoSuchMethodException e)

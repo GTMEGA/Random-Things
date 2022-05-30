@@ -104,7 +104,7 @@ public class RTEventHandler
 	{
 		try
 		{
-			experienceValue = EntityLiving.class.getDeclaredField(MCPNames.field(RandomThings.returnValidMethod("field_70728_aV","experienceValue")));
+			experienceValue = EntityLiving.class.getDeclaredField(MCPNames.field("field_70728_aV"));
 			experienceValue.setAccessible(true);
 		}
 		catch (Exception e)

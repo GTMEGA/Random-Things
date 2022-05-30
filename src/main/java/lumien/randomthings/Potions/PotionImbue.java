@@ -34,7 +34,7 @@ public class PotionImbue extends Potion
 	public int getLiquidColor()
 	{
 		StackTraceElement[] stackTraceElements = Thread.currentThread().getStackTrace();
-		if (stackTraceElements.length > 3 && stackTraceElements[3].getMethodName().equals(MCPNames.method(RandomThings.returnValidMethod("func_70679_bo","updatePotionEffects"))))
+		if (stackTraceElements.length > 3 && stackTraceElements[3].getMethodName().equals(MCPNames.method("func_70679_bo")))
 		{
 			return 0;
 		}
