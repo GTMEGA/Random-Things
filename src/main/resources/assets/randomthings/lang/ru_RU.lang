@@ -109,6 +109,7 @@ text.miscellaneous.category=Категория: %s
 text.miscellaneous.shiftCategory=Shift-ПКМ, чтобы изменить категорию
 text.miscellaneous.save=Сохранить
 text.miscellaneous.charges=Заряжает: %d
+text.miscellaneous.opSpectreSneak=Использование с приседанием возвращает в Оверворлд
 
 text.miscellaneous.whiteList=Белый список
 text.miscellaneous.blackList=Чёрный список

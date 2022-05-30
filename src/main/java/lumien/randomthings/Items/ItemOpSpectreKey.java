@@ -7,12 +7,16 @@ import lumien.randomthings.Library.GuiIds;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.EntityFX;
 import net.minecraft.client.particle.EntitySmokeFX;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+
+import java.util.List;
 
 public class ItemOpSpectreKey extends ItemOp
 {
@@ -65,9 +69,24 @@ public class ItemOpSpectreKey extends ItemOp
 	{
 		if (!par2World.isRemote)
 		{
-			par3EntityPlayer.openGui(RandomThings.instance, GuiIds.OP_SPECTRE_KEY, par2World, 0, 0, 0);
+			if(par3EntityPlayer.isSneaking())
+			{
+				RandomThings.instance.spectreHandler.teleportPlayerOutOfSpectreWorld((EntityPlayerMP) par3EntityPlayer);
+				par3EntityPlayer.setSneaking(false);
+			}
+			else
+			{
+				par3EntityPlayer.openGui(RandomThings.instance, GuiIds.OP_SPECTRE_KEY, par2World, 0, 0, 0);
+			}
 		}
 		return par1ItemStack;
+	}
+
+	@Override
+	public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4)
+	{
+		super.addInformation(par1ItemStack, par2EntityPlayer, par3List, par4);
+		par3List.add("\u00A7c" + I18n.format("text.miscellaneous.opSpectreSneak"));
 	}
 
 	@Override
