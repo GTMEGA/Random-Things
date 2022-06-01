@@ -16,6 +16,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
+import static lumien.randomthings.Library.Colors.interpolatePixel;
+
 public class ContainerDyeingMachine extends Container
 {
 	IInventory ingredients = new InventoryCrafting(this, 2, 1);
@@ -55,6 +57,10 @@ public class ContainerDyeingMachine extends Container
 				copy.stackTagCompound = new NBTTagCompound();
 			}
 			copy.stackSize = 1;
+			if (copy.stackTagCompound.hasKey("customRTColor"))
+			{
+				dyeColor = interpolatePixel(copy.stackTagCompound.getInteger("customRTColor"), dyeColor, 0.50f);
+			}
 			copy.stackTagCompound.setInteger("customRTColor", dyeColor);
 			this.result.setInventorySlotContents(0, copy);
 		}
@@ -124,7 +130,7 @@ public class ContainerDyeingMachine extends Container
 	@Override
 	public boolean canInteractWith(EntityPlayer par1EntityPlayer)
 	{
-		return this.worldObj.getBlock(this.posX, this.posY, this.posZ) != ModBlocks.dyeingMachine ? false : par1EntityPlayer.getDistanceSq(this.posX + 0.5D, this.posY + 0.5D, this.posZ + 0.5D) <= 64.0D;
+		return this.worldObj.getBlock(this.posX, this.posY, this.posZ) == ModBlocks.dyeingMachine && par1EntityPlayer.getDistanceSq(this.posX + 0.5D, this.posY + 0.5D, this.posZ + 0.5D) <= 64.0D;
 	}
 
 	@Override

@@ -265,6 +265,10 @@ public class RTEventHandler
 				{
 					dye = I18n.format("text.color." + ItemDye.field_150923_a[indexDye], new Object[] {});
 				}
+				else
+				{
+					dye = String.format("#%06X", (0xFFFFFF & dyeColor));
+				}
 
 				event.toolTip.add(I18n.format("text.dyed", new Object[] { dye }));
 			}
