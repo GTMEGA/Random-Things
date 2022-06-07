@@ -2,6 +2,8 @@ package lumien.randomthings.Client.GUI.Elements;
 
 import java.util.ArrayList;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import lumien.randomthings.Library.Interfaces.IPlayerListGUI;
 
 import org.lwjgl.opengl.GL11;
@@ -13,6 +15,7 @@ import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.Tessellator;
 import cpw.mods.fml.client.GuiScrollingList;
 
+@SideOnly(Side.CLIENT)
 public class GuiSlotPlayerList extends GuiScrollingList
 {
 	private ArrayList<String> players;
