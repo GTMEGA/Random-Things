@@ -113,6 +113,7 @@ public class RTConfiguration
 		ConfigBlocks.spectreGlass = isBlockEnabled("SpectreGlass");
 		ConfigBlocks.energyDistributor = isBlockEnabled("EnergyDistributor");
 		ConfigBlocks.enderEnergyDistributor = isBlockEnabled("EnderEnergyDistributor");
+		ConfigBlocks.wirelessLever = isBlockEnabled("WirelessLever");
 		
 		// Items
 		ConfigItems.biomeCapsule = isItemEnabled("BiomeSolution");
