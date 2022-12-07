@@ -1,8 +1,6 @@
 // Add any additional repositories for your dependencies here
 
 repositories {
-    maven { url = "https://gtmega.falsepattern.com"}
+    maven { url = "https://mvn.falsepattern.com/gtmega_releases"}
     maven { url = "http://maven.cil.li/" }
-    maven { url = "http://chickenbones.net/maven/" }
-	maven { url = "https://jitpack.io" }
 }
