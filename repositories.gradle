@@ -1,6 +1,11 @@
 // Add any additional repositories for your dependencies here
 
 repositories {
+    mavenLocal()
+    maven { url = "https://mvn.falsepattern.com/releases"}
     maven { url = "https://mvn.falsepattern.com/gtmega_releases"}
+    maven { url = "https://mvn.ventooth.com/releases"}
     maven { url = "http://maven.cil.li/" }
+    maven { url = "http://chickenbones.net/maven/" }
+	maven { url = "https://jitpack.io" }
 }
