@@ -1,3 +1,6 @@
+/**
+ * It's a copy of the vanilla mob spawner class, but with a few changes to make it more flexible
+ */
 package lumien.randomthings.Library;
 
 import java.util.ArrayList;

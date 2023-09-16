@@ -6,9 +6,8 @@ import java.util.List;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import lumien.randomthings.Client.RenderUtils;
-import lumien.randomthings.Configuration.Settings;
+import lumien.randomthings.Configuration.RTSettingsConfiguration;
 import lumien.randomthings.Library.PotionEffects;
-import lumien.randomthings.Library.PotionIds;
 import lumien.randomthings.Potions.ModPotions;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
@@ -120,12 +119,12 @@ public class ItemImbue extends ItemBase
 
 	private void addImbue(EntityPlayer player, PotionEffect pe)
 	{
-		player.removePotionEffect(PotionIds.IMBUE_EXPERIENCE);
-		player.removePotionEffect(PotionIds.IMBUE_POISON);
-		player.removePotionEffect(PotionIds.IMBUE_FIRE);
-		player.removePotionEffect(PotionIds.IMBUE_WITHER);
-		player.removePotionEffect(PotionIds.IMBUE_WEAKNESS);
-		player.removePotionEffect(PotionIds.IMBUE_SPECTRE);
+		player.removePotionEffect(RTSettingsConfiguration.IMBUE_EXPERIENCE);
+		player.removePotionEffect(RTSettingsConfiguration.IMBUE_POISON);
+		player.removePotionEffect(RTSettingsConfiguration.IMBUE_FIRE);
+		player.removePotionEffect(RTSettingsConfiguration.IMBUE_WITHER);
+		player.removePotionEffect(RTSettingsConfiguration.IMBUE_WEAKNESS);
+		player.removePotionEffect(RTSettingsConfiguration.IMBUE_SPECTRE);
 
 		player.addPotionEffect(pe);
 	}
@@ -142,26 +141,26 @@ public class ItemImbue extends ItemBase
 		switch (is.getItemDamage())
 		{
 			case 0:
-				imbueID = PotionIds.IMBUE_POISON;
+				imbueID = RTSettingsConfiguration.IMBUE_POISON;
 				break;
 			case 1:
-				imbueID = PotionIds.IMBUE_EXPERIENCE;
+				imbueID = RTSettingsConfiguration.IMBUE_EXPERIENCE;
 				break;
 			case 2:
-				imbueID = PotionIds.IMBUE_FIRE;
+				imbueID = RTSettingsConfiguration.IMBUE_FIRE;
 				break;
 			case 3:
-				imbueID = PotionIds.IMBUE_WITHER;
+				imbueID = RTSettingsConfiguration.IMBUE_WITHER;
 				break;
 			case 4:
-				imbueID = PotionIds.IMBUE_WEAKNESS;
+				imbueID = RTSettingsConfiguration.IMBUE_WEAKNESS;
 				break;
 			case 5:
-				imbueID = PotionIds.IMBUE_SPECTRE;
+				imbueID = RTSettingsConfiguration.IMBUE_SPECTRE;
 				break;
 		}
 
-		PotionEffect pe = new PotionEffect(imbueID, Settings.IMBUE_DURATION, 0, false);
+		PotionEffect pe = new PotionEffect(imbueID, RTSettingsConfiguration.IMBUE_DURATION, 0, false);
 
 		ArrayList<ItemStack> curatives = new ArrayList<ItemStack>();
 		pe.setCurativeItems(curatives);

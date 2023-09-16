@@ -2,17 +2,14 @@ package lumien.randomthings.Client.GUI;
 
 import java.util.ArrayList;
 
+import lumien.randomthings.Configuration.RTSettingsConfiguration;
 import org.lwjgl.opengl.GL11;
 
-import lumien.randomthings.Configuration.Settings;
 import lumien.randomthings.Container.ContainerEnderEnergyDistributor;
-import lumien.randomthings.Container.ContainerEnergyDistributor;
 import lumien.randomthings.TileEntities.EnergyDistributors.TileEntityEnderEnergyDistributor;
-import lumien.randomthings.TileEntities.EnergyDistributors.TileEntityEnergyDistributor;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.util.ForgeDirection;
 
@@ -46,7 +43,7 @@ public class GuiEnderEnergyDistributor extends GuiContainer
 
 		float energyWidth = div * stored;
 		this.drawTexturedModalRect(x + 19, y + 21, 0, 159, (int) (Math.floor(energyWidth)), 7);
-		this.drawCenteredString(fontRendererObj, stored + "/" + Settings.ENDER_ENERGY_DISTRIBUTOR_BUFFERSIZE + " RF", x + 176 / 2, y + 21, 13107200);
+		this.drawCenteredString(fontRendererObj, stored + "/" + RTSettingsConfiguration.ENDER_ENERGY_DISTRIBUTOR_BUFFERSIZE + " RF", x + 176 / 2, y + 21, 13107200);
 
 		if (mouseX > x && mouseX < x + 35 && mouseY > y + 33 && mouseY < y + 33 + 10)
 		{
@@ -68,9 +65,9 @@ public class GuiEnderEnergyDistributor extends GuiContainer
 		fontRendererObj.drawString(I18n.format("tile.enderEnergyDistributor.name", new Object[0]), 14, 6, 4210752);
 
 		int distributed = ((ContainerEnderEnergyDistributor) this.inventorySlots).energyDistributedLastTick;
-		fontRendererObj.drawString("Edlt: " + distributed + "/" + Settings.ENDER_ENERGY_DISTRIBUTOR_PERTICK + " RF", 16, 34, 4210752);
+		fontRendererObj.drawString("Edlt: " + distributed + "/" + RTSettingsConfiguration.ENDER_ENERGY_DISTRIBUTOR_PERTICK + " RF", 16, 34, 4210752);
 		
 		int machinesConnected = ((ContainerEnderEnergyDistributor) this.inventorySlots).machinesConnected;
-		fontRendererObj.drawString("MC: " + machinesConnected + "/" + Settings.ENDER_ENERGY_DISTRIBUTOR_MAXMACHINES, 103, 34, 4210752);
+		fontRendererObj.drawString("MC: " + machinesConnected + "/" + RTSettingsConfiguration.ENDER_ENERGY_DISTRIBUTOR_MAXMACHINES, 103, 34, 4210752);
 	}
 }

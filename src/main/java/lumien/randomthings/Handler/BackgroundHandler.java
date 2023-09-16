@@ -3,8 +3,7 @@ package lumien.randomthings.Handler;
 import java.lang.reflect.Field;
 import java.util.Random;
 
-import lumien.randomthings.Configuration.Settings;
-import lumien.randomthings.Configuration.VanillaChanges;
+import lumien.randomthings.Configuration.RTSettingsConfiguration;
 import lumien.randomthings.Library.OverrideUtils;
 
 import net.minecraft.client.gui.Gui;
@@ -67,31 +66,20 @@ public class BackgroundHandler
 
 	public static void setRandomBackground()
 	{
-		if (VanillaChanges.MODIFIED_BACKGROUND)
-		{
-			if (!Settings.FIXED_BACKGROUND.equals(""))
-			{
-				setBackground(new ResourceLocation(Settings.FIXED_BACKGROUND));
-			}
-			else
-			{
-				String randomBlock = validBlocks[rng.nextInt(validBlocks.length)];
+		if (!RTSettingsConfiguration.FIXED_BACKGROUND.equals("")) {
+			setBackground(new ResourceLocation(RTSettingsConfiguration.FIXED_BACKGROUND));
+		} else {
+			String randomBlock = validBlocks[rng.nextInt(validBlocks.length)];
 
-				if (randomBlock.equals("hardened_clay"))
-				{
-					randomBlock = randomBlock + "_stained_" + ItemDye.field_150921_b[rng.nextInt(ItemDye.field_150921_b.length)];
-				}
-				else if (randomBlock.equals("wool_colored"))
-				{
-					randomBlock = randomBlock + "_" + ItemDye.field_150921_b[rng.nextInt(ItemDye.field_150921_b.length)];
-				}
-				else if (randomBlock.equals("log") || randomBlock.equals("planks"))
-				{
-					randomBlock = randomBlock + "_" + logTypes[rng.nextInt(logTypes.length)];
-				}
-
-				setBackgroundBlock(randomBlock);
+			if (randomBlock.equals("hardened_clay")) {
+				randomBlock = randomBlock + "_stained_" + ItemDye.field_150921_b[rng.nextInt(ItemDye.field_150921_b.length)];
+			} else if (randomBlock.equals("wool_colored")) {
+				randomBlock = randomBlock + "_" + ItemDye.field_150921_b[rng.nextInt(ItemDye.field_150921_b.length)];
+			} else if (randomBlock.equals("log") || randomBlock.equals("planks")) {
+				randomBlock = randomBlock + "_" + logTypes[rng.nextInt(logTypes.length)];
 			}
+
+			setBackgroundBlock(randomBlock);
 		}
 	}
 }

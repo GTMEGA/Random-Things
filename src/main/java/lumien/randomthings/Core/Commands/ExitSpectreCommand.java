@@ -1,7 +1,7 @@
 package lumien.randomthings.Core.Commands;
 
 import lumien.randomthings.RandomThings;
-import lumien.randomthings.Configuration.Settings;
+import lumien.randomthings.Configuration.RTSettingsConfiguration;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayer;
@@ -28,7 +28,7 @@ public class ExitSpectreCommand extends CommandBase
 		if (commandUser instanceof EntityPlayer)
 		{
 			EntityPlayer player = (EntityPlayer) commandUser;
-			if (player.dimension == Settings.SPECTRE_DIMENSON_ID)
+			if (player.dimension == RTSettingsConfiguration.SPECTRE_DIMENSON_ID)
 			{
 				RandomThings.instance.spectreHandler.teleportPlayerOutOfSpectreWorld((EntityPlayerMP) player);
 			}

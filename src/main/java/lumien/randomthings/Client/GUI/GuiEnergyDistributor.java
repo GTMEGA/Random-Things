@@ -4,12 +4,11 @@ import java.util.ArrayList;
 
 import org.lwjgl.opengl.GL11;
 
-import lumien.randomthings.Configuration.Settings;
+import lumien.randomthings.Configuration.RTSettingsConfiguration;
 import lumien.randomthings.Container.ContainerEnergyDistributor;
 import lumien.randomthings.TileEntities.EnergyDistributors.TileEntityEnergyDistributor;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.util.ForgeDirection;
 
@@ -43,7 +42,7 @@ public class GuiEnergyDistributor extends GuiContainer
 
 		float energyWidth = div * stored;
 		this.drawTexturedModalRect(x + 11, y + 21, 0, 80, (int) (Math.floor(energyWidth)), 7);
-		this.drawCenteredString(fontRendererObj, stored + "/" + Settings.ENERGY_DISTRIBUTOR_BUFFERSIZE + " RF", x + 11 + 138 / 2, y + 21, 13107200);
+		this.drawCenteredString(fontRendererObj, stored + "/" + RTSettingsConfiguration.ENERGY_DISTRIBUTOR_BUFFERSIZE + " RF", x + 11 + 138 / 2, y + 21, 13107200);
 
 		if (mouseX > x && mouseX < x + 35 && mouseY > y + 33 && mouseY < y + 33 + 14)
 		{
@@ -65,9 +64,9 @@ public class GuiEnergyDistributor extends GuiContainer
 		fontRendererObj.drawString(I18n.format("tile.energyDistributor.name", new Object[0]), 8, 6, 4210752);
 
 		int distributed = ((ContainerEnergyDistributor) this.inventorySlots).energyDistributedLastTick;
-		fontRendererObj.drawString("Edlt: " + distributed + "/" + Settings.ENERGY_DISTRIBUTOR_PERTICK + " RF", 8, 35, 4210752);
+		fontRendererObj.drawString("Edlt: " + distributed + "/" + RTSettingsConfiguration.ENERGY_DISTRIBUTOR_PERTICK + " RF", 8, 35, 4210752);
 
 		int machinesConnected = ((ContainerEnergyDistributor) this.inventorySlots).machinesConnected;
-		fontRendererObj.drawString("MC: " + machinesConnected + "/" + Settings.ENERGY_DISTRIBUTOR_MAXMACHINES, 103, 35, 4210752);
+		fontRendererObj.drawString("MC: " + machinesConnected + "/" + RTSettingsConfiguration.ENERGY_DISTRIBUTOR_MAXMACHINES, 103, 35, 4210752);
 	}
 }

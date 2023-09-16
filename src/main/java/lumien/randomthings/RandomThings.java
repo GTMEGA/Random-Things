@@ -3,7 +3,7 @@ package lumien.randomthings;
 import java.io.File;
 import java.io.IOException;
 
-import net.minecraft.launchwrapper.Launch;
+import lumien.randomthings.Configuration.RTSettingsConfiguration;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.Logger;
 
@@ -11,8 +11,6 @@ import com.google.common.collect.ImmutableList;
 
 import lumien.randomthings.Blocks.ModBlocks;
 import lumien.randomthings.Client.GuiHandler;
-import lumien.randomthings.Configuration.RTConfiguration;
-import lumien.randomthings.Configuration.Settings;
 import lumien.randomthings.Core.RTCreativeTab;
 import lumien.randomthings.Core.Commands.ExitSpectreCommand;
 import lumien.randomthings.Core.Commands.RTCommand;
@@ -54,7 +52,7 @@ import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.Mod.EventHandler;
 
-@Mod(modid = Reference.MOD_ID, version = Reference.MOD_VERSION, name = Reference.MOD_NAME, acceptedMinecraftVersions = "[1.7.10]", guiFactory = "lumien.randomthings.Client.Config.RandomThingsGuiFactory")
+@Mod(modid = Reference.MOD_ID, version = Reference.MOD_VERSION, name = Reference.MOD_NAME, acceptedMinecraftVersions = "[1.7.10]")
 public class RandomThings
 {
 	@Instance(Reference.MOD_ID)
@@ -82,8 +80,6 @@ public class RandomThings
 	public void preInit(FMLPreInitializationEvent event)
 	{
 		logger = event.getModLog();
-		RTConfiguration.init(event);
-		RTConfiguration.syncConfig();
 
 		ModItems.init();
 		ModBlocks.init();
@@ -98,7 +94,7 @@ public class RandomThings
 		MinecraftForge.EVENT_BUS.register(rte);
 		FMLCommonHandler.instance().bus().register(rte);
 
-		proxy.registerTickHandler();
+		proxy.preInit();
 
 		if (event.getSide().isClient())
 		{
@@ -112,18 +108,10 @@ public class RandomThings
 	public void init(FMLInitializationEvent event)
 	{
 		PacketHandler.init();
-		RandomThings.proxy.registerRenderers();
+		proxy.init();
 
-		if (Settings.SPECTRE_DIMENSON_ID == -1)
-		{
-			int dimensionID = DimensionManager.getNextFreeDimId();
-			logger.log(Level.INFO, "Auto Resolved Spectre Dimension ID to " + dimensionID);
-			RTConfiguration.spectreDimensionID.set(dimensionID);
-
-			RTConfiguration.syncConfig();
-		}
-		DimensionManager.registerProviderType(Settings.SPECTRE_DIMENSON_ID, WorldProviderSpectre.class, true);
-		DimensionManager.registerDimension(Settings.SPECTRE_DIMENSON_ID, Settings.SPECTRE_DIMENSON_ID);
+		DimensionManager.registerProviderType(RTSettingsConfiguration.getSpectreDimensionID(), WorldProviderSpectre.class, true);
+		DimensionManager.registerDimension(RTSettingsConfiguration.getSpectreDimensionID(), RTSettingsConfiguration.getSpectreDimensionID());
 
 		Recipes.init();
 	}

@@ -2,7 +2,7 @@ package lumien.randomthings.Items;
 
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.Client.RenderUtils;
-import lumien.randomthings.Configuration.Settings;
+import lumien.randomthings.Configuration.RTSettingsConfiguration;
 import lumien.randomthings.Library.GuiIds;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.EntityFX;
@@ -93,7 +93,7 @@ public class ItemOpSpectreKey extends ItemOp
 	@SideOnly(Side.CLIENT)
 	public boolean hasEffect(ItemStack par1ItemStack, int pass)
 	{
-		return Minecraft.getMinecraft().thePlayer.worldObj.provider.dimensionId == Settings.SPECTRE_DIMENSON_ID;
+		return Minecraft.getMinecraft().thePlayer.worldObj.provider.dimensionId == RTSettingsConfiguration.SPECTRE_DIMENSON_ID;
 	}
 
 	/**

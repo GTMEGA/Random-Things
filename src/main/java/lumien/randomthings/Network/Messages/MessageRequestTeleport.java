@@ -2,7 +2,7 @@ package lumien.randomthings.Network.Messages;
 
 import net.minecraft.entity.player.EntityPlayerMP;
 import lumien.randomthings.RandomThings;
-import lumien.randomthings.Configuration.ConfigItems;
+import lumien.randomthings.Configuration.RTItemConfiguration;
 import lumien.randomthings.Handler.MagneticForceHandler;
 import lumien.randomthings.Items.ModItems;
 import lumien.randomthings.Library.WorldUtils;
@@ -23,7 +23,7 @@ public class MessageRequestTeleport implements IRTMessage
 		MessageAnswerTeleport answer = new MessageAnswerTeleport();
 		EntityPlayerMP playerEntity = ctx.getServerHandler().playerEntity;
 
-		if (!ConfigItems.magneticForce)
+		if (!RTItemConfiguration.magneticForce)
 		{
 			answer.setStatus(STATUS.NO_RIGHT);
 			PacketHandler.INSTANCE.sendTo(answer, playerEntity);

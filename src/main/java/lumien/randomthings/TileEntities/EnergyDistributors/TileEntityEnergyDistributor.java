@@ -3,21 +3,18 @@ package lumien.randomthings.TileEntities.EnergyDistributors;
 import java.util.HashSet;
 
 import cofh.api.energy.EnergyStorage;
-import cofh.api.energy.IEnergyHandler;
 import cofh.api.energy.IEnergyReceiver;
 
-import lumien.randomthings.Configuration.Settings;
+import lumien.randomthings.Configuration.RTSettingsConfiguration;
 import lumien.randomthings.Library.WorldUtils;
 import lumien.randomthings.Library.Interfaces.IValidator;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ChatComponentText;
 import net.minecraftforge.common.util.ForgeDirection;
 
 public class TileEntityEnergyDistributor extends TileEntity implements IEnergyReceiver
@@ -44,7 +41,7 @@ public class TileEntityEnergyDistributor extends TileEntity implements IEnergyRe
 	{
 		receiverCache = new HashSet<TileEntity>();
 		facing = ForgeDirection.UP;
-		buffer = new EnergyStorage(Settings.ENERGY_DISTRIBUTOR_BUFFERSIZE);
+		buffer = new EnergyStorage(RTSettingsConfiguration.ENERGY_DISTRIBUTOR_BUFFERSIZE);
 		energyDistributedLastTick = 0;
 		machinesConnected = 0;
 	}
@@ -94,14 +91,14 @@ public class TileEntityEnergyDistributor extends TileEntity implements IEnergyRe
 				fillReceiverCache();
 			}
 
-			int limit = Settings.ENERGY_DISTRIBUTOR_PERTICK;
+			int limit = RTSettingsConfiguration.ENERGY_DISTRIBUTOR_PERTICK;
 			energyDistributedLastTick = 0;
 			for (TileEntity te : receiverCache)
 			{
 				if (!te.isInvalid())
 				{
 					IEnergyReceiver er = (IEnergyReceiver) te;
-					int consumed = er.receiveEnergy(ForgeDirection.UP, Math.min(limit, Math.min(buffer.getEnergyStored(), Settings.ENERGY_DISTRIBUTOR_PERMACHINE)), false);
+					int consumed = er.receiveEnergy(ForgeDirection.UP, Math.min(limit, Math.min(buffer.getEnergyStored(), RTSettingsConfiguration.ENERGY_DISTRIBUTOR_PERMACHINE)), false);
 					limit -= consumed;
 					buffer.setEnergyStored(buffer.getEnergyStored() - consumed);
 					energyDistributedLastTick +=consumed;
@@ -119,7 +116,7 @@ public class TileEntityEnergyDistributor extends TileEntity implements IEnergyRe
 	{
 		receiverCache = WorldUtils.getConnectedTEs(worldObj, xCoord + facing.offsetX, yCoord + facing.offsetY, zCoord + facing.offsetZ, validator);
 		machinesConnected = receiverCache.size();
-		while (receiverCache.size() > Settings.ENERGY_DISTRIBUTOR_MAXMACHINES)
+		while (receiverCache.size() > RTSettingsConfiguration.ENERGY_DISTRIBUTOR_MAXMACHINES)
 		{
 			receiverCache.remove(receiverCache.toArray()[0]);
 		}

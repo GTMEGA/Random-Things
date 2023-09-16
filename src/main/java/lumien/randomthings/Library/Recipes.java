@@ -1,8 +1,8 @@
 package lumien.randomthings.Library;
 
 import lumien.randomthings.Blocks.ModBlocks;
-import lumien.randomthings.Configuration.ConfigBlocks;
-import lumien.randomthings.Configuration.ConfigItems;
+import lumien.randomthings.Configuration.RTBlockConfiguration;
+import lumien.randomthings.Configuration.RTItemConfiguration;
 import lumien.randomthings.Handler.ImbuingStation.ImbuingRecipeHandler;
 import lumien.randomthings.Items.ItemFilter;
 import lumien.randomthings.Items.ModItems;
@@ -89,68 +89,68 @@ public class Recipes
 		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ModItems.ingredients, 1, 5), "dyeRed", "dyeOrange", "dyeYellow", "dyeGreen", "dyeCyan", "dyePurple", "dyeGray", "dyeLime", "dyeMagenta"));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.ingredients, 1, 6), "xex", "ede", "xex", 'e', iEnderPearl, 'd', "gemDiamond"));
 
-		if (ConfigBlocks.playerInterface)
+		if (RTBlockConfiguration.playerInterface)
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.playerInterface), "oeo", "omo", "ono", 'o', iObsidian, 'e', iEnderChest, 'm', iPlayerCore, 'n', iNetherstar));
-		if (ConfigBlocks.fluidDisplay)
+		if (RTBlockConfiguration.fluidDisplay)
 		{
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.fluidDisplay, 8), "ggg", "gbg", "ggg", 'g', "paneGlass", 'b', iGlassBottle));
 			GameRegistry.addRecipe(new ShapelessOreRecipe(ModBlocks.advancedFluidDisplay, ModBlocks.fluidDisplay, "gemLapis"));
 		}
-		if (ConfigBlocks.fertilizedDirt)
+		if (RTBlockConfiguration.fertilizedDirt)
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.fertilizedDirt, 1), "brb", "rdr", "brb", 'b', iBonemeal, 'r', iRottenflesh, 'd', iDirt));
-		if (ConfigBlocks.itemCollector)
+		if (RTBlockConfiguration.itemCollector)
 		{
 			ItemStack iItemCollector = new ItemStack(ModBlocks.itemCollector);
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.itemCollector, 1), "xhx", "rer", "xox", 'h', iHopper, 'r', "dustRedstone", 'e', iEnderPearl, 'o', "stickObsidian"));
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.advancedItemCollector, 1), "xdx", "gig", 'd', "gemDiamond", 'g', "dustGlowstone", 'i', iItemCollector));
 		}
-		if (ConfigBlocks.onlineDetector)
+		if (RTBlockConfiguration.onlineDetector)
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.onlineDetector, 1), "sts", "rer", "sts", 's', "stone", 't', iRedstoneTorch, 'r', "dustRedstone", 'e', "gemLapis"));
-		if (ConfigBlocks.moonSensor)
+		if (RTBlockConfiguration.moonSensor)
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.moonSensor, 1), "ggg", "lql", "sss", 'g', "blockGlass", 'l', "gemLapis", 's', "slabWood", 'q', "gemQuartz"));
-		if (ConfigBlocks.lapisLamp)
+		if (RTBlockConfiguration.lapisLamp)
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.spectreLamp, 4, 0), "isi", "sls", "isi", 's', "blockGlass", 'i', "ingotIron", 'l', "gemLapis"));
-		if (ConfigBlocks.wirelessLever)
+		if (RTBlockConfiguration.wirelessLever)
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.wirelessLever), "r", "l", 'r', "blockRedstone", 'l', iLever));
-		if (ConfigBlocks.dyeingMachine)
+		if (RTBlockConfiguration.dyeingMachine)
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.dyeingMachine), "wpw", "ptp", "wpw", 'w', new ItemStack(Blocks.wool, 1, OreDictionary.WILDCARD_VALUE), 'p', "plankWood", 't', iTransformationCore));
-		if (ConfigBlocks.spectreGlass)
+		if (RTBlockConfiguration.spectreGlass)
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.spectreGlass, 16, 0), "ggg", "geg", "ggg", 'g', "blockGlass", 'e', iEctoplasm));
-		if (ConfigBlocks.energyDistributor)
+		if (RTBlockConfiguration.energyDistributor)
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.energyDistributor), "iri", "beb", "iri", 'i', "blockIron", 'b', "blockRedstone", 'r', iRedstoneRepeater, 'e', iEnergizedWater));
-		if (ConfigBlocks.enderEnergyDistributor && ConfigBlocks.energyDistributor)
+		if (RTBlockConfiguration.enderEnergyDistributor && RTBlockConfiguration.energyDistributor)
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.enderEnergyDistributor), "ede", "dsd", "ede", 'd', iEnderDiamond, 's', new ItemStack(ModBlocks.energyDistributor)));
-		if (ConfigBlocks.bloodMoonSensor)
+		if (RTBlockConfiguration.bloodMoonSensor)
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.bloodMoonSensor), "ggg", "rqr", "sss", 'g', "blockGlass", 'r', "dustRedstone", 's', "slabWood", 'q', "gemQuartz"));
 
-		if (ConfigItems.voidStone)
+		if (RTItemConfiguration.voidStone)
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.voidStone, 1), "xox", "oeo", "xox", 'o', "stone", 'e', iEnderPearl));
-		if (ConfigItems.dropFilter)
+		if (RTItemConfiguration.dropFilter)
 		{
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.dropFilter, 1, 0), "lsl", "sfs", "lsl", 'l', iLeather, 's', iString, 'f', iFlint));
-			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.dropFilter, 1, 1), "fe", 'f', new ItemStack(ModItems.dropFilter, 1, 0), 'e', ConfigItems.voidStone ? ModItems.voidStone : iEnderPearl));
+			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.dropFilter, 1, 1), "fe", 'f', new ItemStack(ModItems.dropFilter, 1, 0), 'e', RTItemConfiguration.voidStone ? ModItems.voidStone : iEnderPearl));
 		}
-		if (ConfigItems.enderLetter)
+		if (RTItemConfiguration.enderLetter)
 		{
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.enderLetter, 1, 0), "fpl", 'f', iEnderFragment, 'p', iPaper, 'l', iLeather));
 		}
-		if (ConfigItems.spectreArmor)
+		if (RTItemConfiguration.spectreArmor)
 			addArmorRecipes(iSpectreIron, new ItemStack(ModItems.spectreHelmet), new ItemStack(ModItems.spectreChestplate), new ItemStack(ModItems.spectreLeggings), new ItemStack(ModItems.spectreBoots));
-		if (ConfigItems.spectreSword)
+		if (RTItemConfiguration.spectreSword)
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.spectreSword), "xsx", "xsx", "xox", 's', iSpectreIron, 'o', "stickObsidian"));
-		if (ConfigItems.spectreKey)
+		if (RTItemConfiguration.spectreKey)
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.spectreKey), "xsx", "xtx", 's', iSpectreIron, 't', "stickWood"));
-		if (ConfigItems.magneticForce)
+		if (RTItemConfiguration.magneticForce)
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.magneticForce), "xex", "xmx", "xpx", 'e', iEnderPearl, 'm', "gemEmerald", 'p', iPaper));
-		if (ConfigItems.spiritBinder)
+		if (RTItemConfiguration.spiritBinder)
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.spiritBinder), "ses", "ene", "ses", 's', iEctoplasm, 'e', iEnderPearl, 'n', iNetherstar));
-		if (ConfigItems.soundRecorder)
+		if (RTItemConfiguration.soundRecorder)
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.soundRecorder), "xrx", "wiw", "wiw", 'r', iRedstoneTorch, 'w', "plankWood", 'i', "ingotIron"));
-		if (ConfigItems.biomeCapsule)
+		if (RTItemConfiguration.biomeCapsule)
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.biomeCapsule), "dte", "qgq", "ooo", 'd', "blockDiamond", 'e', "gemEmerald", 't', iTransformationCore, 'q', "gemQuartz", 'g', "blockGlass", 'o', iObsidian));
-		if (ConfigItems.biomePainter)
+		if (RTItemConfiguration.biomePainter)
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.biomePainter), "xtx", "xwx", "xox", 't', iTransformationCore, 'w', new ItemStack(Blocks.wool, 1, OreDictionary.WILDCARD_VALUE), 'o', "stickObsidian"));
-		if (ConfigItems.ginto)
+		if (RTItemConfiguration.ginto)
 		{
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.ginto, 1, 0), "ixi", "xsx", 'i', "ingotIron", 's', iSpectreIron, 'e', iEctoplasm));
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.ginto, 1, 1), "xex", "xgx", 'e', iEctoplasm, 'g', new ItemStack(ModItems.ginto, 1, 0)));
@@ -166,7 +166,7 @@ public class Recipes
 
 	private static void addImbuingRecipes()
 	{
-		if (ConfigItems.imbue)
+		if (RTItemConfiguration.imbue)
 		{
 			ImbuingRecipeHandler.addRecipe(iSpiderEye, iAllium, iRedMushroom, iWaterBottle, imbuePoison);
 			ImbuingRecipeHandler.addRecipe(iDiamond, iEmerald, iGoldIngot, iWaterBottle, imbueExperience);

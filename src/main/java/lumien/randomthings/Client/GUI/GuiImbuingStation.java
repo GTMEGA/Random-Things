@@ -1,8 +1,8 @@
 package lumien.randomthings.Client.GUI;
 
+import lumien.randomthings.Configuration.RTSettingsConfiguration;
 import org.lwjgl.opengl.GL11;
 
-import lumien.randomthings.Configuration.Settings;
 import lumien.randomthings.Container.ContainerImbuingStation;
 import lumien.randomthings.TileEntities.TileEntityImbuingStation;
 import net.minecraft.client.gui.GuiButton;
@@ -46,7 +46,7 @@ public class GuiImbuingStation extends GuiContainer
 
 		if (imbuingProgress > 0)
 		{
-			int progressArrow = (int) (22F / Settings.IMBUING_LENGTH * imbuingProgress) + 1;
+			int progressArrow = (int) (22F / RTSettingsConfiguration.IMBUING_LENGTH * imbuingProgress) + 1;
 
 			this.drawTexturedModalRect(x + 99, y + 54, 189, 13, progressArrow, 16);
 

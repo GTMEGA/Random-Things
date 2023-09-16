@@ -1,6 +1,6 @@
 package lumien.randomthings.Handler.Spectre;
 
-import lumien.randomthings.Configuration.Settings;
+import lumien.randomthings.Configuration.RTSettingsConfiguration;
 import net.minecraft.world.WorldProvider;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.biome.WorldChunkManagerHell;
@@ -39,7 +39,7 @@ public class WorldProviderSpectre extends WorldProvider
 	@Override
 	public boolean doesXZShowFog(int par1, int par2)
 	{
-		return Settings.SPECTRE_DIMENSION_FOG;
+		return RTSettingsConfiguration.SPECTRE_DIMENSION_FOG;
 	}
 
 	@Override
@@ -57,8 +57,8 @@ public class WorldProviderSpectre extends WorldProvider
 	@Override
 	public void registerWorldChunkManager()
 	{
-		this.worldChunkMgr = new WorldChunkManagerHell(BiomeGenBase.sky, 0F);
-		this.dimensionId = Settings.SPECTRE_DIMENSON_ID;
+        this.worldChunkMgr = new WorldChunkManagerHell(BiomeGenBase.sky, 0F);
+        this.dimensionId = RTSettingsConfiguration.SPECTRE_DIMENSON_ID;
 	}
 
 	@Override

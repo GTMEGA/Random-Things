@@ -3,9 +3,9 @@ package lumien.randomthings.Handler.Spectre;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import lumien.randomthings.Configuration.RTSettingsConfiguration;
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.Blocks.ModBlocks;
-import lumien.randomthings.Configuration.Settings;
 import lumien.randomthings.Library.PotionEffects;
 import lumien.randomthings.Library.WorldUtils;
 import lumien.randomthings.Network.PacketHandler;
@@ -39,8 +39,8 @@ public class SpectreHandler extends WorldSavedData
 	{
 		super("SpectreHandler");
 		nextCoord = 0;
-		playerConnection = new HashMap<String, Integer>();
-		spectreDimensionID = Settings.SPECTRE_DIMENSON_ID;
+        playerConnection = new HashMap<String, Integer>();
+        spectreDimensionID = RTSettingsConfiguration.SPECTRE_DIMENSON_ID;
 	}
 
 	public SpectreHandler()
@@ -64,12 +64,12 @@ public class SpectreHandler extends WorldSavedData
 			}
 			else
 			{
-				WorldServer spectreWorld = MinecraftServer.getServer().worldServerForDimension(Settings.SPECTRE_DIMENSON_ID);
+				WorldServer spectreWorld = MinecraftServer.getServer().worldServerForDimension(RTSettingsConfiguration.SPECTRE_DIMENSON_ID);
 				int coord = playerConnection.get(cubeOwner);
 
-				if (operator.dimension != Settings.SPECTRE_DIMENSON_ID)
+				if (operator.dimension != RTSettingsConfiguration.SPECTRE_DIMENSON_ID)
 				{
-					MinecraftServer.getServer().getConfigurationManager().transferPlayerToDimension((EntityPlayerMP) operator, Settings.SPECTRE_DIMENSON_ID, new TeleporterSpectre(spectreWorld));
+					MinecraftServer.getServer().getConfigurationManager().transferPlayerToDimension((EntityPlayerMP) operator, RTSettingsConfiguration.SPECTRE_DIMENSON_ID, new TeleporterSpectre(spectreWorld));
 				}
 
 				operator.setPositionAndUpdate(coord * 32 + 9 - 1, 42, 2 - 0.5);
@@ -81,7 +81,7 @@ public class SpectreHandler extends WorldSavedData
 	{
 		String playerName = player.getCommandSenderName();
 		int coord = 0;
-		WorldServer spectreWorld = MinecraftServer.getServer().worldServerForDimension(Settings.SPECTRE_DIMENSON_ID);
+		WorldServer spectreWorld = MinecraftServer.getServer().worldServerForDimension(RTSettingsConfiguration.SPECTRE_DIMENSON_ID);
 		if (playerConnection.containsKey(playerName))
 		{
 			coord = playerConnection.get(playerName);
@@ -95,9 +95,9 @@ public class SpectreHandler extends WorldSavedData
 			this.markDirty();
 		}
 
-		if (player.dimension != Settings.SPECTRE_DIMENSON_ID)
+		if (player.dimension != RTSettingsConfiguration.SPECTRE_DIMENSON_ID)
 		{
-			MinecraftServer.getServer().getConfigurationManager().transferPlayerToDimension(player, Settings.SPECTRE_DIMENSON_ID, new TeleporterSpectre(spectreWorld));
+			MinecraftServer.getServer().getConfigurationManager().transferPlayerToDimension(player, RTSettingsConfiguration.SPECTRE_DIMENSON_ID, new TeleporterSpectre(spectreWorld));
 		}
 
 		player.setPositionAndUpdate(coord * 32 + 9 - 1, 42, 2 - 0.5);
@@ -152,10 +152,10 @@ public class SpectreHandler extends WorldSavedData
 			RandomThings.instance.logger.log(Level.WARN, "If you don't this will crash in a second!! :(");
 		}
 
-		if (spectreDimensionID != Settings.SPECTRE_DIMENSON_ID)
+		if (spectreDimensionID != RTSettingsConfiguration.SPECTRE_DIMENSON_ID)
 		{
-			RandomThings.instance.logger.log(Level.WARN, "Resetting Spectre World because dimensionID changed (" + spectreDimensionID + "->" + Settings.SPECTRE_DIMENSON_ID + ")");
-			spectreDimensionID = Settings.SPECTRE_DIMENSON_ID;
+			RandomThings.instance.logger.log(Level.WARN, "Resetting Spectre World because dimensionID changed (" + spectreDimensionID + "->" + RTSettingsConfiguration.SPECTRE_DIMENSON_ID + ")");
+            spectreDimensionID = RTSettingsConfiguration.SPECTRE_DIMENSON_ID;
 			reset();
 			this.markDirty();
 		}

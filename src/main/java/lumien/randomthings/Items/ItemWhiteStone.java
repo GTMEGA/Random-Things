@@ -3,11 +3,9 @@ package lumien.randomthings.Items;
 import java.util.List;
 
 import cpw.mods.fml.common.network.NetworkRegistry.TargetPoint;
+import lumien.randomthings.Configuration.RTSettingsConfiguration;
 import lumien.randomthings.RandomThings;
-import lumien.randomthings.Configuration.ConfigDungeonLoot;
-import lumien.randomthings.Configuration.ConfigItems;
-import lumien.randomthings.Handler.RTMoonHandler.Bloodmoon.ClientBloodmoonHandler;
-import lumien.randomthings.Handler.RTMoonHandler.Bloodmoon.ServerBloodmoonHandler;
+import lumien.randomthings.Configuration.RTItemConfiguration;
 import lumien.randomthings.Network.PacketHandler;
 import lumien.randomthings.Network.Messages.MessageWhitestone;
 import net.minecraft.creativetab.CreativeTabs;
@@ -30,7 +28,7 @@ public class ItemWhiteStone extends ItemBase
 		this.setHasSubtypes(true);
 		this.setMaxStackSize(1);
 
-		ChestGenHooks.addItem(ChestGenHooks.DUNGEON_CHEST, new WeightedRandomChestContent(new ItemStack(this, 1, 0), 1, 1, ConfigDungeonLoot.WHITESTONE_CHANCE));
+		ChestGenHooks.addItem(ChestGenHooks.DUNGEON_CHEST, new WeightedRandomChestContent(new ItemStack(this, 1, 0), 1, 1, RTSettingsConfiguration.WHITESTONE_CHANCE));
 	}
 
 	@Override
@@ -130,7 +128,7 @@ public class ItemWhiteStone extends ItemBase
 	@Override
 	public boolean onEntityItemUpdate(EntityItem entityItem)
 	{
-		if (ConfigItems.bloodStone && entityItem.dimension == 0 && entityItem.getEntityItem().getItemDamage() == 1 && entityItem.worldObj.canBlockSeeTheSky((int) Math.floor(entityItem.posX), (int) Math.floor(entityItem.posY), (int) Math.floor(entityItem.posZ)))
+		if (RTItemConfiguration.bloodStone && entityItem.dimension == 0 && entityItem.getEntityItem().getItemDamage() == 1 && entityItem.worldObj.canBlockSeeTheSky((int) Math.floor(entityItem.posX), (int) Math.floor(entityItem.posY), (int) Math.floor(entityItem.posZ)))
 		{
 			if (entityItem.worldObj.isRemote)
 			{

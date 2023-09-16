@@ -1,12 +1,11 @@
 package lumien.randomthings.Blocks;
 
-import cpw.mods.fml.common.registry.GameRegistry;
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.Blocks.EnergyDistributors.BlockEnderEnergyDistributor;
 import lumien.randomthings.Blocks.EnergyDistributors.BlockEnergyDistributor;
 import lumien.randomthings.Blocks.Spectre.BlockSpectreBlock;
 import lumien.randomthings.Blocks.Spectre.BlockSpectreGlass;
-import lumien.randomthings.Configuration.ConfigBlocks;
+import lumien.randomthings.Configuration.RTBlockConfiguration;
 
 public class ModBlocks
 {
@@ -35,44 +34,43 @@ public class ModBlocks
 	{
 		RandomThings.instance.logger.debug("Initializing Blocks");
 
-		if (ConfigBlocks.playerInterface)
+		if (RTBlockConfiguration.playerInterface)
 		{
 			playerInterface = new BlockPlayerInterface();
 			creativePlayerInterface = new BlockCreativePlayerInterface();
 		}
-		if (ConfigBlocks.fluidDisplay)
+		if (RTBlockConfiguration.fluidDisplay)
 		{
 			fluidDisplay = new BlockFluidDisplay();
 			advancedFluidDisplay = new BlockAdvancedFluidDisplay();
 		}
-		if (ConfigBlocks.fertilizedDirt)
+		if (RTBlockConfiguration.fertilizedDirt)
 			fertilizedDirt = new BlockFertilizedDirt(false);
-		if (ConfigBlocks.fertilizedDirtTilled)
 			fertilizedDirtTilled = new BlockFertilizedDirt(true);
-		if (ConfigBlocks.itemCollector)
+		if (RTBlockConfiguration.itemCollector)
 		{
 			itemCollector = new BlockItemCollector();
 			advancedItemCollector = new BlockAdvancedItemCollector();
 		}
-		if (ConfigBlocks.onlineDetector)
+		if (RTBlockConfiguration.onlineDetector)
 			onlineDetector = new BlockOnlineDetector();
-		if (ConfigBlocks.moonSensor)
+		if (RTBlockConfiguration.moonSensor)
 			moonSensor = new BlockMoonSensor();
-		if (ConfigBlocks.bloodMoonSensor)
+		if (RTBlockConfiguration.bloodMoonSensor)
 			bloodMoonSensor = new BlockBloodmoonSensor();
-		if (ConfigBlocks.notificationInterface)
+		if (RTBlockConfiguration.notificationInterface)
 			notificationInterface = new BlockNotificationInterface();
-		if (ConfigBlocks.lapisLamp)
+		if (RTBlockConfiguration.lapisLamp)
 			spectreLamp = new BlockLapisLamp();
-		if (ConfigBlocks.wirelessLever)
+		if (RTBlockConfiguration.wirelessLever)
 			wirelessLever = new BlockWirelessLever();
-		if (ConfigBlocks.dyeingMachine)
+		if (RTBlockConfiguration.dyeingMachine)
 			dyeingMachine = new BlockDyeingMachine();
-		if (ConfigBlocks.spectreGlass)
+		if (RTBlockConfiguration.spectreGlass)
 			spectreGlass = new BlockSpectreGlass();
-		if (ConfigBlocks.energyDistributor)
+		if (RTBlockConfiguration.energyDistributor)
 			energyDistributor = new BlockEnergyDistributor();
-		if (ConfigBlocks.enderEnergyDistributor)
+		if (RTBlockConfiguration.enderEnergyDistributor)
 			enderEnergyDistributor = new BlockEnderEnergyDistributor();
 
 		// Always there

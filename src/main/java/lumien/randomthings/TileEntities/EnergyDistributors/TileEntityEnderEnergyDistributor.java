@@ -3,9 +3,8 @@ package lumien.randomthings.TileEntities.EnergyDistributors;
 import java.util.HashSet;
 
 import cofh.api.energy.EnergyStorage;
-import cofh.api.energy.IEnergyHandler;
 import cofh.api.energy.IEnergyReceiver;
-import lumien.randomthings.Configuration.Settings;
+import lumien.randomthings.Configuration.RTSettingsConfiguration;
 import lumien.randomthings.Items.ItemFilter;
 import lumien.randomthings.Library.DimensionCoordinate;
 import lumien.randomthings.Library.InventoryUtils;
@@ -42,7 +41,7 @@ public class TileEntityEnderEnergyDistributor extends TileEntity implements IEne
 	public TileEntityEnderEnergyDistributor()
 	{
 		super();
-		buffer = new EnergyStorage(Settings.ENDER_ENERGY_DISTRIBUTOR_BUFFERSIZE);
+		buffer = new EnergyStorage(RTSettingsConfiguration.ENDER_ENERGY_DISTRIBUTOR_BUFFERSIZE);
 		receiverCache = new HashSet<TileEntity>();
 		machinesConnected = 0;
 	}
@@ -84,7 +83,7 @@ public class TileEntityEnderEnergyDistributor extends TileEntity implements IEne
 			if (is != null)
 			{
 				DimensionCoordinate dc = ItemFilter.getPosition(is);
-				if (dc.dimension == worldObj.provider.dimensionId && dc.getDistanceSqrd(xCoord, yCoord, zCoord) <= Settings.ENDER_ENERGY_DISTRIBUTOR_RANGE_SQRD)
+				if (dc.dimension == worldObj.provider.dimensionId && dc.getDistanceSqrd(xCoord, yCoord, zCoord) <= (RTSettingsConfiguration.ENDER_ENERGY_DISTRIBUTOR_RANGE * RTSettingsConfiguration.ENDER_ENERGY_DISTRIBUTOR_RANGE))
 				{
 					WorldUtils.recConnectedTEs(receiverCache, worldObj, dc.posX, dc.posY, dc.posZ, validator);
 
@@ -97,7 +96,7 @@ public class TileEntityEnderEnergyDistributor extends TileEntity implements IEne
 			}
 		}
 		machinesConnected = receiverCache.size();
-		while (receiverCache.size() > Settings.ENDER_ENERGY_DISTRIBUTOR_MAXMACHINES)
+		while (receiverCache.size() > RTSettingsConfiguration.ENDER_ENERGY_DISTRIBUTOR_MAXMACHINES)
 		{
 			receiverCache.remove(receiverCache.toArray()[0]);
 		}
@@ -115,14 +114,14 @@ public class TileEntityEnderEnergyDistributor extends TileEntity implements IEne
 				fillReceiverCache();
 			}
 
-			int limit = Settings.ENDER_ENERGY_DISTRIBUTOR_PERTICK;
+			int limit = RTSettingsConfiguration.ENDER_ENERGY_DISTRIBUTOR_PERTICK;
 			energyDistributedLastTick = 0;
 			for (TileEntity te : receiverCache)
 			{
 				if (!te.isInvalid())
 				{
 					IEnergyReceiver er = (IEnergyReceiver) te;
-					int consumed = er.receiveEnergy(ForgeDirection.UP, Math.min(limit, Math.min(buffer.getEnergyStored(), Settings.ENDER_ENERGY_DISTRIBUTOR_PERMACHINE)), false);
+					int consumed = er.receiveEnergy(ForgeDirection.UP, Math.min(limit, Math.min(buffer.getEnergyStored(), RTSettingsConfiguration.ENDER_ENERGY_DISTRIBUTOR_PERMACHINE)), false);
 					limit -= consumed;
 					buffer.setEnergyStored(buffer.getEnergyStored() - consumed);
 					energyDistributedLastTick += consumed;
