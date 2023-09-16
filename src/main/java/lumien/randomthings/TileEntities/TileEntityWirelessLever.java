@@ -2,6 +2,7 @@ package lumien.randomthings.TileEntities;
 
 import java.util.HashSet;
 
+import lumien.randomthings.Configuration.RTSettingsConfiguration;
 import org.lwjgl.util.vector.Vector3f;
 
 import cpw.mods.fml.relauncher.Side;
@@ -9,7 +10,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 import lumien.randomthings.Blocks.ModBlocks;
 import lumien.randomthings.Blocks.ItemBlocks.ItemBlockWirelessLever;
-import lumien.randomthings.Configuration.Settings;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
@@ -56,7 +56,7 @@ public class TileEntityWirelessLever extends TileEntity
 					{
 						particle.setRBGColorF(0.9f, 0.9f, 0.9f);
 					}
-					if (vec.length() > Settings.WIRELESSLEVER_RANGE)
+					if (vec.length() > RTSettingsConfiguration.WIRELESS_LEVER_RANGE)
 					{
 						particle.setRBGColorF(0, 0, 0);
 					}
@@ -127,7 +127,7 @@ public class TileEntityWirelessLever extends TileEntity
 				if (te.worldObj == worldObj && te.targetX == posX && te.targetY == posY && te.targetZ == posZ && (te.worldObj.getBlockMetadata(te.xCoord, te.yCoord, te.zCoord) & 8) > 0)
 				{
 					double distance = Math.sqrt((te.xCoord - te.targetX) * (te.xCoord - te.targetX) + (te.yCoord - te.targetY) * (te.yCoord - te.targetY) + (te.zCoord - te.targetZ) * (te.zCoord - te.targetZ));
-					if (distance <= Settings.WIRELESSLEVER_RANGE)
+					if (distance <= RTSettingsConfiguration.WIRELESS_LEVER_RANGE)
 					{
 						return true;
 					}

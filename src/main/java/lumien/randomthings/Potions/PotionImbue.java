@@ -2,11 +2,10 @@ package lumien.randomthings.Potions;
 
 import java.awt.Color;
 
-import lumien.randomthings.RandomThings;
+import lumien.randomthings.Configuration.RTSettingsConfiguration;
 import org.lwjgl.opengl.GL11;
 
 import lumien.randomthings.Client.RenderUtils;
-import lumien.randomthings.Library.PotionIds;
 import lumien.randomthings.Transformer.MCPNames;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -52,7 +51,7 @@ public class PotionImbue extends Potion
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		mc.renderEngine.bindTexture(icon);
 
-		if (this.getId() == PotionIds.IMBUE_SPECTRE)
+		if (this.getId() == RTSettingsConfiguration.IMBUE_SPECTRE)
 		{
 			RenderUtils.enableDefaultBlending();
 			GL11.glColor4f(1, 1, 1, 0.8f);

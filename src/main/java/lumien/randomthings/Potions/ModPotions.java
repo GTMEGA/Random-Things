@@ -2,16 +2,18 @@ package lumien.randomthings.Potions;
 
 import java.util.Arrays;
 
+import lombok.SneakyThrows;
+import lumien.randomthings.Configuration.RTSettingsConfiguration;
 import org.apache.logging.log4j.Level;
 
 import lumien.randomthings.RandomThings;
-import lumien.randomthings.Configuration.RTConfiguration;
 import lumien.randomthings.Library.OverrideUtils;
-import lumien.randomthings.Library.PotionIds;
 import lumien.randomthings.Transformer.MCPNames;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.config.Property;
+
+import static lumien.randomthings.Configuration.RTSettingsConfiguration.validatePotionID;
 
 public class ModPotions
 {
@@ -26,88 +28,17 @@ public class ModPotions
 
 	public static void init()
 	{
-		PotionIds.IMBUE_POISON = checkPotionID(RTConfiguration.piImbuePoison).getInt();
-		imbuePoison = getImbue("poison", PotionIds.IMBUE_POISON, imbueColors[0]);
-
-		PotionIds.IMBUE_EXPERIENCE = checkPotionID(RTConfiguration.piImbueExperience).getInt();
-		imbueExperience = getImbue("experience", PotionIds.IMBUE_EXPERIENCE, imbueColors[1]);
-
-		PotionIds.IMBUE_FIRE = checkPotionID(RTConfiguration.piImbueFire).getInt();
-		imbueFire = getImbue("fire", PotionIds.IMBUE_FIRE, imbueColors[2]);
-
-		PotionIds.IMBUE_WITHER = checkPotionID(RTConfiguration.piImbueWither).getInt();
-		imbueWither = getImbue("wither", PotionIds.IMBUE_WITHER, imbueColors[3]);
-
-		PotionIds.IMBUE_WEAKNESS = checkPotionID(RTConfiguration.piImbueWeakness).getInt();
-		imbueWeakness = getImbue("weakness", PotionIds.IMBUE_WEAKNESS, imbueColors[4]);
-
-		PotionIds.IMBUE_SPECTRE = checkPotionID(RTConfiguration.piImbueSpectre).getInt();
-		imbueSpectre = getImbue("spectre", PotionIds.IMBUE_SPECTRE, imbueColors[5]);
+		imbuePoison = getImbue("poison", imbueColors[0]);
+		imbueExperience = getImbue("experience", imbueColors[1]);
+		imbueFire = getImbue("fire", imbueColors[2]);
+		imbueWither = getImbue("wither", imbueColors[3]);
+		imbueWeakness = getImbue("weakness", imbueColors[4]);
+		imbueSpectre = getImbue("spectre", imbueColors[5]);
 	}
 
-	private static PotionImbue getImbue(String name, int id, int color)
+	@SneakyThrows
+	private static PotionImbue getImbue(String name, int color)
 	{
-		return new PotionImbue("imbue." + name, id, color, new ResourceLocation("randomthings:textures/gui/imbueEffects/" + name + ".png"));
-	}
-
-	public static Property checkPotionID(Property p)
-	{
-		int id = p.getInt();
-		int freeID = getFreePotionID();
-		if (id == -1)
-		{
-			RandomThings.instance.logger.log(Level.INFO, "Auto Resolved " + p.getName() + " ID to " + freeID);
-			p.set(freeID);
-			RTConfiguration.syncConfig();
-			return p;
-		}
-
-		if (Potion.potionTypes.length - 1 < id)
-		{
-			resizePotionArray(id + 1);
-		}
-
-		if (Potion.potionTypes[id] != null)
-		{
-			RandomThings.instance.logger.log(Level.INFO, "PotionID " + id + " is already occupied by " + Potion.potionTypes[id].getName());
-			p.set(freeID);
-			RTConfiguration.syncConfig();
-			RandomThings.instance.logger.log(Level.INFO, "Moved Potion from " + id + " to " + freeID);
-		}
-		else
-		{
-			return p;
-		}
-
-		return p;
-	}
-
-	public static void resizePotionArray(int newSize)
-	{
-		try
-		{
-			OverrideUtils.setFinalStatic(Potion.class.getDeclaredField(MCPNames.field("field_76425_a")), Arrays.copyOf(Potion.potionTypes, newSize));
-		}
-		catch (Exception e)
-		{
-			RandomThings.instance.logger.log(Level.WARN, "Couldn't extend Potion ID Array for more IDs, potions might not work as expected.");
-			e.printStackTrace();
-		}
-	}
-
-	public static int getFreePotionID()
-	{
-		for (int i = 1; i < Potion.potionTypes.length; i++)
-		{
-			if (Potion.potionTypes[i] == null)
-			{
-				return i;
-			}
-		}
-
-		int oldLength = Potion.potionTypes.length;
-		resizePotionArray(Potion.potionTypes.length + 20);
-
-		return oldLength;
+		return new PotionImbue("imbue." + name, validatePotionID(("IMBUE_" + name).toUpperCase()), color, new ResourceLocation("randomthings:textures/gui/imbueEffects/" + name + ".png"));
 	}
 }

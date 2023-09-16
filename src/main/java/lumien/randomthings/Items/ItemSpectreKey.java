@@ -2,9 +2,9 @@ package lumien.randomthings.Items;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import lumien.randomthings.Configuration.RTSettingsConfiguration;
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.Client.RenderUtils;
-import lumien.randomthings.Configuration.Settings;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.EntityFX;
 import net.minecraft.client.particle.EntitySmokeFX;
@@ -67,7 +67,7 @@ public class ItemSpectreKey extends ItemBase
 	{
 		if (!par2World.isRemote)
 		{
-			if (par2World.provider.dimensionId != Settings.SPECTRE_DIMENSON_ID)
+			if (par2World.provider.dimensionId != RTSettingsConfiguration.SPECTRE_DIMENSON_ID)
 			{
 				RandomThings.instance.spectreHandler.teleportPlayerToSpectreWorld((EntityPlayerMP) par3EntityPlayer);
 			}
@@ -83,7 +83,7 @@ public class ItemSpectreKey extends ItemBase
 	@SideOnly(Side.CLIENT)
 	public boolean hasEffect(ItemStack par1ItemStack, int pass)
 	{
-		return Minecraft.getMinecraft().thePlayer.worldObj.provider.dimensionId == Settings.SPECTRE_DIMENSON_ID;
+		return Minecraft.getMinecraft().thePlayer.worldObj.provider.dimensionId == RTSettingsConfiguration.SPECTRE_DIMENSON_ID;
 	}
 
 	/**

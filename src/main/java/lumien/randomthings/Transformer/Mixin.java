@@ -1,45 +1,27 @@
 package lumien.randomthings.Transformer;
 
-import cpw.mods.fml.relauncher.FMLLaunchHandler;
+import com.falsepattern.lib.mixin.IMixin;
+import com.falsepattern.lib.mixin.ITargetedMod;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
+import java.util.function.Predicate;
 
-import static lumien.randomthings.Transformer.TargetedMod.*;
+import static com.falsepattern.lib.mixin.IMixin.PredicateHelpers.*;
 
-/**
- *  IMPORTANT: Do not make any references to any mod from this file. This file is loaded quite early on and if
- *  you refer to other mods you load them as well. The consequence is: You can't inject any previously loaded classes!
- *  Exception: Reference.java, as long as it is used for Strings only!
- */
-public enum Mixin {
+@RequiredArgsConstructor
+public enum Mixin implements IMixin {
 
-    RTBLOCKLEAVESBASEMIXIN("RTBlockLeavesBaseMixin", Side.BOTH, VANILLA),
-    RTENTITYRENDERERMIXIN("RTEntityRendererMixin", Side.CLIENT, VANILLA),
-    RTITEMMIXIN("RTItemMixin", Side.BOTH, VANILLA),
-    RTRENDERGLOBALMIXIN("RTRenderGlobalMixin", Side.CLIENT, VANILLA),
-    RTWORLDMIXIN("RTWorldMixin", Side.BOTH, VANILLA);
+    RTBLOCKLEAVESBASEMIXIN(Side.COMMON, always(), "RTBlockLeavesBaseMixin"),
+    RTITEMMIXIN(Side.COMMON, always(), "RTItemMixin"),
+    RTWORLDMIXIN(Side.COMMON, always(), "RTWorldMixin");
 
-    public final String mixinClass;
-    public final List<TargetedMod> targetedMods;
-    private final Side side;
 
-    Mixin(String mixinClass, Side side, TargetedMod... targetedMods) {
-        this.mixinClass = mixinClass;
-        this.targetedMods = Arrays.asList(targetedMods);
-        this.side = side;
-    }
-
-    public boolean shouldLoad(List<TargetedMod> loadedMods) {
-        return (side == Side.BOTH
-                || side == Side.SERVER && FMLLaunchHandler.side().isServer()
-                || side == Side.CLIENT && FMLLaunchHandler.side().isClient())
-                && loadedMods.containsAll(targetedMods);
-    }
-}
-
-enum Side {
-    BOTH,
-    CLIENT,
-    SERVER;
+    @Getter
+    public final Side side;
+    @Getter
+    public final Predicate<List<ITargetedMod>> filter;
+    @Getter
+    public final String mixin;
 }

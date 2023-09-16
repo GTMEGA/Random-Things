@@ -7,6 +7,7 @@ import java.util.List;
 
 import lumien.randomthings.Client.Model.ModelBlueWolf;
 import lumien.randomthings.Client.Renderer.*;
+import lumien.randomthings.Configuration.RTHDConfiguration;
 import lumien.randomthings.Entity.*;
 import org.apache.logging.log4j.Level;
 
@@ -28,7 +29,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.client.MinecraftForgeClient;
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.Client.ClientTickHandler;
-import lumien.randomthings.Configuration.VanillaChanges;
 import lumien.randomthings.Handler.RTMoonHandler.Bloodmoon.ClientBloodmoonHandler;
 import lumien.randomthings.Items.ItemGinto;
 import lumien.randomthings.Items.ModItems;
@@ -137,45 +137,49 @@ public class ClientProxy extends CommonProxy
 		return players;
 	}
 
+	private void lockGamma() {
+		GameSettings.Options[] videoOptions = ReflectionHelper.getPrivateValue(GuiVideoSettings.class, null, MCPNames.field("field_146502_i"));
+		ArrayList<GameSettings.Options> options = new ArrayList<GameSettings.Options>(Arrays.asList(videoOptions));
+
+		Iterator<GameSettings.Options> iterator = options.iterator();
+		while (iterator.hasNext())
+		{
+			GameSettings.Options option = iterator.next();
+			if (option == GameSettings.Options.GAMMA)
+			{
+				iterator.remove();
+			}
+		}
+
+		RandomThings.instance.logger.log(Level.INFO, "Removing Gamma from settings... (GammaLock is on)");
+		try
+		{
+			OverrideUtils.setFinalStatic(GuiVideoSettings.class.getDeclaredField(MCPNames.field("field_146502_i")), options.toArray(videoOptions));
+		}
+		catch (NoSuchFieldException e)
+		{
+			e.printStackTrace();
+		}
+		catch (SecurityException e)
+		{
+			e.printStackTrace();
+		}
+		catch (IllegalAccessException e)
+		{
+			// Still works
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
+
 	@Override
 	public void postInit()
 	{
-		if (VanillaChanges.LOCKED_GAMMA)
+		if (RTHDConfiguration.HD_LOCKED_GAMMA != 100)
 		{
-			GameSettings.Options[] videoOptions = ReflectionHelper.getPrivateValue(GuiVideoSettings.class, null, MCPNames.field("field_146502_i"));
-			ArrayList<GameSettings.Options> options = new ArrayList<GameSettings.Options>(Arrays.asList(videoOptions));
-
-			Iterator<GameSettings.Options> iterator = options.iterator();
-			while (iterator.hasNext())
-			{
-				GameSettings.Options option = iterator.next();
-				if (option == GameSettings.Options.GAMMA)
-				{
-					iterator.remove();
-				}
-			}
-
-			RandomThings.instance.logger.log(Level.INFO, "Removing Gamma from settings... (GammaLock is on)");
-			try
-			{
-				OverrideUtils.setFinalStatic(GuiVideoSettings.class.getDeclaredField(MCPNames.field("field_146502_i")), options.toArray(videoOptions));
-			}
-			catch (NoSuchFieldException e)
-			{
-				e.printStackTrace();
-			}
-			catch (SecurityException e)
-			{
-				e.printStackTrace();
-			}
-			catch (IllegalAccessException e)
-			{
-				// Still works
-			}
-			catch (Exception e)
-			{
-				e.printStackTrace();
-			}
+			lockGamma();
 		}
 	}
 }

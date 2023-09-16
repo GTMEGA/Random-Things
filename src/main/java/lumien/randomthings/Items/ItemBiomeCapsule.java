@@ -5,8 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
+import lumien.randomthings.Configuration.RTSettingsConfiguration;
 import lumien.randomthings.RandomThings;
-import lumien.randomthings.Configuration.Settings;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
@@ -160,7 +160,7 @@ public class ItemBiomeCapsule extends ItemBase
 				}
 				int charges = is.stackTagCompound.getInteger("charges");
 				int biomeID = is.getItemDamage() - 1;
-				if (charges < 256 && entityItem.worldObj.getTotalWorldTime() % Settings.BIOME_CHARGE_TIME == 0)
+				if (charges < 256 && entityItem.worldObj.getTotalWorldTime() % RTSettingsConfiguration.BIOME_CHARGE_TIME == 0)
 				{
 					int itemPosX = (int) Math.floor(entityItem.posX);
 					int itemPosZ = (int) Math.floor(entityItem.posZ);

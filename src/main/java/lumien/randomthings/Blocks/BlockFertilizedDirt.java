@@ -3,7 +3,7 @@ package lumien.randomthings.Blocks;
 import java.util.Random;
 
 import lumien.randomthings.RandomThings;
-import lumien.randomthings.Configuration.Settings;
+import lumien.randomthings.Configuration.RTSettingsConfiguration;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
@@ -116,12 +116,12 @@ public class BlockFertilizedDirt extends BlockBase
 			Block toBoost = par1World.getBlock(posX, posY + 1, posZ);
 			if (toBoost != null && toBoost != Blocks.air && toBoost instanceof IPlantable)
 			{
-				if (Settings.FERTILIZEDDIRT_GROWTHINDICATOR)
+				if (RTSettingsConfiguration.FERTILIZED_DIRT_GROWTH_INDICATOR)
 				{
 					par1World.playAuxSFX(2005, posX, posY + 1, posZ, 0);
 				}
 			}
-			for (int i = 0; i < Settings.FERTILIZED_DIRT_GROWTH; i++)
+			for (int i = 0; i < RTSettingsConfiguration.FERTILIZED_DIRT_GROWTH; i++)
 			{
 				toBoost = par1World.getBlock(posX, posY + 1, posZ);
 				if (toBoost != null && toBoost != Blocks.air && toBoost instanceof IPlantable)

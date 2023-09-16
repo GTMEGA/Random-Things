@@ -1,6 +1,6 @@
 package lumien.randomthings.TileEntities;
 
-import lumien.randomthings.Configuration.Settings;
+import lumien.randomthings.Configuration.RTSettingsConfiguration;
 import lumien.randomthings.Handler.ImbuingStation.ImbuingRecipeHandler;
 import lumien.randomthings.Library.InventoryUtils;
 import net.minecraft.entity.player.EntityPlayer;
@@ -54,7 +54,7 @@ public class TileEntityImbuingStation extends TileEntity implements IInventory
 			if (this.currentOutput != null)
 			{
 				this.imbuingProgress++;
-				if (this.imbuingProgress >= Settings.IMBUING_LENGTH)
+				if (this.imbuingProgress >= RTSettingsConfiguration.IMBUING_LENGTH)
 				{
 					imbuingProgress = 0;
 					imbue();
@@ -179,7 +179,7 @@ public class TileEntityImbuingStation extends TileEntity implements IInventory
 	}
 
 	@Override
-	public boolean isItemValidForSlot(int p_94041_1_, ItemStack p_94041_2_)
+	public boolean isItemValidForSlot(int index, ItemStack stack)
 	{
 		return false;
 	}

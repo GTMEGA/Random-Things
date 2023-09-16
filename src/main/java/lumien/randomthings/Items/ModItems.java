@@ -4,7 +4,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.item.ItemArmor.ArmorMaterial;
 import net.minecraftforge.common.util.EnumHelper;
 import lumien.randomthings.RandomThings;
-import lumien.randomthings.Configuration.ConfigItems;
+import lumien.randomthings.Configuration.RTItemConfiguration;
 
 public class ModItems
 {
@@ -40,25 +40,25 @@ public class ModItems
 	{
 		RandomThings.instance.logger.debug("Initializing Items");
 
-		if (ConfigItems.biomeCapsule)
+		if (RTItemConfiguration.biomeCapsule)
 			biomeCapsule = new ItemBiomeCapsule();
-		if (ConfigItems.biomePainter)
+		if (RTItemConfiguration.biomePainter)
 			biomePainter = new ItemBiomePainter();
-		if (ConfigItems.whitestone)
+		if (RTItemConfiguration.whitestone)
 			whitestone = new ItemWhiteStone();
-		if (ConfigItems.magneticForce)
+		if (RTItemConfiguration.magneticForce)
 			magneticForce = new ItemMagneticForce();
-		if (ConfigItems.voidStone)
+		if (RTItemConfiguration.voidStone)
 			voidStone = new ItemVoidStone();
-		if (ConfigItems.dropFilter)
+		if (RTItemConfiguration.dropFilter)
 			dropFilter = new ItemDropFilter();
-		if (ConfigItems.enderLetter)
+		if (RTItemConfiguration.enderLetter)
 			enderLetter = new ItemEnderLetter();
-		if (ConfigItems.spectreKey)
+		if (RTItemConfiguration.spectreKey)
 			spectreKey = new ItemSpectreKey();
-		if (ConfigItems.opSpectreKey)
+		if (RTItemConfiguration.opSpectreKey)
 			opSpectreKey = new ItemOpSpectreKey();
-		if (ConfigItems.spectreArmor)
+		if (RTItemConfiguration.spectreArmor)
 		{
 			spectreHelmet = (ItemSpectreArmor) new ItemSpectreArmor(0).setUnlocalizedName("spectreHelmet").setTextureName("RandomThings:armor/spectreHelmet");
 			spectreChestplate = (ItemSpectreArmor) new ItemSpectreArmor(1).setUnlocalizedName("spectreChestplate").setTextureName("RandomThings:armor/spectreChestplate");
@@ -69,24 +69,24 @@ public class ModItems
 			GameRegistry.registerItem(spectreLeggings, "spectreLeggings");
 			GameRegistry.registerItem(spectreBoots, "spectreBoots");
 		}
-		if (ConfigItems.spectreSword)
+		if (RTItemConfiguration.spectreSword)
 			spectreSword = new ItemSpectreSword();
-		if (ConfigItems.spiritBinder)
+		if (RTItemConfiguration.spiritBinder)
 			spiritBinder = new ItemSpiritBinder();
-		if (ConfigItems.imbue)
+		if (RTItemConfiguration.imbue)
 			imbue = new ItemImbue();
-		if (ConfigItems.bloodStone)
+		if (RTItemConfiguration.bloodStone)
 			bloodStone = new ItemBloodstone();
 
-		if (ConfigItems.creativeSword)
+		if (RTItemConfiguration.creativeSword)
 			creativeSword = new ItemCreativeSword();
-		if (ConfigItems.creativeGrower)
+		if (RTItemConfiguration.creativeGrower)
 			creativeGrower = new ItemCreativeGrower();
-		if (ConfigItems.creativeChestGenerator)
+		if (RTItemConfiguration.creativeChestGenerator)
 			creativeChestGenerator = new ItemCreativeChestGenerator();
-		if (ConfigItems.soundRecorder)
+		if (RTItemConfiguration.soundRecorder)
 			soundRecorder = new ItemSoundRecorder();
-		if (ConfigItems.ginto)
+		if (RTItemConfiguration.ginto)
 			ginto = new ItemGinto();
 
 		ingredients = new ItemIngredient();
