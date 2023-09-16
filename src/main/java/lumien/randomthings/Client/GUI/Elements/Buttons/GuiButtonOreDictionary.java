@@ -45,14 +45,14 @@ public class GuiButtonOreDictionary extends GuiButton
 	}
 
 	@Override
-	public void drawButton(Minecraft p_146112_1_, int p_146112_2_, int p_146112_3_)
+	public void drawButton(Minecraft mc, int mouseX, int mouseY)
 	{
 		if (this.visible)
 		{
-			FontRenderer fontrenderer = p_146112_1_.fontRenderer;
-			p_146112_1_.getTextureManager().bindTexture(oreButtonTextures);
+			FontRenderer fontrenderer = mc.fontRenderer;
+			mc.getTextureManager().bindTexture(oreButtonTextures);
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-			this.field_146123_n = p_146112_2_ >= this.xPosition && p_146112_3_ >= this.yPosition && p_146112_2_ < this.xPosition + this.width && p_146112_3_ < this.yPosition + this.height;
+			this.field_146123_n = mouseX >= this.xPosition && mouseY >= this.yPosition && mouseX < this.xPosition + this.width && mouseY < this.yPosition + this.height;
 			int k = this.getHoverState(this.field_146123_n);
 			GL11.glEnable(GL11.GL_BLEND);
 			OpenGlHelper.glBlendFunc(770, 771, 1, 0);
@@ -60,7 +60,7 @@ public class GuiButtonOreDictionary extends GuiButton
 
 			this.drawTexturedModalRect(this.xPosition, this.yPosition, (!enabled ? 0 : 1) * 20, (k - 1) * 20, 20, 20);
 
-			this.mouseDragged(p_146112_1_, p_146112_2_, p_146112_3_);
+			this.mouseDragged(mc, mouseX, mouseY);
 			int l = 14737632;
 
 			if (packedFGColour != 0)

@@ -40,7 +40,7 @@ public class BlockSpectreGlass extends BlockBase
 	}
 
 	@Override
-	public int getRenderColor(int p_149741_1_)
+	public int getRenderColor(int meta)
 	{
 		GL11.glEnable(GL11.GL_BLEND);
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
@@ -48,13 +48,13 @@ public class BlockSpectreGlass extends BlockBase
 	}
 
 	@Override
-	public void addCollisionBoxesToList(World p_149743_1_, int p_149743_2_, int p_149743_3_, int p_149743_4_, AxisAlignedBB p_149743_5_, List p_149743_6_, Entity entity)
+	public void addCollisionBoxesToList(World worldIn, int x, int y, int z, AxisAlignedBB mask, List list, Entity entity)
 	{
-		AxisAlignedBB axisalignedbb1 = this.getCollisionBoundingBoxFromPool(p_149743_1_, p_149743_2_, p_149743_3_, p_149743_4_);
+		AxisAlignedBB axisalignedbb1 = this.getCollisionBoundingBoxFromPool(worldIn, x, y, z);
 
-		if (axisalignedbb1 != null && p_149743_5_.intersectsWith(axisalignedbb1) && (entity instanceof EntityPlayer))
+		if (axisalignedbb1 != null && mask.intersectsWith(axisalignedbb1) && (entity instanceof EntityPlayer))
 		{
-			p_149743_6_.add(axisalignedbb1);
+			list.add(axisalignedbb1);
 		}
 	}
 

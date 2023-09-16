@@ -39,9 +39,9 @@ public class BlockWirelessLever extends BlockLever implements ITileEntityProvide
 	}
 
 	@Override
-	public boolean onBlockActivated(World worldObj, int posX, int posY, int posZ, EntityPlayer p_149727_5_, int p_149727_6_, float p_149727_7_, float p_149727_8_, float p_149727_9_)
+	public boolean onBlockActivated(World worldObj, int posX, int posY, int posZ, EntityPlayer player, int side, float subX, float subY, float subZ)
 	{
-		boolean activate = super.onBlockActivated(worldObj, posX, posY, posZ, p_149727_5_, p_149727_6_, p_149727_7_, p_149727_8_, p_149727_9_);
+		boolean activate = super.onBlockActivated(worldObj, posX, posY, posZ, player, side, subX, subY, subZ);
 
 		TileEntityWirelessLever te = (TileEntityWirelessLever) worldObj.getTileEntity(posX, posY, posZ);
 		if (te != null)
@@ -51,19 +51,19 @@ public class BlockWirelessLever extends BlockLever implements ITileEntityProvide
 	}
 
 	@Override
-	public int quantityDropped(Random p_149745_1_)
+	public int quantityDropped(Random random)
 	{
 		return 0;
 	}
 
 	@Override
-	public int isProvidingWeakPower(IBlockAccess p_149709_1_, int p_149709_2_, int p_149709_3_, int p_149709_4_, int p_149709_5_)
+	public int isProvidingWeakPower(IBlockAccess worldIn, int x, int y, int z, int side)
 	{
 		return 0;
 	}
 
 	@Override
-	public int isProvidingStrongPower(IBlockAccess p_149748_1_, int p_149748_2_, int p_149748_3_, int p_149748_4_, int p_149748_5_)
+	public int isProvidingStrongPower(IBlockAccess worldIn, int x, int y, int z, int side)
 	{
 		return 0;
 	}
@@ -93,10 +93,10 @@ public class BlockWirelessLever extends BlockLever implements ITileEntityProvide
 	}
 
 	@Override
-	public boolean onBlockEventReceived(World p_149696_1_, int p_149696_2_, int p_149696_3_, int p_149696_4_, int p_149696_5_, int p_149696_6_)
+	public boolean onBlockEventReceived(World worldIn, int x, int y, int z, int eventId, int eventData)
 	{
-		super.onBlockEventReceived(p_149696_1_, p_149696_2_, p_149696_3_, p_149696_4_, p_149696_5_, p_149696_6_);
-		TileEntity tileentity = p_149696_1_.getTileEntity(p_149696_2_, p_149696_3_, p_149696_4_);
-		return tileentity != null ? tileentity.receiveClientEvent(p_149696_5_, p_149696_6_) : false;
+		super.onBlockEventReceived(worldIn, x, y, z, eventId, eventData);
+		TileEntity tileentity = worldIn.getTileEntity(x, y, z);
+		return tileentity != null ? tileentity.receiveClientEvent(eventId, eventData) : false;
 	}
 }

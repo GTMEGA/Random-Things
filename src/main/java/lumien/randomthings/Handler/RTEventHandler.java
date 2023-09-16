@@ -12,13 +12,10 @@ import java.lang.reflect.Field;
 
 import lumien.randomthings.Handler.RTMoonHandler.Bluemoon.ClientBluemoonHandler;
 import lumien.randomthings.Handler.RTMoonHandler.Bluemoon.ServerBluemoonHandler;
+import lumien.randomthings.Configuration.*;
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.Blocks.ModBlocks;
 import lumien.randomthings.Client.RenderUtils;
-import lumien.randomthings.Configuration.ConfigItems;
-import lumien.randomthings.Configuration.RTConfiguration;
-import lumien.randomthings.Configuration.Settings;
-import lumien.randomthings.Configuration.VanillaChanges;
 import lumien.randomthings.Entity.EntityHealingOrb;
 import lumien.randomthings.Entity.EntitySoul;
 import lumien.randomthings.Entity.EntitySpirit;
@@ -194,7 +191,7 @@ public class RTEventHandler
 	@SubscribeEvent
 	public void sleepInBed(PlayerSleepInBedEvent event)
 	{
-		if (Settings.BLOODMOON_NOSLEEP)
+		if (RTBloodMoonConfiguration.BLOODMOON_NOSLEEP)
 		{
 			if (RandomThings.proxy.isBloodmoon() && !RandomThings.proxy.isBluemoon())
 			{
@@ -202,7 +199,7 @@ public class RTEventHandler
 				event.entityPlayer.addChatMessage(new ChatComponentTranslation("text.rtmoon.nosleep").setChatStyle(new ChatStyle().setColor(EnumChatFormatting.RED)));
 			}
 		}
-		if (Settings.BLUEMOON_NOSLEEP)
+		if (RTBlueMoonConfiguration.BLUEMOON_NOSLEEP)
 		{
 			if (RandomThings.proxy.isBluemoon() && !RandomThings.proxy.isBloodmoon())
 			{
@@ -210,7 +207,7 @@ public class RTEventHandler
 				event.entityPlayer.addChatMessage(new ChatComponentTranslation("text.rtmoon.nosleep").setChatStyle(new ChatStyle().setColor(EnumChatFormatting.BLUE)));
 			}
 		}
-		if (Settings.BLOODMOON_NOSLEEP && Settings.BLUEMOON_NOSLEEP)
+		if (RTBloodMoonConfiguration.BLOODMOON_NOSLEEP && RTBlueMoonConfiguration.BLUEMOON_NOSLEEP)
 		{
 			if (RandomThings.proxy.isBluemoon() && RandomThings.proxy.isBloodmoon())
 			{
@@ -324,7 +321,7 @@ public class RTEventHandler
 	@SubscribeEvent
 	public void worldLoad(WorldEvent.Load event)
 	{
-		if (event.world.isRemote && VanillaChanges.LOCKED_GAMMA)
+		if (event.world.isRemote && RTHDConfiguration.HD_LOCKED_GAMMA != 100)
 		{
 			Minecraft.getMinecraft().gameSettings.setOptionFloatValue(GameSettings.Options.GAMMA, 0);
 			Minecraft.getMinecraft().gameSettings.gammaSetting = 0;
@@ -334,7 +331,7 @@ public class RTEventHandler
 	@SubscribeEvent
 	public void changedDimension(PlayerChangedDimensionEvent event)
 	{
-		if (event.toDim == Settings.SPECTRE_DIMENSON_ID)
+		if (event.toDim == RTSettingsConfiguration.SPECTRE_DIMENSON_ID)
 		{
 			double movementFactor = 1;
 			EntityPlayer player = event.player;
@@ -357,7 +354,7 @@ public class RTEventHandler
 	@SubscribeEvent
 	public void loadWorld(WorldEvent.Load event)
 	{
-		if (!event.world.isRemote && event.world.provider.dimensionId == Settings.SPECTRE_DIMENSON_ID)
+		if (!event.world.isRemote && event.world.provider.dimensionId == RTSettingsConfiguration.SPECTRE_DIMENSON_ID)
 		{
 			SpectreHandler spectreHandler = (SpectreHandler) event.world.mapStorage.loadData(SpectreHandler.class, "SpectreHandler");
 			if (spectreHandler == null)
@@ -398,7 +395,7 @@ public class RTEventHandler
 	public void itemPickUp(EntityItemPickupEvent event)
 	{
 
-		if (ConfigItems.dropFilter)
+		if (RTItemConfiguration.dropFilter)
 		{
 			if (!event.entityPlayer.worldObj.isRemote && event.entityPlayer != null)
 			{
@@ -473,7 +470,7 @@ public class RTEventHandler
 			ServerBluemoonHandler.INSTANCE.playerJoinedWorld((EntityPlayer) event.entity);
 		}
 
-		if (VanillaChanges.THROWABLES_MOTION)
+		if (RTSettingsConfiguration.THROWABLES_MOTION)
 		{
 			if (event.entity instanceof EntityThrowable)
 			{
@@ -555,7 +552,7 @@ public class RTEventHandler
 				EntityPlayer player = (EntityPlayer) event.entityLiving;
 				if (player.isPotionActive(ModPotions.imbueSpectre))
 				{
-					if (!event.source.isMagicDamage() && (event.source.getSourceOfDamage() != null || event.source.isExplosion()) && !event.source.canHarmInCreative() && !event.source.isFireDamage() && !event.source.isUnblockable() && Math.random() <= Settings.SPECTRE_IMBUE_CHANCE)
+					if (!event.source.isMagicDamage() && (event.source.getSourceOfDamage() != null || event.source.isExplosion()) && !event.source.canHarmInCreative() && !event.source.isFireDamage() && !event.source.isUnblockable() && Math.random() <= RTSettingsConfiguration.SPECTRE_IMBUE_CHANCE)
 					{
 						event.setCanceled(true);
 						return;
@@ -605,7 +602,7 @@ public class RTEventHandler
 				EntityPlayer player = ((EntityPlayer) event.entityLiving);
 				player.worldObj.spawnEntityInWorld(new EntitySoul(player.worldObj, player.posX, player.posY, player.posZ, player.getGameProfile().getName()));
 			}
-			if (ConfigItems.whitestone)
+			if (RTItemConfiguration.whitestone)
 			{
 				if (event.entityLiving instanceof EntityPlayer && !event.source.canHarmInCreative())
 				{
@@ -635,7 +632,7 @@ public class RTEventHandler
 				}
 			}
 
-			if (ConfigItems.bloodStone)
+			if (RTItemConfiguration.bloodStone)
 			{
 				if (event.entity instanceof IMob && !event.isCanceled())
 				{
@@ -665,15 +662,15 @@ public class RTEventHandler
 				}
 			}
 
-			if (ConfigItems.spectreArmor || ConfigItems.spectreKey || ConfigItems.spectreSword)
+			if (RTItemConfiguration.spectreArmor || RTItemConfiguration.spectreKey || RTItemConfiguration.spectreSword)
 			{
 				if (event.source.getEntity() != null && !(event.source.getEntity() instanceof FakePlayer) && event.source.getEntity() instanceof EntityPlayer && !(event.entity instanceof EntitySpirit))
 				{
 					EntityPlayer player = (EntityPlayer) event.source.getEntity();
-					double chance = Settings.SPIRIT_CHANCE;
-					if (ConfigItems.spectreSword && player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().getItem() == ModItems.spectreSword)
+					double chance = RTSettingsConfiguration.SPIRIT_CHANCE;
+					if (RTItemConfiguration.spectreSword && player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().getItem() == ModItems.spectreSword)
 					{
-						chance = Settings.SPIRIT_CHANCE_SWORD;
+                        chance = RTSettingsConfiguration.SPIRIT_CHANCE_SWORD;
 					}
 					double random = Math.random();
 					if (random <= chance)
@@ -683,7 +680,7 @@ public class RTEventHandler
 				}
 			}
 
-			if (ConfigItems.imbue && experienceValue != null && event.entityLiving instanceof EntityLiving && event.source.getEntity() != null && event.source.getEntity() instanceof EntityLivingBase)
+			if (RTItemConfiguration.imbue && experienceValue != null && event.entityLiving instanceof EntityLiving && event.source.getEntity() != null && event.source.getEntity() instanceof EntityLivingBase)
 			{
 				EntityLivingBase livingAttacker = (EntityLivingBase) event.source.getEntity();
 				EntityLiving attacked = (EntityLiving) event.entityLiving;

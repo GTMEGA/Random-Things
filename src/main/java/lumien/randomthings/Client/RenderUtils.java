@@ -41,16 +41,16 @@ public class RenderUtils
 		glDisable(GL_SCISSOR_TEST);
 	}
 
-	public static void drawTexturedModalRect(int p_73729_1_, int p_73729_2_, int p_73729_3_, int p_73729_4_, int p_73729_5_, int p_73729_6_, int zLevel)
+	public static void drawTexturedModalRect(int x, int y, int textureX, int textureY, int width, int height, int zLevel)
 	{
 		float f = 0.00390625F;
 		float f1 = 0.00390625F;
 		Tessellator tessellator = Tessellator.instance;
 		tessellator.startDrawingQuads();
-		tessellator.addVertexWithUV(p_73729_1_ + 0, p_73729_2_ + p_73729_6_, zLevel, (p_73729_3_ + 0) * f, (p_73729_4_ + p_73729_6_) * f1);
-		tessellator.addVertexWithUV(p_73729_1_ + p_73729_5_, p_73729_2_ + p_73729_6_, zLevel, (p_73729_3_ + p_73729_5_) * f, (p_73729_4_ + p_73729_6_) * f1);
-		tessellator.addVertexWithUV(p_73729_1_ + p_73729_5_, p_73729_2_ + 0, zLevel, (p_73729_3_ + p_73729_5_) * f, (p_73729_4_ + 0) * f1);
-		tessellator.addVertexWithUV(p_73729_1_ + 0, p_73729_2_ + 0, zLevel, (p_73729_3_ + 0) * f, (p_73729_4_ + 0) * f1);
+		tessellator.addVertexWithUV(x + 0, y + height, zLevel, (textureX + 0) * f, (textureY + height) * f1);
+		tessellator.addVertexWithUV(x + width, y + height, zLevel, (textureX + width) * f, (textureY + height) * f1);
+		tessellator.addVertexWithUV(x + width, y + 0, zLevel, (textureX + width) * f, (textureY + 0) * f1);
+		tessellator.addVertexWithUV(x + 0, y + 0, zLevel, (textureX + 0) * f, (textureY + 0) * f1);
 		tessellator.draw();
 	}
 

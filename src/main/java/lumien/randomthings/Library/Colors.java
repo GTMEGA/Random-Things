@@ -69,14 +69,14 @@ public class Colors
 		return -1;
 	}
 
-	private static int interpolate(int a, int b, double alpha) {
-		return (int) Math.round(255d * Math.pow(Math.pow(a / 255d, GAMMA) * alpha + Math.pow(b / 255d, GAMMA) * (1d - alpha), 1d / GAMMA));
+	public static int interpolateChannel(int first, int second, double alpha) {
+		return (int) Math.round(255d * Math.pow(Math.pow(first / 255d, GAMMA) * alpha + Math.pow(second / 255d, GAMMA) * (1d - alpha), 1d / GAMMA));
 	}
 
 	public static int interpolatePixel(int first, int second, double alpha) {
-		int r = interpolate((first & 0x00FF0000) >>> 16, (second & 0x00FF0000) >>> 16, alpha);
-		int g = interpolate((first & 0x0000FF00) >>> 8, (second & 0x0000FF00) >>> 8, alpha);
-		int b = interpolate(first & 0x000000FF, second & 0x000000FF, alpha);
+		int r = interpolateChannel((first & 0x00FF0000) >>> 16, (second & 0x00FF0000) >>> 16, alpha);
+		int g = interpolateChannel((first & 0x0000FF00) >>> 8, (second & 0x0000FF00) >>> 8, alpha);
+		int b = interpolateChannel(first & 0x000000FF, second & 0x000000FF, alpha);
 		return first & 0xFF000000 | r << 16 | g << 8 | b;
 	}
 }

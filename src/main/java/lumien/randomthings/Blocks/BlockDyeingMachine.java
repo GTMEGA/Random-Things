@@ -49,17 +49,17 @@ public class BlockDyeingMachine extends BlockContainerBase
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public IIcon getIcon(int p_149691_1_, int p_149691_2_)
+	public IIcon getIcon(int side, int meta)
 	{
-		return p_149691_1_ == 1 ? this.iconTop : (p_149691_1_ == 0 ? Blocks.planks.getIcon(p_149691_1_, 1) : (p_149691_1_ != 2 && p_149691_1_ != 4 ? this.iconSide : this.iconFront));
+		return side == 1 ? this.iconTop : (side == 0 ? Blocks.planks.getIcon(side, 1) : (side != 2 && side != 4 ? this.iconSide : this.iconFront));
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerBlockIcons(IIconRegister p_149651_1_)
+	public void registerBlockIcons(IIconRegister reg)
 	{
-		this.iconSide = p_149651_1_.registerIcon(this.getTextureName() + "_side");
-		this.iconTop = p_149651_1_.registerIcon(this.getTextureName() + "_top");
-		this.iconFront = p_149651_1_.registerIcon(this.getTextureName() + "_front");
+		this.iconSide = reg.registerIcon(this.getTextureName() + "_side");
+		this.iconTop = reg.registerIcon(this.getTextureName() + "_top");
+		this.iconFront = reg.registerIcon(this.getTextureName() + "_front");
 	}
 }

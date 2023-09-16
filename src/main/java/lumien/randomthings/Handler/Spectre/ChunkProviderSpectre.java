@@ -29,7 +29,7 @@ public class ChunkProviderSpectre implements IChunkProvider
 	}
 
 	/**
-	 * Will return a chunk, if it doesn't exist and it's not an MP client it
+	 * Will return a chunk, if it doesn't exist, and it's not an MP client it
 	 * will generate all the blocks for the specified chunk from the map seed
 	 * and chunk seed
 	 */
