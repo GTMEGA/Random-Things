@@ -7,7 +7,7 @@ dependencies {
     annotationProcessor'org.projectlombok:lombok:1.18.28'
 
     implementation 'com.falsepattern:falsepatternlib-mc1.7.10:0.12.3:dev'
-    implementation 'li.cil.oc:OpenComputers:MC1.7.10-1.4.+:api'
+    implementation 'li.cil.oc:OpenComputers:MC1.7.10-1.7.4.1264:api'
     implementation "codechicken:codechickencore-mc1.7.10:1.1.0-mega:dev"
 	implementation "codechicken:codechickenlib-mc1.7.10:1.2.0-mega:dev" 
 	implementation "codechicken:notenoughitems-mc1.7.10:2.1.6-gtmega:dev"
