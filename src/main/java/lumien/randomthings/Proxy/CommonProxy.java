@@ -3,9 +3,7 @@ package lumien.randomthings.Proxy;
 import java.util.ArrayList;
 
 import lumien.randomthings.Entity.EntitySoul;
-import lumien.randomthings.Handler.RTMoonHandler.Bloodmoon.ServerBloodmoonHandler;
 
-import lumien.randomthings.Handler.RTMoonHandler.Bluemoon.ServerBluemoonHandler;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
 
@@ -17,16 +15,6 @@ public class CommonProxy
 	public boolean canBeCollidedWith(EntitySoul soul)
 	{
 		return false;
-	}
-
-	public boolean isBloodmoon()
-	{
-		return ServerBloodmoonHandler.INSTANCE.isBloodmoonActive();
-	}
-
-	public boolean isBluemoon()
-	{
-		return ServerBluemoonHandler.INSTANCE.isBluemoonActive();
 	}
 	
 	public void setContainerProperty(int index,int value)
@@ -63,6 +51,16 @@ public class CommonProxy
 		}
 
 		return players;
+	}
+
+	public void preInit()
+	{
+		registerTickHandler();
+	}
+
+	public void init()
+	{
+		registerRenderers();
 	}
 
 	public void postInit()

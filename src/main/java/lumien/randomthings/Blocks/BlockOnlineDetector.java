@@ -120,7 +120,7 @@ public class BlockOnlineDetector extends BlockContainerBase
 	}
 
 	@Override
-	public int getMixedBrightnessForBlock(IBlockAccess p_149677_1_, int p_149677_2_, int p_149677_3_, int p_149677_4_)
+	public int getMixedBrightnessForBlock(IBlockAccess worldIn, int x, int y, int z)
 	{
 		return 15728704;
 	}
@@ -140,7 +140,7 @@ public class BlockOnlineDetector extends BlockContainerBase
 	}
 
 	@Override
-	public IIcon getIcon(int p_149691_1_, int p_149691_2_)
+	public IIcon getIcon(int side, int meta)
 	{
 		return icons[0];
 	}
@@ -152,7 +152,7 @@ public class BlockOnlineDetector extends BlockContainerBase
 	}
 
 	@Override
-	public boolean onBlockActivated(World worldObj, int posX, int posY, int posZ, EntityPlayer player, int p_149727_6_, float p_149727_7_, float p_149727_8_, float p_149727_9_)
+	public boolean onBlockActivated(World worldObj, int posX, int posY, int posZ, EntityPlayer player, int side, float subX, float subY, float subZ)
 	{
 		if (!worldObj.isRemote)
 		{

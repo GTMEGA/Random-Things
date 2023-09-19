@@ -44,16 +44,16 @@ public class BlockEnderEnergyDistributor extends BlockContainerBase
 	}
 
 	@Override
-	public void breakBlock(World p_149749_1_, int p_149749_2_, int p_149749_3_, int p_149749_4_, Block p_149749_5_, int p_149749_6_)
+	public void breakBlock(World worldIn, int x, int y, int z, Block blockBroken, int meta)
 	{
-		TileEntityEnderEnergyDistributor distributor = (TileEntityEnderEnergyDistributor) p_149749_1_.getTileEntity(p_149749_2_, p_149749_3_, p_149749_4_);
+		TileEntityEnderEnergyDistributor distributor = (TileEntityEnderEnergyDistributor) worldIn.getTileEntity(x, y, z);
 
 		if (distributor != null)
 		{
 			distributor.dropItems();
-			p_149749_1_.func_147453_f(p_149749_2_, p_149749_3_, p_149749_4_, p_149749_5_);
+			worldIn.func_147453_f(x, y, z, blockBroken);
 		}
-		super.breakBlock(p_149749_1_, p_149749_2_, p_149749_3_, p_149749_4_, p_149749_5_, p_149749_6_);
+		super.breakBlock(worldIn, x, y, z, blockBroken, meta);
 	}
 
 	@Override

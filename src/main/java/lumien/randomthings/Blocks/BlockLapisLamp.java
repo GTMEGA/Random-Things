@@ -25,7 +25,7 @@ public class BlockLapisLamp extends BlockBase
 	}
 
 	@Override
-	public int getRenderColor(int p_149741_1_)
+	public int getRenderColor(int meta)
 	{
 		GL11.glEnable(GL11.GL_BLEND);
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);

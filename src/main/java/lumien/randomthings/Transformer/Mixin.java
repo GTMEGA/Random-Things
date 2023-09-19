@@ -14,7 +14,7 @@ import static com.falsepattern.lib.mixin.IMixin.PredicateHelpers.*;
 public enum Mixin implements IMixin {
 
     RTBLOCKLEAVESBASEMIXIN(Side.COMMON, always(), "RTBlockLeavesBaseMixin"),
-    RTITEMMIXIN(Side.COMMON, always(), "RTItemMixin"),
+    RTITEMMIXIN(Side.CLIENT, always(), "RTItemMixin"),
     RTWORLDMIXIN(Side.COMMON, always(), "RTWorldMixin");
 
 

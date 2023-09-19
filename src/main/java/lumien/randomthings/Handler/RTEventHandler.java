@@ -10,20 +10,13 @@ import static org.lwjgl.opengl.GL11.glEnable;
 
 import java.lang.reflect.Field;
 
-import lumien.randomthings.Handler.RTMoonHandler.Bluemoon.ClientBluemoonHandler;
-import lumien.randomthings.Handler.RTMoonHandler.Bluemoon.ServerBluemoonHandler;
+import lumien.randomthings.Configuration.*;
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.Blocks.ModBlocks;
 import lumien.randomthings.Client.RenderUtils;
-import lumien.randomthings.Configuration.ConfigItems;
-import lumien.randomthings.Configuration.RTConfiguration;
-import lumien.randomthings.Configuration.Settings;
-import lumien.randomthings.Configuration.VanillaChanges;
 import lumien.randomthings.Entity.EntityHealingOrb;
 import lumien.randomthings.Entity.EntitySoul;
 import lumien.randomthings.Entity.EntitySpirit;
-import lumien.randomthings.Handler.RTMoonHandler.Bloodmoon.ClientBloodmoonHandler;
-import lumien.randomthings.Handler.RTMoonHandler.Bloodmoon.ServerBloodmoonHandler;
 import lumien.randomthings.Handler.Spectre.SpectreHandler;
 import lumien.randomthings.Items.ItemBloodstone;
 import lumien.randomthings.Items.ItemCreativeSword;
@@ -42,12 +35,9 @@ import net.minecraft.client.settings.GameSettings;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.IMob;
-import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayer.EnumStatus;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.entity.projectile.EntityThrowable;
@@ -57,13 +47,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.util.ChatComponentTranslation;
-import net.minecraft.util.ChatStyle;
-import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.world.World;
 import net.minecraft.world.WorldProvider;
 import net.minecraft.world.WorldServer;
-import net.minecraftforge.client.event.EntityViewRenderEvent.FogColors;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.client.event.RenderWorldLastEvent;
@@ -71,14 +56,12 @@ import net.minecraftforge.client.event.sound.PlaySoundEvent17;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
-import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.entity.player.PlayerDropsEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent.BreakSpeed;
-import net.minecraftforge.event.entity.player.PlayerSleepInBedEvent;
 import net.minecraftforge.event.entity.player.UseHoeEvent;
 import net.minecraftforge.event.world.BlockEvent.BreakEvent;
 import net.minecraftforge.event.world.WorldEvent;
@@ -87,7 +70,6 @@ import org.apache.logging.log4j.Level;
 import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.client.FMLClientHandler;
-import cpw.mods.fml.client.event.ConfigChangedEvent.OnConfigChangedEvent;
 import cpw.mods.fml.common.eventhandler.Event.Result;
 import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -98,7 +80,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class RTEventHandler
 {
 	Field experienceValue;
-	static final float sinMax = (float) (Math.PI / 12000d);
 
 	public RTEventHandler()
 	{
@@ -169,70 +150,6 @@ public class RTEventHandler
 	}
 
 	@SubscribeEvent
-	public void livingUpdate(LivingUpdateEvent event) {
-		if (!event.entityLiving.worldObj.isRemote && event.entityLiving.dimension == 0) {
-			EntityLivingBase eventEntity = event.entityLiving;
-			
-			if (Settings.BLOODMOON_VANISH && eventEntity.getEntityData().getBoolean("bloodmoonSpawned") && !ServerBloodmoonHandler.INSTANCE.isBloodmoonActive() && Math.random() <= 0.2f) {
-				eventEntity.setDead();
-			}
-			if (Settings.BLUEMOON_VANISH && eventEntity.getEntityData().getBoolean("bluemoonSpawned") && !ServerBluemoonHandler.INSTANCE.isBluemoonActive() && Math.random() <= 0.01f) {
-				if (Math.random() > 0.9f) {
-					World world = eventEntity.worldObj;
-					if(world.countEntities(EnumCreatureType.creature, true) <= EnumCreatureType.creature.getMaxNumberOfCreature()) {
-						EntityLiving newDoggo = new EntityWolf(world);
-
-						newDoggo.setLocationAndAngles(eventEntity.posX, eventEntity.posY, eventEntity.posZ, eventEntity.rotationYaw, eventEntity.rotationPitch);
-						eventEntity.worldObj.spawnEntityInWorld(newDoggo);
-					}
-				}
-				eventEntity.setDead();
-			}
-		}
-	}
-
-	@SubscribeEvent
-	public void sleepInBed(PlayerSleepInBedEvent event)
-	{
-		if (Settings.BLOODMOON_NOSLEEP)
-		{
-			if (RandomThings.proxy.isBloodmoon() && !RandomThings.proxy.isBluemoon())
-			{
-				event.result = EnumStatus.OTHER_PROBLEM;
-				event.entityPlayer.addChatMessage(new ChatComponentTranslation("text.rtmoon.nosleep").setChatStyle(new ChatStyle().setColor(EnumChatFormatting.RED)));
-			}
-		}
-		if (Settings.BLUEMOON_NOSLEEP)
-		{
-			if (RandomThings.proxy.isBluemoon() && !RandomThings.proxy.isBloodmoon())
-			{
-				event.result = EnumStatus.OTHER_PROBLEM;
-				event.entityPlayer.addChatMessage(new ChatComponentTranslation("text.rtmoon.nosleep").setChatStyle(new ChatStyle().setColor(EnumChatFormatting.BLUE)));
-			}
-		}
-		if (Settings.BLOODMOON_NOSLEEP && Settings.BLUEMOON_NOSLEEP)
-		{
-			if (RandomThings.proxy.isBluemoon() && RandomThings.proxy.isBloodmoon())
-			{
-				event.result = EnumStatus.OTHER_PROBLEM;
-				event.entityPlayer.addChatMessage(new ChatComponentTranslation("text.rtmoon.nosleep").setChatStyle(new ChatStyle().setColor(EnumChatFormatting.DARK_GRAY)));
-			}
-		}
-	}
-
-	@SubscribeEvent
-	@SideOnly(Side.CLIENT)
-	public void fogColor(FogColors event)
-	{
-		if (Settings.BLOODMOON_VISUAL_BLACKFOG && ClientBloodmoonHandler.INSTANCE.isBloodmoonActive() || Settings.BLUEMOON_VISUAL_BLACKFOG && ClientBluemoonHandler.INSTANCE.isBluemoonActive())
-		{
-			event.red = Math.max(event.red - ClientBloodmoonHandler.INSTANCE.fogRemove, 0);
-			event.green = Math.max(event.green - ClientBloodmoonHandler.INSTANCE.fogRemove, 0);
-			event.blue = Math.max(event.blue - ClientBloodmoonHandler.INSTANCE.fogRemove, 0);
-		}
-	}
-
-	@SubscribeEvent
 	public void useHoe(UseHoeEvent event)
 	{
 		if (event.world.getBlock(event.x, event.y, event.z) == ModBlocks.fertilizedDirt)
@@ -242,13 +159,6 @@ public class RTEventHandler
 			event.world.playSoundEffect(event.x + 0.5F, event.y + 0.5F, event.z + 0.5F, ModBlocks.fertilizedDirtTilled.stepSound.getStepResourcePath(), (ModBlocks.fertilizedDirtTilled.stepSound.getVolume() + 1.0F) / 2.0F, ModBlocks.fertilizedDirtTilled.stepSound.getPitch() * 0.8F);
 		}
 	}
-
-	@SubscribeEvent
-	public void onConfigChange(OnConfigChangedEvent event)
-	{
-		RTConfiguration.onConfigChange(event);
-	}
-
 	@SubscribeEvent
 	@SideOnly(Side.CLIENT)
 	public void toolTip(ItemTooltipEvent event)
@@ -324,7 +234,7 @@ public class RTEventHandler
 	@SubscribeEvent
 	public void worldLoad(WorldEvent.Load event)
 	{
-		if (event.world.isRemote && VanillaChanges.LOCKED_GAMMA)
+		if (event.world.isRemote && RTHDConfiguration.HD_LOCKED_GAMMA != 100)
 		{
 			Minecraft.getMinecraft().gameSettings.setOptionFloatValue(GameSettings.Options.GAMMA, 0);
 			Minecraft.getMinecraft().gameSettings.gammaSetting = 0;
@@ -334,7 +244,7 @@ public class RTEventHandler
 	@SubscribeEvent
 	public void changedDimension(PlayerChangedDimensionEvent event)
 	{
-		if (event.toDim == Settings.SPECTRE_DIMENSON_ID)
+		if (event.toDim == RTSettingsConfiguration.SPECTRE_DIMENSON_ID)
 		{
 			double movementFactor = 1;
 			EntityPlayer player = event.player;
@@ -357,7 +267,7 @@ public class RTEventHandler
 	@SubscribeEvent
 	public void loadWorld(WorldEvent.Load event)
 	{
-		if (!event.world.isRemote && event.world.provider.dimensionId == Settings.SPECTRE_DIMENSON_ID)
+		if (!event.world.isRemote && event.world.provider.dimensionId == RTSettingsConfiguration.SPECTRE_DIMENSON_ID)
 		{
 			SpectreHandler spectreHandler = (SpectreHandler) event.world.mapStorage.loadData(SpectreHandler.class, "SpectreHandler");
 			if (spectreHandler == null)
@@ -371,34 +281,13 @@ public class RTEventHandler
 			event.world.mapStorage.setData("SpectreHandler", spectreHandler);
 			RandomThings.instance.spectreHandler = spectreHandler;
 		}
-
-		if (!event.world.isRemote && event.world.provider.dimensionId == 0)
-		{
-			ServerBloodmoonHandler.INSTANCE = (ServerBloodmoonHandler) event.world.mapStorage.loadData(ServerBloodmoonHandler.class, "Bloodmoon");
-			ServerBluemoonHandler.INSTANCE = (ServerBluemoonHandler) event.world.mapStorage.loadData(ServerBluemoonHandler.class, "Bluemoon");
-
-			if (ServerBloodmoonHandler.INSTANCE == null)
-			{
-				ServerBloodmoonHandler.INSTANCE = new ServerBloodmoonHandler();
-				ServerBloodmoonHandler.INSTANCE.markDirty();
-			}
-
-			if (ServerBluemoonHandler.INSTANCE == null)
-			{
-				ServerBluemoonHandler.INSTANCE = new ServerBluemoonHandler();
-				ServerBluemoonHandler.INSTANCE.markDirty();
-			}
-
-			event.world.mapStorage.setData("Bloodmoon", ServerBloodmoonHandler.INSTANCE);
-			event.world.mapStorage.setData("Bluemoon", ServerBluemoonHandler.INSTANCE);
-		}
 	}
 
 	@SubscribeEvent
 	public void itemPickUp(EntityItemPickupEvent event)
 	{
 
-		if (ConfigItems.dropFilter)
+		if (RTItemConfiguration.dropFilter)
 		{
 			if (!event.entityPlayer.worldObj.isRemote && event.entityPlayer != null)
 			{
@@ -454,26 +343,9 @@ public class RTEventHandler
 	}
 
 	@SubscribeEvent
-	@SideOnly(Side.CLIENT)
-	public void entityJoinWorldClient(EntityJoinWorldEvent event)
-	{
-		if (event.entity == Minecraft.getMinecraft().thePlayer)
-		{
-			ClientBloodmoonHandler.INSTANCE.setBloodmoon(false);
-			ClientBluemoonHandler.INSTANCE.setBluemoon(false);
-		}
-	}
-
-	@SubscribeEvent
 	public void entityJoinWorld(EntityJoinWorldEvent event)
 	{
-		if (!event.world.isRemote && event.entity instanceof EntityPlayer && event.world.provider.dimensionId == 0)
-		{
-			ServerBloodmoonHandler.INSTANCE.playerJoinedWorld((EntityPlayer) event.entity);
-			ServerBluemoonHandler.INSTANCE.playerJoinedWorld((EntityPlayer) event.entity);
-		}
-
-		if (VanillaChanges.THROWABLES_MOTION)
+		if (RTSettingsConfiguration.THROWABLES_MOTION)
 		{
 			if (event.entity instanceof EntityThrowable)
 			{
@@ -555,7 +427,7 @@ public class RTEventHandler
 				EntityPlayer player = (EntityPlayer) event.entityLiving;
 				if (player.isPotionActive(ModPotions.imbueSpectre))
 				{
-					if (!event.source.isMagicDamage() && (event.source.getSourceOfDamage() != null || event.source.isExplosion()) && !event.source.canHarmInCreative() && !event.source.isFireDamage() && !event.source.isUnblockable() && Math.random() <= Settings.SPECTRE_IMBUE_CHANCE)
+					if (!event.source.isMagicDamage() && (event.source.getSourceOfDamage() != null || event.source.isExplosion()) && !event.source.canHarmInCreative() && !event.source.isFireDamage() && !event.source.isUnblockable() && Math.random() <= RTSettingsConfiguration.SPECTRE_IMBUE_CHANCE)
 					{
 						event.setCanceled(true);
 						return;
@@ -605,7 +477,7 @@ public class RTEventHandler
 				EntityPlayer player = ((EntityPlayer) event.entityLiving);
 				player.worldObj.spawnEntityInWorld(new EntitySoul(player.worldObj, player.posX, player.posY, player.posZ, player.getGameProfile().getName()));
 			}
-			if (ConfigItems.whitestone)
+			if (RTItemConfiguration.whitestone)
 			{
 				if (event.entityLiving instanceof EntityPlayer && !event.source.canHarmInCreative())
 				{
@@ -635,7 +507,7 @@ public class RTEventHandler
 				}
 			}
 
-			if (ConfigItems.bloodStone)
+			if (RTItemConfiguration.bloodStone)
 			{
 				if (event.entity instanceof IMob && !event.isCanceled())
 				{
@@ -665,15 +537,15 @@ public class RTEventHandler
 				}
 			}
 
-			if (ConfigItems.spectreArmor || ConfigItems.spectreKey || ConfigItems.spectreSword)
+			if (RTItemConfiguration.spectreArmor || RTItemConfiguration.spectreKey || RTItemConfiguration.spectreSword)
 			{
 				if (event.source.getEntity() != null && !(event.source.getEntity() instanceof FakePlayer) && event.source.getEntity() instanceof EntityPlayer && !(event.entity instanceof EntitySpirit))
 				{
 					EntityPlayer player = (EntityPlayer) event.source.getEntity();
-					double chance = Settings.SPIRIT_CHANCE;
-					if (ConfigItems.spectreSword && player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().getItem() == ModItems.spectreSword)
+					double chance = RTSettingsConfiguration.SPIRIT_CHANCE;
+					if (RTItemConfiguration.spectreSword && player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().getItem() == ModItems.spectreSword)
 					{
-						chance = Settings.SPIRIT_CHANCE_SWORD;
+                        chance = RTSettingsConfiguration.SPIRIT_CHANCE_SWORD;
 					}
 					double random = Math.random();
 					if (random <= chance)
@@ -683,7 +555,7 @@ public class RTEventHandler
 				}
 			}
 
-			if (ConfigItems.imbue && experienceValue != null && event.entityLiving instanceof EntityLiving && event.source.getEntity() != null && event.source.getEntity() instanceof EntityLivingBase)
+			if (RTItemConfiguration.imbue && experienceValue != null && event.entityLiving instanceof EntityLiving && event.source.getEntity() != null && event.source.getEntity() instanceof EntityLivingBase)
 			{
 				EntityLivingBase livingAttacker = (EntityLivingBase) event.source.getEntity();
 				EntityLiving attacked = (EntityLiving) event.entityLiving;

@@ -95,7 +95,7 @@ public class EntitySoul extends Entity implements IEntityAdditionalSpawnData
 	}
 
 	@Override
-	public AxisAlignedBB getCollisionBox(Entity p_70114_1_)
+	public AxisAlignedBB getCollisionBox(Entity entityIn)
 	{
 		return null;
 	}

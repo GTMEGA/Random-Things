@@ -4,7 +4,6 @@ import io.netty.buffer.ByteBuf;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import lumien.randomthings.Handler.RTMoonHandler.Bloodmoon.ClientBloodmoonHandler;
 import lumien.randomthings.Network.IRTMessage;
 
 public class MessageBloodmoon implements IRTMessage
@@ -37,6 +36,6 @@ public class MessageBloodmoon implements IRTMessage
 	@SideOnly(Side.CLIENT)
 	public void onMessage(MessageContext context)
 	{
-		ClientBloodmoonHandler.INSTANCE.setBloodmoon(this.bloodMoon);
+	
 	}
 }

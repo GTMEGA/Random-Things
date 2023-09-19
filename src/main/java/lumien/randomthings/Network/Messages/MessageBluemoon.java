@@ -4,7 +4,6 @@ import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import io.netty.buffer.ByteBuf;
-import lumien.randomthings.Handler.RTMoonHandler.Bluemoon.ClientBluemoonHandler;
 import lumien.randomthings.Network.IRTMessage;
 
 public class MessageBluemoon implements IRTMessage
@@ -37,6 +36,6 @@ public class MessageBluemoon implements IRTMessage
 	@SideOnly(Side.CLIENT)
 	public void onMessage(MessageContext context)
 	{
-		ClientBluemoonHandler.INSTANCE.setBluemoon(this.blueMoon);
+	
 	}
 }

@@ -4,7 +4,6 @@ import io.netty.buffer.ByteBuf;
 import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
 
 import lumien.randomthings.RandomThings;
-import lumien.randomthings.Handler.RTMoonHandler.Bloodmoon.ServerBloodmoonHandler;
 import lumien.randomthings.Items.ItemBloodstone;
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;
@@ -54,7 +53,7 @@ public class EntityBloodmoonCircle extends Entity implements IEntityAdditionalSp
 	}
 
 	@Override
-	public AxisAlignedBB getCollisionBox(Entity p_70114_1_)
+	public AxisAlignedBB getCollisionBox(Entity entityIn)
 	{
 		return null;
 	}
@@ -101,7 +100,6 @@ public class EntityBloodmoonCircle extends Entity implements IEntityAdditionalSp
 		if (!worldObj.isRemote && age == 340)
 		{
 			this.setDead();
-			ServerBloodmoonHandler.INSTANCE.force();
 			
 			for (int modX=-2;modX<3;modX++)
 			{

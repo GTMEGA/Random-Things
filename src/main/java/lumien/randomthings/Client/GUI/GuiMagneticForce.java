@@ -100,7 +100,7 @@ public class GuiMagneticForce extends GuiContainer implements IPlayerListGUI
 	}
 
 	@Override
-	protected void drawGuiContainerForegroundLayer(int p_146979_1_, int p_146979_2_)
+	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY)
 	{
 		if (status != null)
 		{

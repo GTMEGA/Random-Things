@@ -29,7 +29,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.client.MinecraftForgeClient;
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.Client.ClientTickHandler;
-import lumien.randomthings.Handler.RTMoonHandler.Bloodmoon.ClientBloodmoonHandler;
 import lumien.randomthings.Items.ItemGinto;
 import lumien.randomthings.Items.ModItems;
 import lumien.randomthings.Library.OverrideUtils;
@@ -48,12 +47,6 @@ public class ClientProxy extends CommonProxy
 	public void registerTickHandler()
 	{
 		FMLCommonHandler.instance().bus().register(new ClientTickHandler());
-	}
-
-	@Override
-	public boolean isBloodmoon()
-	{
-		return ClientBloodmoonHandler.INSTANCE.isBloodmoonActive();
 	}
 
 	@Override

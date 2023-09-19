@@ -177,7 +177,7 @@ public class ParticleSystem
 		glEnable(GL_TEXTURE_2D);
 	}
 
-	private void checkGLError(String p_71361_1_)
+	private void checkGLError(String message)
 	{
 		int i = GL11.glGetError();
 
@@ -185,7 +185,7 @@ public class ParticleSystem
 		{
 			String s1 = GLU.gluErrorString(i);
 			RandomThings.instance.logger.error("########## GL ERROR ##########");
-			RandomThings.instance.logger.error("@ " + p_71361_1_);
+			RandomThings.instance.logger.error("@ " + message);
 			RandomThings.instance.logger.error(i + ": " + s1);
 		}
 	}
