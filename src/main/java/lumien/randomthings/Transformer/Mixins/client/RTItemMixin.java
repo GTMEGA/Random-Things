@@ -1,4 +1,4 @@
-package lumien.randomthings.Transformer.Mixins.common;
+package lumien.randomthings.Transformer.Mixins.client;
 
 import lumien.randomthings.Handler.CoreHandler;
 import net.minecraft.item.Item;
