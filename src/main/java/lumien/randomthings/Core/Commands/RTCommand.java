@@ -8,9 +8,8 @@ import com.google.common.base.Preconditions;
 import cpw.mods.fml.common.registry.GameData;
 import cpw.mods.fml.common.registry.GameRegistry;
 
-import lumien.randomthings.Handler.RTMoonHandler.Bluemoon.ServerBluemoonHandler;
+import lombok.val;
 import lumien.randomthings.RandomThings;
-import lumien.randomthings.Handler.RTMoonHandler.Bloodmoon.ServerBloodmoonHandler;
 import lumien.randomthings.Items.ItemBiomeCapsule;
 import lumien.randomthings.Network.PacketHandler;
 import lumien.randomthings.Network.Messages.MessageNotification;
@@ -28,7 +27,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.ChatStyle;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.biome.BiomeGenBase;
@@ -71,7 +69,7 @@ public class RTCommand extends CommandBase
 	@Override
 	public void processCommand(ICommandSender commandUser, String[] args)
 	{
-		ChatComponentText invalidArguments = new ChatComponentText("/rt <notify|moon|setItemColor|setBiomeCapsule|analyze|bloodmoon|bluemoon>");
+		ChatComponentText invalidArguments = new ChatComponentText("/rt <notify|moon|setItemColor|setBiomeCapsule|analyze>");
 		invalidArguments.getChatStyle().setColor(EnumChatFormatting.RED);
 		if (args.length == 0)
 		{
@@ -89,8 +87,8 @@ public class RTCommand extends CommandBase
 				throw new WrongUsageException(invalidArguments.getFormattedText());
 			}
 
-			String receiver = args[1];
-			String title = args[2];
+			val    receiver = args[1];
+			String title    = args[2];
 			String description = args[3];
 			int duration = CommandBase.parseInt(commandUser, args[4]);
 			String iconString = args[5];
@@ -263,16 +261,6 @@ public class RTCommand extends CommandBase
 				}
 			}
 		}
-		else if (subCommand.equals("bloodmoon"))
-		{
-			ServerBloodmoonHandler.INSTANCE.force();
-			commandUser.addChatMessage(new ChatComponentTranslation("text.bloodmoon.command", new Object[0]));
-		}
-		else if (subCommand.equals("bluemoon"))
-		{
-			ServerBluemoonHandler.INSTANCE.force();
-			commandUser.addChatMessage(new ChatComponentTranslation("text.bluemoon.command", new Object[0]));
-		}
 	}
 
 	@Override
@@ -286,7 +274,7 @@ public class RTCommand extends CommandBase
 	{
 		if (stringList.length == 1)
 		{
-			return getListOfStringsMatchingLastWord(stringList, "notify", "moon", "setItemColor", "spectre", "sendtospectre", "setBiomeCapsule", "spectre", "analyze", "bloodmoon", "bluemoon");
+			return getListOfStringsMatchingLastWord(stringList, "notify", "moon", "setItemColor", "spectre", "sendtospectre", "setBiomeCapsule", "spectre", "analyze");
 		}
 		else if (stringList[0].equals("notify") && stringList.length == 2)
 		{

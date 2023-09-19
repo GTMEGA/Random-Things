@@ -2,9 +2,9 @@ package lumien.randomthings.Blocks;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import lumien.randomthings.RandomThings;
-import lumien.randomthings.Handler.RTMoonHandler.Bloodmoon.ServerBloodmoonHandler;
 import net.minecraft.block.BlockDaylightDetector;
 import net.minecraft.world.World;
+
 
 public class BlockBloodmoonSensor extends BlockDaylightDetector
 {
@@ -23,15 +23,6 @@ public class BlockBloodmoonSensor extends BlockDaylightDetector
 	@Override
 	public void func_149957_e(World worldObj, int posX, int posY, int posZ)
 	{
-		int metadata = worldObj.getBlockMetadata(posX, posY, posZ);
-		
-		if (ServerBloodmoonHandler.INSTANCE.isBloodmoonActive() && metadata==0)
-		{
-			worldObj.setBlockMetadataWithNotify(posX, posY, posZ, 15, 3);
-		}
-		else if (!ServerBloodmoonHandler.INSTANCE.isBloodmoonActive() && metadata == 15)
-		{
-			worldObj.setBlockMetadataWithNotify(posX, posY, posZ, 0, 3);
-		}
+
 	}
 }

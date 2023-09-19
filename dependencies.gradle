@@ -1,21 +1,18 @@
 // Add your dependencies here
 
 dependencies {
-    compileOnly ("org.projectlombok:lombok:1.18.24+") {
+    compileOnly ("org.projectlombok:lombok:1.18.28") {
         transitive = false
     }
     annotationProcessor'org.projectlombok:lombok:1.18.28'
 
-    implementation 'com.falsepattern:falsepatternlib-mc1.7.10:0.12.1:dev'
+    implementation 'com.falsepattern:falsepatternlib-mc1.7.10:0.12.3:dev'
     implementation 'li.cil.oc:OpenComputers:MC1.7.10-1.4.+:api'
     implementation "codechicken:codechickencore-mc1.7.10:1.1.0-mega:dev"
 	implementation "codechicken:codechickenlib-mc1.7.10:1.2.0-mega:dev" 
 	implementation "codechicken:notenoughitems-mc1.7.10:2.1.6-gtmega:dev"
     implementation 'com.falsepattern:endlessids-mc1.7.10:1.5-a0008-hf1:dev'
-    implementation 'com.falsepattern:rple-mc1.7.10:1.0.0-rc4:dev'
-    /*compileOnly 'com.ventooth:lunarevents-mc1.7.10:TAG:api'
-    runtimeOnly 'com.ventooth:lunarevents-mc1.7.10:TAG:dev'*/
-    implementation 'com.ventooth:lunarevents-mc1.7.10:5243140:dev' //TODO: LunarHeist: uncomment top two once internals are exposed to API, remove this one
+
 
     testImplementation 'org.mockito:mockito-core:4.7.0'
     testImplementation 'org.mockito:mockito-junit-jupiter:4.7.0'

@@ -124,33 +124,7 @@ public class ItemWhiteStone extends ItemBase
 			}
 		}
 	}
-
-	@Override
-	public boolean onEntityItemUpdate(EntityItem entityItem)
-	{
-		if (RTItemConfiguration.bloodStone && entityItem.dimension == 0 && entityItem.getEntityItem().getItemDamage() == 1 && entityItem.worldObj.canBlockSeeTheSky((int) Math.floor(entityItem.posX), (int) Math.floor(entityItem.posY), (int) Math.floor(entityItem.posZ)))
-		{
-			if (entityItem.worldObj.isRemote)
-			{
-				if (ClientBloodmoonHandler.INSTANCE.isBloodmoonActive())
-					RandomThings.proxy.spawnColoredDust(entityItem.posX, entityItem.posY, entityItem.posZ, 0, 0.1, 0, 1, 0, 0);
-			}
-			else
-			{
-				if (ServerBloodmoonHandler.INSTANCE.isBloodmoonActive())
-				{
-					entityItem.getEntityData().setInteger("progress", entityItem.getEntityData().getInteger("progress") + 1);
-
-					if (entityItem.getEntityData().getInteger("progress") >= 200)
-					{
-						entityItem.setEntityItemStack(new ItemStack(ModItems.bloodStone));
-					}
-				}
-			}
-		}
-
-		return false;
-	}
+	
 
 	@Override
 	public void getSubItems(Item p_150895_1_, CreativeTabs p_150895_2_, List p_150895_3_)

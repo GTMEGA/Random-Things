@@ -2,9 +2,6 @@ package lumien.randomthings.Items;
 
 import java.util.List;
 
-import lumien.randomthings.RandomThings;
-import lumien.randomthings.Entity.EntityBloodmoonCircle;
-import lumien.randomthings.Handler.RTMoonHandler.Bloodmoon.ServerBloodmoonHandler;
 import lumien.randomthings.Library.BlockPattern;
 
 import cpw.mods.fml.relauncher.Side;
@@ -17,7 +14,6 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
 
 public class ItemBloodstone extends ItemBase
@@ -68,44 +64,6 @@ public class ItemBloodstone extends ItemBase
 		ritualPattern.addBlock(Blocks.nether_brick, 0, 1, 0, 2);
 	}
 
-	@Override
-	public boolean onItemUse(ItemStack is, EntityPlayer player, World worldObj, int posX, int posY, int posZ, int side, float p_77648_8_, float p_77648_9_, float p_77648_10_)
-	{
-		if (worldObj.getBlock(posX, posY, posZ) == Blocks.obsidian)
-		{
-			if (!worldObj.isRemote && worldObj.getTotalWorldTime()>15000 && !ServerBloodmoonHandler.INSTANCE.isBloodmoonScheduled())
-			{
-				if (ritualPattern.matches(worldObj, posX, posY, posZ))
-				{
-					int charges = 0;
-					if (is.stackTagCompound != null)
-					{
-						charges = is.stackTagCompound.getInteger("charges");
-					}
-
-					if (charges >= 50)
-					{
-						List<EntityBloodmoonCircle> list = worldObj.getEntitiesWithinAABB(EntityBloodmoonCircle.class, AxisAlignedBB.getBoundingBox(posX + 0.5f - 2, posY + 1 - 2, posZ + 0.5f - 2, posX + 0.5f + 2, posY + 1 + 2, posZ + 0.5f + 2));
-						if (list.isEmpty())
-						{
-							worldObj.spawnEntityInWorld(new EntityBloodmoonCircle(worldObj, posX + 0.5f, posY + 1, posZ + 0.5f, posX, posY, posZ));
-
-							if (!player.capabilities.isCreativeMode)
-							{
-								is.stackTagCompound.setInteger("charges", charges - 50);
-							}
-						}
-					}
-				}
-			}
-			return true;
-		}
-		if (!worldObj.isRemote && player.isSneaking() && player.getCommandSenderName().equals(RandomThings.AUTHOR_USERNAME))
-		{
-			ritualPattern.place(worldObj, posX, posY, posZ);
-		}
-		return true;
-	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
