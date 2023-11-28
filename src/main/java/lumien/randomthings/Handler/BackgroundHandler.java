@@ -4,7 +4,6 @@ import java.lang.reflect.Field;
 import java.util.Random;
 
 import lumien.randomthings.Configuration.RTSettingsConfiguration;
-import lumien.randomthings.Library.OverrideUtils;
 
 import net.minecraft.client.gui.Gui;
 import net.minecraft.item.ItemDye;
@@ -20,48 +19,12 @@ public class BackgroundHandler
 
 	public static void setBackgroundBlock(String block)
 	{
-		try
-		{
-			for (Field f : Gui.class.getFields())
-			{
-				if (f.getType() == ResourceLocation.class)
-				{
-					ResourceLocation r = (ResourceLocation) f.get(null);
-					if (r.getResourcePath().equals("textures/gui/options_background.png"))
-					{
-						OverrideUtils.setFinalStatic(f, new ResourceLocation("textures/blocks/" + block + ".png"));
-						return;
-					}
-				}
-			}
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-		}
+		Gui.optionsBackground = new ResourceLocation("textures/blocks/" + block + ".png");
 	}
 	
 	public static void setBackground(ResourceLocation rl)
 	{
-		try
-		{
-			for (Field f : Gui.class.getFields())
-			{
-				if (f.getType() == ResourceLocation.class)
-				{
-					ResourceLocation r = (ResourceLocation) f.get(null);
-					if (r.getResourcePath().equals("textures/gui/options_background.png"))
-					{
-						OverrideUtils.setFinalStatic(f, rl);
-						return;
-					}
-				}
-			}
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-		}
+		Gui.optionsBackground = rl;
 	}
 
 	public static void setRandomBackground()

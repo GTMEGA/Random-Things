@@ -31,7 +31,6 @@ import lumien.randomthings.RandomThings;
 import lumien.randomthings.Client.ClientTickHandler;
 import lumien.randomthings.Items.ItemGinto;
 import lumien.randomthings.Items.ModItems;
-import lumien.randomthings.Library.OverrideUtils;
 import lumien.randomthings.Library.RenderIds;
 import lumien.randomthings.Library.Interfaces.IContainerWithProperties;
 import lumien.randomthings.TileEntities.TileEntityAdvancedItemCollector;
@@ -145,26 +144,7 @@ public class ClientProxy extends CommonProxy
 		}
 
 		RandomThings.instance.logger.log(Level.INFO, "Removing Gamma from settings... (GammaLock is on)");
-		try
-		{
-			OverrideUtils.setFinalStatic(GuiVideoSettings.class.getDeclaredField(MCPNames.field("field_146502_i")), options.toArray(videoOptions));
-		}
-		catch (NoSuchFieldException e)
-		{
-			e.printStackTrace();
-		}
-		catch (SecurityException e)
-		{
-			e.printStackTrace();
-		}
-		catch (IllegalAccessException e)
-		{
-			// Still works
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-		}
+		GuiVideoSettings.videoOptions = options.toArray(videoOptions);
 	}
 
 	@Override

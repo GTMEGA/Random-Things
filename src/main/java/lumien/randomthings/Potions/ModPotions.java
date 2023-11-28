@@ -7,7 +7,6 @@ import lumien.randomthings.Configuration.RTSettingsConfiguration;
 import org.apache.logging.log4j.Level;
 
 import lumien.randomthings.RandomThings;
-import lumien.randomthings.Library.OverrideUtils;
 import lumien.randomthings.Transformer.MCPNames;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.ResourceLocation;
